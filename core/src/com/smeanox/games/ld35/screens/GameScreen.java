@@ -174,7 +174,8 @@ public class GameScreen implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
 		float width = Consts.HEIGHT * Textures.bg1.get().getWidth() / ((float) Textures.bg1.get().getHeight());
-		spriteBatch.draw(Textures.bg1.get(), -width / 2, -Consts.HEIGHT / 2, width, Consts.HEIGHT);
+		spriteBatch.draw(Textures.bg1.get(), -width / 2 + camera.position.x / 8, -Consts.HEIGHT / 2, width, Consts.HEIGHT);
+		spriteBatch.draw(Textures.bg2.get(), -width / 2, -Consts.HEIGHT / 1.25f, width, Consts.HEIGHT);
 
 		for (Renderable renderable : renderables) {
 			renderable.render(spriteBatch, delta);
