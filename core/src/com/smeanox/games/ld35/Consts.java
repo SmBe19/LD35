@@ -9,6 +9,10 @@ public class Consts {
 	public static final float DESKTOP_SCALE = 20;
 	public static final boolean USE_DEBUG_RENDERER = false;
 
+	public static final float BG1_DIST = 5;
+	public static final float BG2_DIST = 3;
+	public static final float BG3_DIST = 2;
+
 	public static final float PHYS_GRAVITY = -10;
 	public static final float PHYS_TIME_STEP = 1/45f;
 	public static final int PHYS_VELO_ITERATIONS = 6;

@@ -190,6 +190,7 @@ public class GameScreen implements Screen {
 	public void resize(int width, int height) {
 		Consts.WIDTH = Consts.HEIGHT * width / ((float) height);
 		camera = new OrthographicCamera(Consts.WIDTH, Consts.HEIGHT);
+		camera.position.x = cameraX;
 		camera.update();
 		spriteBatch.setProjectionMatrix(camera.combined);
 	}
