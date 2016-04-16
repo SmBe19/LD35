@@ -42,7 +42,6 @@ public class GameScreen implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 
 		debugRenderer = new Box2DDebugRenderer();
-
 	}
 
 	private boolean loadGameWorld() {
@@ -58,33 +57,10 @@ public class GameScreen implements Screen {
 		return true;
 	}
 
-	private void initDebugWorld() {
-		Hero hero = new Hero(0, 5, HeroForm.human);
-		List<Actor> actors = new ArrayList<Actor>();
-		List<Button> buttons = new ArrayList<Button>();
-		List<Platform> platforms = new ArrayList<Platform>();
-
-		platforms.add(new Platform(1, -12, -1, 10, 0.5f, -12, -1, -18, -1, true, 2, 1));
-		platforms.add(new Platform(2, 0, 0, 10, 0.5f, 0, 0, 0, -1, false, 4f, 0.001f));
-		platforms.add(new Platform(3, 12, -1, 10, 0.5f, 12, -1, 18, 1, true, 2, 1));
-
-		actors.add(new Actor(1, 2, 5, 1, 2));
-		actors.add(new Actor(2, 3, 5, 1, 2));
-		actors.add(new Actor(3, 4, 5, 1, 2));
-
-		List<Integer> ids = new ArrayList<Integer>();
-		ids.add(1);
-		buttons.add(new Button(1, -5, 5, 1, 1, ids, new ArrayList<Integer>()));
-		ids.clear();
-		ids.add(2);
-		buttons.add(new Button(2, -15, 0, 1, 1, new ArrayList<Integer>(), ids));
-
-		gameWorld = new GameWorld("Debug", actors, buttons, platforms, hero);
-	}
-
 	private void addGameWorldObjectsToRenderables() {
 		renderables = new ArrayList<Renderable>();
 		addGameWorldObjectsToRenderables(gameWorld.getPlatforms());
+		addGameWorldObjectsToRenderables(gameWorld.getLadders());
 		addGameWorldObjectsToRenderables(gameWorld.getButtons());
 		addGameWorldObjectsToRenderables(gameWorld.getActors());
 		renderables.add(gameWorld.getHero());
@@ -133,6 +109,14 @@ public class GameScreen implements Screen {
 				body.applyLinearImpulse(new Vector2(impulseX, 0), body.getWorldCenter(), true);
 			}
 		}
+		if(gameWorld.getHero().isOnLadder() && gameWorld.getHero().getCurrentForm() == HeroForm.human) {
+			if (Gdx.input.isKeyPressed(Consts.KEY_UP)) {
+				if (body.getLinearVelocity().y < Consts.HERO_JUMP_MAX_VELO_Y) {
+					body.applyLinearImpulse(new Vector2(0, Consts.HERO_LADDER_IMPULSE_Y), body.getWorldCenter(), true);
+					body.applyForceToCenter(-body.getLinearVelocity().x * Consts.HERO_DAMPING_X_COEF_LADDER, 0, true);
+				}
+			}
+		}
 		if (Gdx.input.isKeyPressed(Consts.KEY_JUMP)) {
 			if(gameWorld.getHero().isOnGround() && Math.abs(body.getLinearVelocity().y) < Consts.HERO_JUMP_MAX_VELO_Y) {
 				body.applyLinearImpulse(new Vector2(0, gameWorld.getHero().getCurrentForm().getImpulseY()), body.getWorldCenter(), true);
@@ -145,6 +129,12 @@ public class GameScreen implements Screen {
 			if (gameWorld.getHero().getLastButton() != null && gameWorld.getHero().getCurrentForm() == HeroForm.human) {
 				gameWorld.getHero().getLastButton().interact(gameWorld);
 			}
+			if(gameWorld.getHero().getCurrentForm() == HeroForm.turtle){
+				gameWorld.getHero().toggleTurtleActive();
+			}
+		}
+		if (Gdx.input.isKeyJustPressed(Consts.KEY_RESTART)) {
+			gameWorld.setGameLost(true);
 		}
 	}
 
@@ -174,6 +164,9 @@ public class GameScreen implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
 
+		// FIXME Remove me
+		Font.FONT1.draw(spriteBatch, gameWorld.getHero().getCurrentForm().name().toUpperCase(), camera.position.x - camera.position.x / 10f, 2);
+
 		// bg1
 		float width = Consts.HEIGHT * Consts.BG1_HEIGHT_PART * Textures.bg1.get().getWidth() / ((float) Textures.bg1.get().getHeight());
 		float off = camera.position.x - camera.position.x / Consts.BG1_DIST;
@@ -193,7 +186,6 @@ public class GameScreen implements Screen {
 		for (Renderable renderable : renderables) {
 			renderable.render(spriteBatch, delta);
 		}
-		Font.FONT1.draw(spriteBatch, "TEST STRING", 0, 0);
 		spriteBatch.end();
 
 		if (Consts.USE_DEBUG_RENDERER) {

@@ -8,6 +8,7 @@ import com.smeanox.games.ld35.world.Button;
 import com.smeanox.games.ld35.world.GameWorld;
 import com.smeanox.games.ld35.world.Hero;
 import com.smeanox.games.ld35.world.HeroForm;
+import com.smeanox.games.ld35.world.Ladder;
 import com.smeanox.games.ld35.world.Platform;
 
 import java.io.IOException;
@@ -59,6 +60,15 @@ public class LevelReader {
 					toggleInteract,
 					toggleActive));
 		}
+		XmlReader.Element xladders = xlevel.getChildByName("ladders");
+		List<Ladder> ladders = new ArrayList<Ladder>();
+		for(XmlReader.Element xladder : xladders.getChildrenByName("ladder")){
+			ladders.add(new Ladder(xladder.getInt("id"),
+					xladder.getFloat("x"),
+					xladder.getFloat("width"),
+					xladder.getFloat("start_y"),
+					xladder.getFloat("end_y")));
+		}
 		XmlReader.Element xactors = xlevel.getChildByName("actors");
 		List<Actor> actors = new ArrayList<Actor>();
 		for(XmlReader.Element xactor : xactors.getChildrenByName("actor")) {
@@ -75,6 +85,6 @@ public class LevelReader {
 					xball.getFloat("radius")));
 		}
 		
-		return new GameWorld(xdescription.getText(), actors, buttons, platforms, hero);
+		return new GameWorld(xdescription.getText(), actors, buttons, ladders, platforms, hero);
 	}
 }

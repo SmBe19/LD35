@@ -30,11 +30,11 @@ Engine ToDo
 -----------
 
  - Grafiken
- (-) Gegner töten
  - Getötet werden
  - Wasserphysik
+ - Schwimmen
  - Steine / Dinge zerstören
- - Klettern
- - Verschiedene Actors
+ - Verschiedene Actors (Bär, Reh
  - Brökelnde Platformen
  - Panzer einziehen
+ - Ziel

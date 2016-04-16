@@ -24,18 +24,24 @@ public class Consts {
 	public static final int PHYS_VELO_ITERATIONS = 6;
 	public static final int PHYS_POS_ITERATIONS = 2;
 	public static final int KEY_LEFT = Input.Keys.A;
-	public static final int KEY_JUMP = Input.Keys.W;
+	public static final int KEY_JUMP = Input.Keys.SPACE;
 	public static final int KEY_RIGHT = Input.Keys.D;
+	public static final int KEY_UP = Input.Keys.W;
+	public static final int KEY_DOWN = Input.Keys.S;
 	public static final int KEY_INTERACT = Input.Keys.E;
 	public static final int KEY_HUMAN = Input.Keys.NUM_1;
 	public static final int KEY_TURTLE = Input.Keys.NUM_2;
 	public static final int KEY_WOLF = Input.Keys.NUM_3;
+	public static final int KEY_RESTART = Input.Keys.R;
 	public static final float HERO_WIDTH = 1;
 	public static final float HERO_HEIGHT = 2;
 	public static final float HERO_MAX_VELO = 5;
+	public static final float HERO_LADDER_MAX_VELO_Y = 2;
+	public static final float HERO_LADDER_IMPULSE_Y = 20;
 	public static final float HERO_IMPULSE_X = 10;
 	public static final float HERO_IMPULSE_Y = 50;
 	public static final float HERO_DAMPING_X_COEF = 2;
+	public static final float HERO_DAMPING_X_COEF_LADDER = 100;
 	public static final float HERO_GROUND_SENSOR_HEIGHT = 0.1f;
 	public static final float HERO_GROUND_SENSOR_WIDTH = 0.75f;
 	public static final float HERO_JUMP_MAX_VELO_Y = 1f;
@@ -45,7 +51,9 @@ public class Consts {
 	public static final int TEX_HEIGHT_HERO = 32;
 	public static final int TEX_WIDTH_PLATFORM = 16;
 	public static final int TEX_HEIGHT_PLATFORM = 16;
+	public static final int TEX_WIDTH_LADDER = 32;
+	public static final int TEX_HEIGHT_LADDER = 32;
 	public static final float TEX_WAIT_MAX_VELO = 1f;
-
 	public static final float LETHAL_IMPULSE = 500;
+	public static final float LETHAL_IMPULSE_MULTIPLIER_TURTLE = 2;
 }

@@ -3,6 +3,7 @@ package com.smeanox.games.ld35.world;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -36,7 +37,7 @@ public class Ball extends Actor {
 		shape.setRadius(width/2);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 5000f;
+		fixtureDef.density = 500f;
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0.2f;
 
@@ -46,14 +47,17 @@ public class Ball extends Actor {
 		body.setUserData(this);
 	}
 
-
 	@Override
 	public void render(SpriteBatch spriteBatch, float delta) {
 		animationTime += delta * Math.abs(getBody().getAngularVelocity());
 		spriteBatch.draw(animation.getKeyFrame(animationTime),
-			getBody().getPosition().x - width / 2,
-			getBody().getPosition().y - height / 2,
-			2*getBody().getFixtureList().get(0).getShape().getRadius(), 2*getBody().getFixtureList().get(0).getShape().getRadius());
+				getBody().getPosition().x - width / 2,
+				getBody().getPosition().y - height / 2,
+				width / 2,
+				height / 2,
+				2*getBody().getFixtureList().get(0).getShape().getRadius(), 2*getBody().getFixtureList().get(0).getShape().getRadius(),
+				1, 1, 0*getBody().getAngle() * MathUtils.radiansToDegrees);
+		// prevent rotation
 	}
 
 

@@ -12,6 +12,7 @@ public class GameWorld {
 	private World world;
 	private List<Actor> actors;
 	private List<Button> buttons;
+	private List<Ladder> ladders;
 	private List<Platform> platforms;
 	private Hero hero;
 	private WorldBorder worldBorder;
@@ -19,10 +20,11 @@ public class GameWorld {
 
 	private float phys_accumulator;
 
-	public GameWorld(String description, List<Actor> actors, List<Button> buttons, List<Platform> platforms, Hero hero) {
+	public GameWorld(String description, List<Actor> actors, List<Button> buttons, List<Ladder> ladders, List<Platform> platforms, Hero hero) {
 		this.description = description;
 		this.actors = actors;
 		this.buttons = buttons;
+		this.ladders = ladders;
 		this.platforms = platforms;
 		this.hero = hero;
 		this.worldBorder = new WorldBorder();
@@ -35,6 +37,7 @@ public class GameWorld {
 
 		addPhysObjects(actors);
 		addPhysObjects(buttons);
+		addPhysObjects(ladders);
 		addPhysObjects(platforms);
 		hero.addToWorld(world);
 		worldBorder.addToWorld(world);
@@ -76,6 +79,10 @@ public class GameWorld {
 
 	public List<Button> getButtons() {
 		return buttons;
+	}
+
+	public List<Ladder> getLadders() {
+		return ladders;
 	}
 
 	public List<Platform> getPlatforms() {

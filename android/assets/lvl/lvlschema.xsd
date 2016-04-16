@@ -15,6 +15,13 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="ladders" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ladder" maxOccurs="unbounded" type="ladder"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="buttons" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
@@ -96,5 +103,13 @@
         <xs:attribute name="x" type="xs:float" use="required"/>
         <xs:attribute name="y" type="xs:float" use="required"/>
         <xs:attribute name="radius" type="xs:float" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="ladder">
+        <xs:attribute name="id" type="xs:int" use="required"/>
+        <xs:attribute name="x" type="xs:float" use="required"/>
+        <xs:attribute name="width" type="xs:float" use="required"/>
+        <xs:attribute name="start_y" type="xs:float" use="required"/>
+        <xs:attribute name="end_y" type="xs:float" use="required"/>
     </xs:complexType>
 </xs:schema>

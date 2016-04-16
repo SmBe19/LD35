@@ -25,12 +25,14 @@ public class Hero implements PhysObject, Renderable {
 
 	private float x, y;
 	private int onGround;
+	private int onLadder;
 	private Button lastButton;
 	private HeroForm currentForm, lastForm;
 	private Map<HeroForm, Body> heroFormBodyMap;
 	private Map<HeroForm, Boolean> heroFormPossible;
+	private boolean turtleActive;
 
-	private Animation activeAnimation, h, hw, t, tw, w, ww, trht, trth, trhw, trwh, trtw, trwt;
+	private Animation activeAnimation, h, hw, t, tw, ta, w, ww, trht, trth, trhw, trwh, trtw, trwt;
 	private float animationTime;
 	private boolean orientation, isTransforming;
 
@@ -39,6 +41,8 @@ public class Hero implements PhysObject, Renderable {
 		this.y = y;
 		this.currentForm = currentForm;
 		onGround = 0;
+		onLadder = 0;
+		turtleActive = false;
 
 		initAnimations();
 		animationTime = 0;
@@ -50,6 +54,7 @@ public class Hero implements PhysObject, Renderable {
 		hw = createAnimation(Textures.spritesheet.get(), 0, 1, 8, 10, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
 		t = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		tw = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 1, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
+		ta = createAnimation(Textures.spritesheet.get(), 1, 2, 4, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		w = createAnimation(Textures.spritesheet.get(), 2, 3, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		ww = createAnimation(Textures.spritesheet.get(), 2, 3, 4, 6, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
 		trht = createAnimation(Textures.spritesheet.get(), 3, 4, 0, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.NORMAL);
@@ -102,6 +107,7 @@ public class Hero implements PhysObject, Renderable {
 		this.currentForm = heroForm;
 		isTransforming = true;
 		animationTime = 0;
+		turtleActive = false;
 	}
 
 	public boolean isOnGround() {
@@ -116,12 +122,36 @@ public class Hero implements PhysObject, Renderable {
 		}
 	}
 
+	public boolean isOnLadder() {
+		return onLadder > 0;
+	}
+
+	public void setOnLadder(boolean onLadder) {
+		if(onLadder){
+			this.onLadder++;
+		} else {
+			this.onLadder--;
+		}
+	}
+
 	public Button getLastButton() {
 		return lastButton;
 	}
 
 	public void setLastButton(Button lastButton) {
 		this.lastButton = lastButton;
+	}
+
+	public boolean isTurtleActive() {
+		return turtleActive;
+	}
+
+	public void setTurtleActive(boolean turtleActive) {
+		this.turtleActive = turtleActive;
+	}
+
+	public void toggleTurtleActive(){
+		this.turtleActive = !this.turtleActive;
 	}
 
 	public void setHeroFormPossible(HeroForm heroForm, boolean possible) {
@@ -246,7 +276,7 @@ public class Hero implements PhysObject, Renderable {
 					activeAnimation = walking ? h : hw;
 					break;
 				case turtle:
-					activeAnimation = walking ? t : tw;
+					activeAnimation = turtleActive ? ta : (walking ? t : tw);
 					break;
 				case wolf:
 					activeAnimation = walking ? w : ww;

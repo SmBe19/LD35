@@ -28,7 +28,7 @@ fetchLoop:	for (int y = 0; y < tex.getHeight(); y+=glyphHeight) {
 		this.drawWidth = drawWidth;
 	}
 
-	public void draw(SpriteBatch b, String text, int x, int y) {
+	public void draw(SpriteBatch b, String text, float x, float y) {
 		for (int i = 0; i < text.length(); i++) {
 			char c = text.charAt(i);
 			int ix = order.indexOf(c);

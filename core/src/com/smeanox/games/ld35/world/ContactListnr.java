@@ -31,6 +31,9 @@ public class ContactListnr implements ContactListener {
 			if(hero.isSensor() && hero.getUserData() instanceof HeroForm && !other.isSensor()){
 				gameWorld.getHero().setHeroFormPossible((HeroForm) hero.getUserData(), false);
 			}
+			if(!hero.isSensor() && other.getBody().getUserData() instanceof Ladder){
+				gameWorld.getHero().setOnLadder(true);
+			}
 			if (!hero.isSensor() && other.getBody().getUserData() instanceof Button) {
 				Button button = (Button) other.getBody().getUserData();
 				gameWorld.getHero().setLastButton(button);
@@ -55,6 +58,9 @@ public class ContactListnr implements ContactListener {
 			if(hero.isSensor() && hero.getUserData() instanceof HeroForm && !other.isSensor()){
 				gameWorld.getHero().setHeroFormPossible((HeroForm) hero.getUserData(), true);
 			}
+			if(!hero.isSensor() && other.getBody().getUserData() instanceof Ladder){
+				gameWorld.getHero().setOnLadder(false);
+			}
 			if (!hero.isSensor() && other.getBody().getUserData() instanceof Button) {
 				Button button = (Button) other.getBody().getUserData();
 				if (gameWorld.getHero().getLastButton() == button) {
@@ -70,7 +76,16 @@ public class ContactListnr implements ContactListener {
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
+		Fixture hero = contact.getFixtureA();
+		Fixture other = contact.getFixtureB();
+		if(other.getBody().getUserData() == gameWorld.getHero()){
+			hero = contact.getFixtureB();
+			other = contact.getFixtureA();
+		}
 
+		if(!gameWorld.getHero().isOnGround() && gameWorld.getHero().isOnLadder() && other.getBody().getUserData() instanceof Platform){
+			contact.setEnabled(false);
+		}
 	}
 
 	@Override
@@ -83,7 +98,12 @@ public class ContactListnr implements ContactListener {
 		}
 
 		if (hero.getBody().getUserData() == gameWorld.getHero()) {
-			if (!hero.isSensor() && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > Consts.LETHAL_IMPULSE) {
+			float lethalImpulse = gameWorld.getHero().getCurrentForm().getLethalImpulse();
+			if(gameWorld.getHero().isTurtleActive()){
+				lethalImpulse *= Consts.LETHAL_IMPULSE_MULTIPLIER_TURTLE;
+			}
+			System.out.println(impulse.getCount());
+			if (!hero.isSensor() && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > lethalImpulse) {
 				gameWorld.setGameLost(true);
 			}
 		}
