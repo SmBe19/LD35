@@ -93,7 +93,7 @@ public class Button implements PhysObject, Renderable {
 		shape.setAsBox(width / 2, height / 2);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 0.5f;
+		fixtureDef.density = 0f;
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0f;
 		fixtureDef.isSensor = true;

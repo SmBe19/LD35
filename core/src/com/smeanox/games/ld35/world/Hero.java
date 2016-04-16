@@ -46,10 +46,10 @@ public class Hero implements PhysObject, Renderable {
 	}
 
 	private void initAnimations(){
-		h = createAnimation(Textures.spritesheet.get(), 0, 1, 0, 8, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
+		h = createAnimation(Textures.spritesheet.get(), 0, 1, 0, 8, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.15f, Animation.PlayMode.LOOP);
 		hw = createAnimation(Textures.spritesheet.get(), 0, 1, 8, 10, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
-		t = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
-		tw = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 1, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
+		t = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
+		tw = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 1, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		w = createAnimation(Textures.spritesheet.get(), 2, 3, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
 		ww = createAnimation(Textures.spritesheet.get(), 2, 3, 4, 6, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
 		trht = createAnimation(Textures.spritesheet.get(), 3, 4, 0, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.NORMAL);
@@ -147,7 +147,7 @@ public class Hero implements PhysObject, Renderable {
 		PolygonShape shape = new PolygonShape();
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 0.5f;
+		fixtureDef.density = 5f;
 		fixtureDef.friction = 0.8f;
 		fixtureDef.restitution = 0f;
 		for (HeroForm form : HeroForm.values()) {
@@ -158,7 +158,7 @@ public class Hero implements PhysObject, Renderable {
 
 			shape.setAsBox(form.getWidth() / 2, form.getHeight() / 2, new Vector2(form.getX(), form.getY()), 0);
 			fixtureDef.isSensor = false;
-			fixtureDef.density = 0.5f;
+			fixtureDef.density = 5f;
 			fixture = body.createFixture(fixtureDef);
 
 			for (HeroForm sensorForm : HeroForm.values()) {
@@ -169,7 +169,8 @@ public class Hero implements PhysObject, Renderable {
 				fixture.setUserData(sensorForm);
 			}
 
-			shape.setAsBox(form.getWidth() / 2, Consts.HERO_GROUND_SENSOR_HEIGHT / 2, new Vector2(form.getX(), form.getY() - (form.getHeight() + Consts.HERO_GROUND_SENSOR_HEIGHT) / 2), 0);
+			shape.setAsBox(form.getWidth() * Consts.HERO_GROUND_SENSOR_WIDTH / 2, Consts.HERO_GROUND_SENSOR_HEIGHT / 2,
+					new Vector2(form.getX(), form.getY() - (form.getHeight() + Consts.HERO_GROUND_SENSOR_HEIGHT) / 2), 0);
 			fixtureDef.isSensor = true;
 			fixtureDef.density = 0f;
 			fixture = body.createFixture(fixtureDef);

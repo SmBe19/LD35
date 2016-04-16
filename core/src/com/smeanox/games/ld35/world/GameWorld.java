@@ -14,6 +14,8 @@ public class GameWorld {
 	private List<Button> buttons;
 	private List<Platform> platforms;
 	private Hero hero;
+	private WorldBorder worldBorder;
+	private boolean gameLost;
 
 	private float phys_accumulator;
 
@@ -23,15 +25,19 @@ public class GameWorld {
 		this.buttons = buttons;
 		this.platforms = platforms;
 		this.hero = hero;
+		this.worldBorder = new WorldBorder();
 
 		world = new World(new Vector2(0, Consts.PHYS_GRAVITY), true);
 		world.setContactListener(new ContactListnr(this));
 		phys_accumulator = 0;
 
+		gameLost = false;
+
 		addPhysObjects(actors);
 		addPhysObjects(buttons);
 		addPhysObjects(platforms);
 		hero.addToWorld(world);
+		worldBorder.addToWorld(world);
 	}
 
 	private void addPhysObjects(List<? extends PhysObject> physObjects){
@@ -78,5 +84,17 @@ public class GameWorld {
 
 	public Hero getHero() {
 		return hero;
+	}
+
+	public WorldBorder getWorldBorder() {
+		return worldBorder;
+	}
+
+	public boolean isGameLost() {
+		return gameLost;
+	}
+
+	public void setGameLost(boolean gameLost) {
+		this.gameLost = gameLost;
 	}
 }

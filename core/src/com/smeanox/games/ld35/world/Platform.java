@@ -1,6 +1,7 @@
 package com.smeanox.games.ld35.world;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -8,7 +9,12 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.smeanox.games.ld35.Consts;
+import com.smeanox.games.ld35.io.Textures;
 import com.smeanox.games.ld35.screens.Renderable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Platform implements PhysObject, Renderable {
 
@@ -20,6 +26,8 @@ public class Platform implements PhysObject, Renderable {
 	private boolean movingEnabled;
 	private float holdTime, aHoldTime;
 	private Vector2 direction;
+
+	private List<TextureRegion> textures;
 
 	public Platform(int id, float x, float y, float width, float height, float startX, float startY, float endX, float endY, boolean movingEnabled, float movingVelo, float holdTime) {
 		this.id = id;
@@ -36,6 +44,25 @@ public class Platform implements PhysObject, Renderable {
 		this.holdTime = holdTime;
 		aHoldTime = 0;
 		direction = new Vector2(endX - startX, endY - startY).nor();
+		initTextures(0, 6, 12, 13);
+	}
+
+	private void initTextures(int startX, int endX, int startY, int endY) {
+		List<TextureRegion> possibleTextures = new ArrayList<TextureRegion>();
+		for (int y = startY; y < endY; y++) {
+			for (int x = startX; x < endX; x++) {
+				possibleTextures.add(new TextureRegion(Textures.spritesheet.get(), x * Consts.TEX_WIDTH_PLATFORM, y * Consts.TEX_HEIGHT_PLATFORM,
+						Consts.TEX_WIDTH_PLATFORM, Consts.TEX_HEIGHT_PLATFORM));
+			}
+		}
+		textures = new ArrayList<TextureRegion>();
+		textures.add(possibleTextures.get(0));
+		float step = height * Consts.TEX_WIDTH_PLATFORM / ((float) Consts.TEX_HEIGHT_PLATFORM);
+		for(float x = step; x < width - step; x += step){
+			int rand = (int) ((possibleTextures.size() - 2) * Math.random()) + 1;
+			textures.add(possibleTextures.get(rand));
+		}
+		textures.add(possibleTextures.get(possibleTextures.size() - 1));
 	}
 
 	public int getId() {
@@ -139,7 +166,7 @@ public class Platform implements PhysObject, Renderable {
 		shape.setAsBox(width / 2, height / 2);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 0.5f;
+		fixtureDef.density = 0f;
 		fixtureDef.friction = 0.8f;
 		fixtureDef.restitution = 0f;
 
@@ -156,6 +183,9 @@ public class Platform implements PhysObject, Renderable {
 
 	@Override
 	public void render(SpriteBatch spriteBatch, float delta) {
-
+		float step = height * Consts.TEX_WIDTH_PLATFORM / ((float) Consts.TEX_HEIGHT_PLATFORM);
+		for (int i = 0; i < textures.size(); i++) {
+			spriteBatch.draw(textures.get(i), body.getPosition().x - width / 2 + step * i, body.getPosition().y - height / 2, step, height);
+		}
 	}
 }

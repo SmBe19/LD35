@@ -61,6 +61,9 @@ public class ContactListnr implements ContactListener {
 				}
 				button.endInteract(gameWorld);
 			}
+			if(!hero.isSensor() && other.getBody().getUserData() == gameWorld.getWorldBorder()){
+				gameWorld.setGameLost(true);
+			}
 		}
 	}
 

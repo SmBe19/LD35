@@ -4,7 +4,7 @@ import com.badlogic.gdx.Input;
 
 public class Consts {
 	public static float WIDTH = 40;
-	public static float HEIGHT = 30;
+	public static final float HEIGHT = 30;
 	public static final float DESKTOP_SCALE = 20;
 	public static final boolean USE_DEBUG_RENDERER = true;
 
@@ -22,12 +22,17 @@ public class Consts {
 	public static final float HERO_WIDTH = 1;
 	public static final float HERO_HEIGHT = 2;
 	public static final float HERO_MAX_VELO = 5;
-	public static final float HERO_IMPULSE_X = 1;
-	public static final float HERO_IMPULSE_Y = 10;
+	public static final float HERO_IMPULSE_X = 10;
+	public static final float HERO_IMPULSE_Y = 50;
 	public static final float HERO_DAMPING_X_COEF = 2;
-	public static final float HERO_GROUND_SENSOR_HEIGHT = 0.5f;
+	public static final float HERO_GROUND_SENSOR_HEIGHT = 0.1f;
+	public static final float HERO_GROUND_SENSOR_WIDTH = 0.75f;
 	public static final float HERO_JUMP_MAX_VELO_Y = 1f;
+	public static final float HERO_IMPULSE_AIR_MODIFIER = 0.2f;
+	public static final float HERO_IMPULSE_OTHER_DIRECTION_MODIFIER = 5f;
 	public static final int TEX_WIDTH_HERO = 32;
 	public static final int TEX_HEIGHT_HERO = 32;
-	public static final float TEX_WAIT_MAX_VELO = 0.1f;
+	public static final int TEX_WIDTH_PLATFORM = 16;
+	public static final int TEX_HEIGHT_PLATFORM = 16;
+	public static final float TEX_WAIT_MAX_VELO = 1f;
 }

@@ -4,8 +4,8 @@ import com.smeanox.games.ld35.Consts;
 
 public enum HeroForm {
 	human (Consts.HERO_MAX_VELO, Consts.HERO_IMPULSE_X, Consts.HERO_IMPULSE_Y, 0, 0, Consts.HERO_WIDTH, Consts.HERO_HEIGHT, 0, 0, 2, 2),
-	turtle (Consts.HERO_MAX_VELO, Consts.HERO_IMPULSE_X, 0, 0, -Consts.HERO_HEIGHT / 4, Consts.HERO_WIDTH, Consts.HERO_HEIGHT / 2, 0, 0, 2, 2),
-	wolf (Consts.HERO_MAX_VELO * 2, Consts.HERO_IMPULSE_X, Consts.HERO_IMPULSE_Y * 1.2f, 0, 0, Consts.HERO_WIDTH, Consts.HERO_HEIGHT, 0, 0, 2, 2),
+	turtle (Consts.HERO_MAX_VELO * 0.5f, Consts.HERO_IMPULSE_X * 0.5f, Consts.HERO_IMPULSE_Y * 0.05f, 0, -Consts.HERO_HEIGHT * 0.375f, Consts.HERO_WIDTH * 2, Consts.HERO_HEIGHT * 0.25f, 0, 0, 2, 2),
+	wolf (Consts.HERO_MAX_VELO * 1.75f, Consts.HERO_IMPULSE_X, Consts.HERO_IMPULSE_Y * 1.4f, 0, -Consts.HERO_HEIGHT * 0.25f, Consts.HERO_WIDTH * 2, Consts.HERO_HEIGHT * 0.5f, 0, 0, 2, 2),
 	;
 
 	float maxVelo, impulseX, impulseY;

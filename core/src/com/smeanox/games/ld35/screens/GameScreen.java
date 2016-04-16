@@ -32,15 +32,7 @@ public class GameScreen implements Screen {
 	List<Renderable> renderables;
 
 	public GameScreen() {
-		//initDebugWorld();
-		try {
-			gameWorld = LevelReader.readLevel(Gdx.files.internal("lvl/lvl1.xml"));
-		} catch (IOException e) {
-			e.printStackTrace();
-			Gdx.app.exit();
-			return;
-		}
-		addGameWorldObjectsToRenderables();
+		if (!loadGameWorld()) return;
 
 		spriteBatch = new SpriteBatch();
 		camera = new OrthographicCamera(Consts.WIDTH, Consts.HEIGHT);
@@ -48,6 +40,19 @@ public class GameScreen implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 
 		debugRenderer = new Box2DDebugRenderer();
+	}
+
+	private boolean loadGameWorld() {
+		//initDebugWorld();
+		try {
+			gameWorld = LevelReader.readLevel(Gdx.files.internal("lvl/lvl1.xml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			Gdx.app.exit();
+			return false;
+		}
+		addGameWorldObjectsToRenderables();
+		return true;
 	}
 
 	private void initDebugWorld() {
@@ -111,14 +116,18 @@ public class GameScreen implements Screen {
 			gameWorld.getHero().setCurrentForm(HeroForm.wolf);
 		}
 		Body body = gameWorld.getHero().getBody();
+		float impulseX = gameWorld.getHero().getCurrentForm().getImpulseX();
+		if(!gameWorld.getHero().isOnGround()){
+			impulseX *= Consts.HERO_IMPULSE_AIR_MODIFIER;
+		}
 		if (Gdx.input.isKeyPressed(Consts.KEY_LEFT)) {
 			if(body.getLinearVelocity().x > -gameWorld.getHero().getCurrentForm().getMaxVelo()) {
-				body.applyLinearImpulse(new Vector2(-gameWorld.getHero().getCurrentForm().getImpulseX(), 0), body.getWorldCenter(), true);
+				body.applyLinearImpulse(new Vector2(-impulseX, 0), body.getWorldCenter(), true);
 			}
 		}
 		if (Gdx.input.isKeyPressed(Consts.KEY_RIGHT)) {
 			if(body.getLinearVelocity().x < gameWorld.getHero().getCurrentForm().getMaxVelo()) {
-				body.applyLinearImpulse(new Vector2(gameWorld.getHero().getCurrentForm().getImpulseX(), 0), body.getWorldCenter(), true);
+				body.applyLinearImpulse(new Vector2(impulseX, 0), body.getWorldCenter(), true);
 			}
 		}
 		if (Gdx.input.isKeyPressed(Consts.KEY_JUMP)) {
@@ -126,11 +135,11 @@ public class GameScreen implements Screen {
 				body.applyLinearImpulse(new Vector2(0, gameWorld.getHero().getCurrentForm().getImpulseY()), body.getWorldCenter(), true);
 			}
 		}
-		if(!Gdx.input.isKeyPressed(Consts.KEY_LEFT) && !Gdx.input.isKeyPressed(Consts.KEY_RIGHT)){
+		if(!Gdx.input.isKeyPressed(Consts.KEY_LEFT) && !Gdx.input.isKeyPressed(Consts.KEY_RIGHT) && gameWorld.getHero().isOnGround()){
 			body.applyForceToCenter(-body.getLinearVelocity().x * Consts.HERO_DAMPING_X_COEF, 0, true);
 		}
 		if(Gdx.input.isKeyJustPressed(Consts.KEY_INTERACT)) {
-			if (gameWorld.getHero().getLastButton() != null) {
+			if (gameWorld.getHero().getLastButton() != null && gameWorld.getHero().getCurrentForm() == HeroForm.human) {
 				gameWorld.getHero().getLastButton().interact(gameWorld);
 			}
 		}
@@ -138,6 +147,10 @@ public class GameScreen implements Screen {
 
 	private void update(float delta) {
 		gameWorld.update(delta);
+
+		if(gameWorld.isGameLost()){
+			loadGameWorld();
+		}
 	}
 
 	private void renderWorld(float delta) {
@@ -160,7 +173,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		Consts.HEIGHT = Consts.WIDTH * height / ((float) width);
+		Consts.WIDTH = Consts.HEIGHT * width / ((float) height);
 		camera = new OrthographicCamera(Consts.WIDTH, Consts.HEIGHT);
 		camera.update();
 		spriteBatch.setProjectionMatrix(camera.combined);
