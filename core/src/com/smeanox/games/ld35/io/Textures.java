@@ -7,6 +7,7 @@ public enum Textures {
 	spritesheet("img/spritesheet.png"),
 	bg1("img/bg1.png"),
 	bg2("img/bg2.png"),
+	font("img/font.png")
 	;
 
 	private Texture texture;
