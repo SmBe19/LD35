@@ -34,6 +34,13 @@ public class ContactListnr implements ContactListener {
 			if(!hero.isSensor() && other.getBody().getUserData() instanceof Ladder){
 				gameWorld.getHero().setOnLadder(true);
 			}
+			if(!hero.isSensor() && other.getBody().getUserData() instanceof Water){
+				if(gameWorld.getHero().getCurrentForm() != HeroForm.turtle){
+					gameWorld.setGameLost(true);
+				} else {
+					gameWorld.getHero().setInWater(true);
+				}
+			}
 			if (!hero.isSensor() && other.getBody().getUserData() instanceof Button) {
 				Button button = (Button) other.getBody().getUserData();
 				gameWorld.getHero().setLastButton(button);
@@ -60,6 +67,9 @@ public class ContactListnr implements ContactListener {
 			}
 			if(!hero.isSensor() && other.getBody().getUserData() instanceof Ladder){
 				gameWorld.getHero().setOnLadder(false);
+			}
+			if(!hero.isSensor() && other.getBody().getUserData() instanceof Water){
+				gameWorld.getHero().setInWater(false);
 			}
 			if (!hero.isSensor() && other.getBody().getUserData() instanceof Button) {
 				Button button = (Button) other.getBody().getUserData();
@@ -102,7 +112,6 @@ public class ContactListnr implements ContactListener {
 			if(gameWorld.getHero().isTurtleActive()){
 				lethalImpulse *= Consts.LETHAL_IMPULSE_MULTIPLIER_TURTLE;
 			}
-			System.out.println(impulse.getCount());
 			if (!hero.isSensor() && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > lethalImpulse) {
 				gameWorld.setGameLost(true);
 			}

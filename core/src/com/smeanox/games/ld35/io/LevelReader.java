@@ -10,6 +10,7 @@ import com.smeanox.games.ld35.world.Hero;
 import com.smeanox.games.ld35.world.HeroForm;
 import com.smeanox.games.ld35.world.Ladder;
 import com.smeanox.games.ld35.world.Platform;
+import com.smeanox.games.ld35.world.Water;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,7 +68,17 @@ public class LevelReader {
 					xladder.getFloat("x"),
 					xladder.getFloat("width"),
 					xladder.getFloat("start_y"),
-					xladder.getFloat("end_y")));
+					xladder.getFloat("end_y"),
+					xladder.getBoolean("in_air", false)));
+		}
+		XmlReader.Element xwaters = xlevel.getChildByName("waters");
+		List<Water> waters = new ArrayList<Water>();
+		for(XmlReader.Element xwater : xwaters.getChildrenByName("water")) {
+			waters.add(new Water(xwater.getInt("id"),
+					xwater.getFloat("x"),
+					xwater.getFloat("y"),
+					xwater.getFloat("width"),
+					xwater.getFloat("height")));
 		}
 		XmlReader.Element xactors = xlevel.getChildByName("actors");
 		List<Actor> actors = new ArrayList<Actor>();
@@ -85,6 +96,6 @@ public class LevelReader {
 					xball.getFloat("radius")));
 		}
 		
-		return new GameWorld(xdescription.getText(), actors, buttons, ladders, platforms, hero);
+		return new GameWorld(xdescription.getText(), actors, buttons, ladders, waters, platforms, hero);
 	}
 }

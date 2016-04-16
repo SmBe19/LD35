@@ -59,6 +59,7 @@ public class GameScreen implements Screen {
 
 	private void addGameWorldObjectsToRenderables() {
 		renderables = new ArrayList<Renderable>();
+		addGameWorldObjectsToRenderables(gameWorld.getWaters());
 		addGameWorldObjectsToRenderables(gameWorld.getPlatforms());
 		addGameWorldObjectsToRenderables(gameWorld.getLadders());
 		addGameWorldObjectsToRenderables(gameWorld.getButtons());
@@ -99,21 +100,37 @@ public class GameScreen implements Screen {
 		if(!gameWorld.getHero().isOnGround()){
 			impulseX *= Consts.HERO_IMPULSE_AIR_MODIFIER;
 		}
+		float maxVeloX = gameWorld.getHero().getCurrentForm().getMaxVelo();
+		if (gameWorld.getHero().isInWater()) {
+			maxVeloX = Consts.HERO_WATER_MAX_VELO_X;
+		}
 		if (Gdx.input.isKeyPressed(Consts.KEY_LEFT)) {
-			if(body.getLinearVelocity().x > -gameWorld.getHero().getCurrentForm().getMaxVelo()) {
+			if(body.getLinearVelocity().x > -maxVeloX) {
 				body.applyLinearImpulse(new Vector2(-impulseX, 0), body.getWorldCenter(), true);
 			}
 		}
 		if (Gdx.input.isKeyPressed(Consts.KEY_RIGHT)) {
-			if(body.getLinearVelocity().x < gameWorld.getHero().getCurrentForm().getMaxVelo()) {
+			if(body.getLinearVelocity().x < maxVeloX) {
 				body.applyLinearImpulse(new Vector2(impulseX, 0), body.getWorldCenter(), true);
 			}
 		}
 		if(gameWorld.getHero().isOnLadder() && gameWorld.getHero().getCurrentForm() == HeroForm.human) {
 			if (Gdx.input.isKeyPressed(Consts.KEY_UP)) {
-				if (body.getLinearVelocity().y < Consts.HERO_JUMP_MAX_VELO_Y) {
+				if (body.getLinearVelocity().y < Consts.HERO_LADDER_MAX_VELO_Y) {
 					body.applyLinearImpulse(new Vector2(0, Consts.HERO_LADDER_IMPULSE_Y), body.getWorldCenter(), true);
 					body.applyForceToCenter(-body.getLinearVelocity().x * Consts.HERO_DAMPING_X_COEF_LADDER, 0, true);
+				}
+			}
+		}
+		if(gameWorld.getHero().isInWater()){
+			if(Gdx.input.isKeyPressed(Consts.KEY_UP)) {
+				if (body.getLinearVelocity().y < Consts.HERO_WATER_MAX_VELO_Y) {
+					body.applyLinearImpulse(new Vector2(0, Consts.HERO_WATER_IMPULSE_Y), body.getWorldCenter(), true);
+				}
+			}
+			if(Gdx.input.isKeyPressed(Consts.KEY_DOWN)){
+				if (body.getLinearVelocity().y > -Consts.HERO_WATER_MAX_VELO_Y) {
+					body.applyLinearImpulse(new Vector2(0, -Consts.HERO_WATER_IMPULSE_Y), body.getWorldCenter(), true);
 				}
 			}
 		}
@@ -122,7 +139,8 @@ public class GameScreen implements Screen {
 				body.applyLinearImpulse(new Vector2(0, gameWorld.getHero().getCurrentForm().getImpulseY()), body.getWorldCenter(), true);
 			}
 		}
-		if(!Gdx.input.isKeyPressed(Consts.KEY_LEFT) && !Gdx.input.isKeyPressed(Consts.KEY_RIGHT) && gameWorld.getHero().isOnGround()){
+		if(!Gdx.input.isKeyPressed(Consts.KEY_LEFT) && !Gdx.input.isKeyPressed(Consts.KEY_RIGHT)
+				&& (gameWorld.getHero().isOnGround() || gameWorld.getHero().isOnLadder() || gameWorld.getHero().isInWater())){
 			body.applyForceToCenter(-body.getLinearVelocity().x * Consts.HERO_DAMPING_X_COEF, 0, true);
 		}
 		if(Gdx.input.isKeyJustPressed(Consts.KEY_INTERACT)) {

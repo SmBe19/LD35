@@ -31,10 +31,7 @@ Engine ToDo
 
  - Grafiken
  - Getötet werden
- - Wasserphysik
- - Schwimmen
  - Steine / Dinge zerstören
- - Verschiedene Actors (Bär, Reh
+ - Verschiedene Actors (Bär, Reh)
  - Brökelnde Platformen
- - Panzer einziehen
  - Ziel

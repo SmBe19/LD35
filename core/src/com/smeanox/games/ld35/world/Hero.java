@@ -26,6 +26,7 @@ public class Hero implements PhysObject, Renderable {
 	private float x, y;
 	private int onGround;
 	private int onLadder;
+	private int inWater;
 	private Button lastButton;
 	private HeroForm currentForm, lastForm;
 	private Map<HeroForm, Body> heroFormBodyMap;
@@ -42,6 +43,7 @@ public class Hero implements PhysObject, Renderable {
 		this.currentForm = currentForm;
 		onGround = 0;
 		onLadder = 0;
+		inWater = 0;
 		turtleActive = false;
 
 		initAnimations();
@@ -93,7 +95,7 @@ public class Hero implements PhysObject, Renderable {
 	}
 
 	public void setCurrentForm(HeroForm heroForm){
-		if(!isHeroFormPossible(heroForm) || currentForm == heroForm || isTransforming){
+		if(!isHeroFormPossible(heroForm) || currentForm == heroForm || isTransforming || isInWater()){
 			return;
 		}
 		Body currentBody = heroFormBodyMap.get(currentForm);
@@ -131,6 +133,23 @@ public class Hero implements PhysObject, Renderable {
 			this.onLadder++;
 		} else {
 			this.onLadder--;
+		}
+	}
+
+	public boolean isInWater() {
+		return inWater > 0;
+	}
+
+	public void setInWater(boolean inWater) {
+		if(inWater){
+			this.inWater++;
+		} else {
+			this.inWater--;
+		}
+		if(isInWater()){
+			getBody().setGravityScale(Consts.HERO_WATER_GRAVITY_SCALE);
+		} else {
+			getBody().setGravityScale(1f);
 		}
 	}
 
