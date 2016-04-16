@@ -1,0 +1,9 @@
+Black = normal platform/stone
+Gold = quest item (basically start of game)
+Red = falling rocks
+Brown = Bridge, collapses under falling rocks
+Light Blue = Water
+Blue = Rope
+Green/ Orange = Buttons and initial position of platform they control
+Pale Green/ Pale Orange = maximum position of platform after activated by button
+Start is always left, end is always top right
