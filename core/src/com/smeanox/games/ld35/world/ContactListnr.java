@@ -1,5 +1,6 @@
 package com.smeanox.games.ld35.world;
 
+import com.smeanox.games.ld35.Consts;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -74,6 +75,21 @@ public class ContactListnr implements ContactListener {
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
+		Fixture hero = contact.getFixtureA();
+		Fixture other = contact.getFixtureB();
+		if(other.getBody().getUserData() == gameWorld.getHero()){
+			hero = contact.getFixtureB();
+			other = contact.getFixtureA();
+		}
+
+		if (hero.getBody().getUserData() == gameWorld.getHero()) {
+			if (!hero.isSensor() && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > 5) {
+				System.out.println(impulse.getNormalImpulses()[0]);
+			}
+			if (!hero.isSensor() && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > Consts.LETHAL_IMPULSE) {
+				gameWorld.setGameLost(true);
+			};
+		}
 
 	}
 }

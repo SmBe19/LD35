@@ -9,6 +9,7 @@
         <platform id="2" x="-12" y="-2" width="10" height="0.5" start_x="-20" moving_velo="2"/>
         <platform id="3" x="12" y="-2" width="10" height="0.5" end_x="18" end_y="2" moving_enabled="false"/>
         <platform id="4" x="-16" y="0" width="2" height="1"/>
+        <platform id="5" x="-20" y="-8" width="50" height="0.5"/>
     </platforms>
     <buttons>
         <button id="1" x="-4" y="5" width="1" height="1">
@@ -23,5 +24,6 @@
         <actor id="2" x="5" y="5" width="1" height="2"/>
         <actor id="3" x="7" y="5" width="1" height="2"/>
         <actor id="4" x="8" y="5" width="1" height="2"/>
+	<ball id="5" x="0" y="30" radius="1"/>
     </actors>
 </level>

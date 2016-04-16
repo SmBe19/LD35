@@ -11,9 +11,9 @@ import com.smeanox.games.ld35.screens.Renderable;
 
 public class Actor implements PhysObject, Renderable {
 
-	private Body body;
+	protected Body body;
 	int id;
-	private float x, y, width, height;
+	protected float x, y, width, height;
 
 	public Actor(int id, float x, float y, float width, float height) {
 		this.id = id;

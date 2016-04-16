@@ -3,6 +3,7 @@ package com.smeanox.games.ld35.io;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.XmlReader;
 import com.smeanox.games.ld35.world.Actor;
+import com.smeanox.games.ld35.world.Ball;
 import com.smeanox.games.ld35.world.Button;
 import com.smeanox.games.ld35.world.GameWorld;
 import com.smeanox.games.ld35.world.Hero;
@@ -67,6 +68,13 @@ public class LevelReader {
 					xactor.getFloat("width"),
 					xactor.getFloat("height")));
 		}
+		for(XmlReader.Element xactor : xactors.getChildrenByName("ball")) {
+			actors.add(new Ball(xactor.getInt("id"),
+					xactor.getFloat("x"),
+					xactor.getFloat("y"),
+					xactor.getFloat("radius")));
+		}
+		
 		return new GameWorld(xdescription.getText(), actors, buttons, platforms, hero);
 	}
 }

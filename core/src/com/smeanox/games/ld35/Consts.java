@@ -6,7 +6,7 @@ public class Consts {
 	public static float WIDTH = 40;
 	public static final float HEIGHT = 30;
 	public static final float DESKTOP_SCALE = 20;
-	public static final boolean USE_DEBUG_RENDERER = true;
+	public static final boolean USE_DEBUG_RENDERER = false;
 
 	public static final float PHYS_GRAVITY = -10;
 	public static final float PHYS_TIME_STEP = 1/45f;
@@ -35,4 +35,6 @@ public class Consts {
 	public static final int TEX_WIDTH_PLATFORM = 16;
 	public static final int TEX_HEIGHT_PLATFORM = 16;
 	public static final float TEX_WAIT_MAX_VELO = 1f;
+
+	public static final float LETHAL_IMPULSE = 500;
 }
