@@ -1,22 +1,30 @@
 package com.smeanox.games.ld35.world;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.smeanox.games.ld35.screens.Renderable;
 
-public class Actor implements PhysObject {
+public class Actor implements PhysObject, Renderable {
 
 	private Body body;
+	int id;
 	private float x, y, width, height;
 
-	public Actor(float x, float y, float width, float height) {
+	public Actor(int id, float x, float y, float width, float height) {
+		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public float getX() {
@@ -61,5 +69,10 @@ public class Actor implements PhysObject {
 	@Override
 	public Body getBody() {
 		return body;
+	}
+
+	@Override
+	public void render(SpriteBatch spriteBatch, float delta) {
+
 	}
 }

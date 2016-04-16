@@ -24,13 +24,16 @@ public class ContactListnr implements ContactListener {
 		}
 
 		if (hero.getBody().getUserData() == gameWorld.getHero()) {
-			if(hero.isSensor() && !other.isSensor()){
+			if(hero.isSensor() && hero.getUserData() == Hero.SENSOR_GROUND && !other.isSensor()){
 				gameWorld.getHero().setOnGround(true);
+			}
+			if(hero.isSensor() && hero.getUserData() instanceof HeroForm && !other.isSensor()){
+				gameWorld.getHero().setHeroFormPossible((HeroForm) hero.getUserData(), false);
 			}
 			if (!hero.isSensor() && other.getBody().getUserData() instanceof Button) {
 				Button button = (Button) other.getBody().getUserData();
 				gameWorld.getHero().setLastButton(button);
-				button.startInteract();
+				button.startInteract(gameWorld);
 			}
 		}
 	}
@@ -45,15 +48,18 @@ public class ContactListnr implements ContactListener {
 		}
 
 		if (hero.getBody().getUserData() == gameWorld.getHero()) {
-			if(hero.isSensor() && !other.isSensor()){
+			if(hero.isSensor() && hero.getUserData() == Hero.SENSOR_GROUND && !other.isSensor()){
 				gameWorld.getHero().setOnGround(false);
+			}
+			if(hero.isSensor() && hero.getUserData() instanceof HeroForm && !other.isSensor()){
+				gameWorld.getHero().setHeroFormPossible((HeroForm) hero.getUserData(), true);
 			}
 			if (!hero.isSensor() && other.getBody().getUserData() instanceof Button) {
 				Button button = (Button) other.getBody().getUserData();
 				if (gameWorld.getHero().getLastButton() == button) {
 					gameWorld.getHero().setLastButton(null);
 				}
-				button.endInteract();
+				button.endInteract(gameWorld);
 			}
 		}
 	}

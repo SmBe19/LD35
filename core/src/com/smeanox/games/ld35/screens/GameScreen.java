@@ -10,12 +10,16 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.smeanox.games.ld35.Consts;
+import com.smeanox.games.ld35.io.LevelReader;
+import com.smeanox.games.ld35.io.Textures;
 import com.smeanox.games.ld35.world.Actor;
 import com.smeanox.games.ld35.world.Button;
 import com.smeanox.games.ld35.world.GameWorld;
 import com.smeanox.games.ld35.world.Hero;
+import com.smeanox.games.ld35.world.HeroForm;
 import com.smeanox.games.ld35.world.Platform;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +29,19 @@ public class GameScreen implements Screen {
 	SpriteBatch spriteBatch;
 	Box2DDebugRenderer debugRenderer;
 	Camera camera;
+	List<Renderable> renderables;
 
 	public GameScreen() {
-		initDebugWorld();
+		//initDebugWorld();
+		try {
+			gameWorld = LevelReader.readLevel(Gdx.files.internal("lvl/lvl1.xml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			Gdx.app.exit();
+			return;
+		}
+		addGameWorldObjectsToRenderables();
+
 		spriteBatch = new SpriteBatch();
 		camera = new OrthographicCamera(Consts.WIDTH, Consts.HEIGHT);
 		camera.update();
@@ -37,23 +51,41 @@ public class GameScreen implements Screen {
 	}
 
 	private void initDebugWorld() {
-		Hero hero = new Hero(0, 5, 1, 2);
+		Hero hero = new Hero(0, 5, HeroForm.human);
 		List<Actor> actors = new ArrayList<Actor>();
 		List<Button> buttons = new ArrayList<Button>();
 		List<Platform> platforms = new ArrayList<Platform>();
 
-		platforms.add(new Platform(-12, -1, 10, 0.5f, -12, -1, -18, -1, 2, 1));
-		platforms.add(new Platform(0, 0, 10, 0.5f, 0, 0, 0, -1, 0, 0.001f));
-		platforms.add(new Platform(12, -1, 10, 0.5f, 12, -1, 18, 1, 2, 1));
+		platforms.add(new Platform(1, -12, -1, 10, 0.5f, -12, -1, -18, -1, true, 2, 1));
+		platforms.add(new Platform(2, 0, 0, 10, 0.5f, 0, 0, 0, -1, false, 4f, 0.001f));
+		platforms.add(new Platform(3, 12, -1, 10, 0.5f, 12, -1, 18, 1, true, 2, 1));
 
-		actors.add(new Actor(2, 5, 1, 2));
-		actors.add(new Actor(3, 5, 1, 2));
-		actors.add(new Actor(4, 5, 1, 2));
+		actors.add(new Actor(1, 2, 5, 1, 2));
+		actors.add(new Actor(2, 3, 5, 1, 2));
+		actors.add(new Actor(3, 4, 5, 1, 2));
 
-		buttons.add(new Button(-5, 5, 1, 1));
-		buttons.add(new Button(-15, 0, 1, 1));
+		List<Integer> ids = new ArrayList<Integer>();
+		ids.add(1);
+		buttons.add(new Button(1, -5, 5, 1, 1, ids, new ArrayList<Integer>()));
+		ids.clear();
+		ids.add(2);
+		buttons.add(new Button(2, -15, 0, 1, 1, new ArrayList<Integer>(), ids));
 
-		gameWorld = new GameWorld(actors, buttons, platforms, hero);
+		gameWorld = new GameWorld("Debug", actors, buttons, platforms, hero);
+	}
+
+	private void addGameWorldObjectsToRenderables() {
+		renderables = new ArrayList<Renderable>();
+		addGameWorldObjectsToRenderables(gameWorld.getPlatforms());
+		addGameWorldObjectsToRenderables(gameWorld.getButtons());
+		addGameWorldObjectsToRenderables(gameWorld.getActors());
+		renderables.add(gameWorld.getHero());
+	}
+
+	private void addGameWorldObjectsToRenderables(List<? extends Renderable> list){
+		for (Renderable renderable : list) {
+			renderables.add(renderable);
+		}
 	}
 
 	@Override
@@ -69,20 +101,29 @@ public class GameScreen implements Screen {
 	}
 
 	private void updateInput(float delta) {
+		if (Gdx.input.isKeyJustPressed(Consts.KEY_HUMAN)) {
+			gameWorld.getHero().setCurrentForm(HeroForm.human);
+		}
+		if (Gdx.input.isKeyJustPressed(Consts.KEY_TURTLE)) {
+			gameWorld.getHero().setCurrentForm(HeroForm.turtle);
+		}
+		if (Gdx.input.isKeyJustPressed(Consts.KEY_WOLF)) {
+			gameWorld.getHero().setCurrentForm(HeroForm.wolf);
+		}
 		Body body = gameWorld.getHero().getBody();
 		if (Gdx.input.isKeyPressed(Consts.KEY_LEFT)) {
-			if(body.getLinearVelocity().x > -Consts.HERO_MAX_VELO) {
-				body.applyLinearImpulse(new Vector2(-Consts.HERO_IMPULSE_X, 0), body.getWorldCenter(), true);
+			if(body.getLinearVelocity().x > -gameWorld.getHero().getCurrentForm().getMaxVelo()) {
+				body.applyLinearImpulse(new Vector2(-gameWorld.getHero().getCurrentForm().getImpulseX(), 0), body.getWorldCenter(), true);
 			}
 		}
 		if (Gdx.input.isKeyPressed(Consts.KEY_RIGHT)) {
-			if(body.getLinearVelocity().x < Consts.HERO_MAX_VELO) {
-				body.applyLinearImpulse(new Vector2(Consts.HERO_IMPULSE_X, 0), body.getWorldCenter(), true);
+			if(body.getLinearVelocity().x < gameWorld.getHero().getCurrentForm().getMaxVelo()) {
+				body.applyLinearImpulse(new Vector2(gameWorld.getHero().getCurrentForm().getImpulseX(), 0), body.getWorldCenter(), true);
 			}
 		}
 		if (Gdx.input.isKeyPressed(Consts.KEY_JUMP)) {
 			if(gameWorld.getHero().isOnGround() && Math.abs(body.getLinearVelocity().y) < Consts.HERO_JUMP_MAX_VELO_Y) {
-				body.applyLinearImpulse(new Vector2(0, Consts.HERO_IMPULSE_Y), body.getWorldCenter(), true);
+				body.applyLinearImpulse(new Vector2(0, gameWorld.getHero().getCurrentForm().getImpulseY()), body.getWorldCenter(), true);
 			}
 		}
 		if(!Gdx.input.isKeyPressed(Consts.KEY_LEFT) && !Gdx.input.isKeyPressed(Consts.KEY_RIGHT)){
@@ -90,7 +131,7 @@ public class GameScreen implements Screen {
 		}
 		if(Gdx.input.isKeyJustPressed(Consts.KEY_INTERACT)) {
 			if (gameWorld.getHero().getLastButton() != null) {
-				gameWorld.getHero().getLastButton().interact();
+				gameWorld.getHero().getLastButton().interact(gameWorld);
 			}
 		}
 	}
@@ -102,6 +143,15 @@ public class GameScreen implements Screen {
 	private void renderWorld(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		spriteBatch.begin();
+		float width = Consts.HEIGHT * Textures.bg1.get().getWidth() / ((float) Textures.bg1.get().getHeight());
+		spriteBatch.draw(Textures.bg1.get(), -width / 2, -Consts.HEIGHT / 2, width, Consts.HEIGHT);
+
+		for (Renderable renderable : renderables) {
+			renderable.render(spriteBatch, delta);
+		}
+		spriteBatch.end();
 
 		if (Consts.USE_DEBUG_RENDERER) {
 			debugRenderer.render(gameWorld.getWorld(), camera.combined);

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class GameWorld {
 
+	private String description;
 	private World world;
 	private List<Actor> actors;
 	private List<Button> buttons;
@@ -16,7 +17,8 @@ public class GameWorld {
 
 	private float phys_accumulator;
 
-	public GameWorld(List<Actor> actors, List<Button> buttons, List<Platform> platforms, Hero hero) {
+	public GameWorld(String description, List<Actor> actors, List<Button> buttons, List<Platform> platforms, Hero hero) {
+		this.description = description;
 		this.actors = actors;
 		this.buttons = buttons;
 		this.platforms = platforms;
@@ -52,6 +54,10 @@ public class GameWorld {
 			world.step(Consts.PHYS_TIME_STEP, Consts.PHYS_VELO_ITERATIONS, Consts.PHYS_POS_ITERATIONS);
 			phys_accumulator -= Consts.PHYS_TIME_STEP;
 		}
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public World getWorld() {

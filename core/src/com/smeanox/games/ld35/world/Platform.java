@@ -1,5 +1,6 @@
 package com.smeanox.games.ld35.world;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -7,18 +8,20 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.smeanox.games.ld35.Consts;
+import com.smeanox.games.ld35.screens.Renderable;
 
-public class Platform implements PhysObject {
+public class Platform implements PhysObject, Renderable {
 
 	private Body body;
 	private int id;
 	private float x, y, width, height;
 	private float startX, startY, endX, endY;
 	private float movingVelo;
+	private boolean movingEnabled;
 	private float holdTime, aHoldTime;
+	private Vector2 direction;
 
-	public Platform(int id, float x, float y, float width, float height, float startX, float startY, float endX, float endY, float movingVelo, float holdTime) {
+	public Platform(int id, float x, float y, float width, float height, float startX, float startY, float endX, float endY, boolean movingEnabled, float movingVelo, float holdTime) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -28,9 +31,11 @@ public class Platform implements PhysObject {
 		this.startY = startY;
 		this.endX = endX;
 		this.endY = endY;
+		this.movingEnabled = movingEnabled;
 		this.movingVelo = movingVelo;
 		this.holdTime = holdTime;
 		aHoldTime = 0;
+		direction = new Vector2(endX - startX, endY - startY).nor();
 	}
 
 	public int getId() {
@@ -73,6 +78,18 @@ public class Platform implements PhysObject {
 		return holdTime;
 	}
 
+	public boolean isMovingEnabled() {
+		return movingEnabled;
+	}
+
+	public void setMovingEnabled(boolean movingEnabled) {
+		this.movingEnabled = movingEnabled;
+	}
+
+	public void toggleMovingEnabled() {
+		this.movingEnabled = !this.movingEnabled;
+	}
+
 	public float getMovingVelo() {
 		return movingVelo;
 	}
@@ -82,11 +99,12 @@ public class Platform implements PhysObject {
 	}
 
 	public void update(float delta){
-		Vector2 dir = new Vector2(endX - startX, endY - startY).nor();
-		if(aHoldTime > 0) {
-			dir.set(0, 0);
+		direction.set(endX - startX, endY - startY).nor().scl(movingVelo);
+		if(aHoldTime > 0 || !movingEnabled){
+			body.setLinearVelocity(0, 0);
+		} else {
+			body.setLinearVelocity(direction);
 		}
-		body.setLinearVelocity(dir.scl(movingVelo));
 
 		if(aHoldTime > 0){
 			aHoldTime -= delta;
@@ -95,10 +113,16 @@ public class Platform implements PhysObject {
 				movingVelo *= -1;
 			}
 		} else {
-			// FIXME doesn't work if Platform too fast
-			if ((Vector2.len(body.getPosition().x - endX, body.getPosition().y - endY) < Consts.PLATFORM_DIR_CHANGE_RADIUS && movingVelo > 0)
-					|| (Vector2.len(body.getPosition().x - startX, body.getPosition().y - startY) < Consts.PLATFORM_DIR_CHANGE_RADIUS && movingVelo < 0)) {
-				aHoldTime = holdTime;
+			if(movingVelo > 0){
+				if(Vector2.dot(endX - body.getPosition().x, endY - body.getPosition().y, direction.x, direction.y) < 0){
+					aHoldTime = holdTime;
+					body.setTransform(endX, endY, body.getAngle());
+				}
+			} else {
+				if(Vector2.dot(startX - body.getPosition().x, startY - body.getPosition().y, direction.x, direction.y) < 0){
+					aHoldTime = holdTime;
+					body.setTransform(startX, startY, body.getAngle());
+				}
 			}
 		}
 	}
@@ -128,5 +152,10 @@ public class Platform implements PhysObject {
 	@Override
 	public Body getBody() {
 		return body;
+	}
+
+	@Override
+	public void render(SpriteBatch spriteBatch, float delta) {
+
 	}
 }

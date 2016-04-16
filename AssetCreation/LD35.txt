@@ -25,3 +25,15 @@ Levels:
  - Fallende Steine
  - Zerfallende Plattformen
  - Gegner / Menschen
+
+Engine ToDo
+-----------
+
+ - Grafiken
+ (-) Gegner töten
+ - Getötet werden
+ - Wasserphysik
+ - Steine / Dinge zerstören
+ - Klettern
+ - Verschiedene Actors
+ - Brökelnde Platformen

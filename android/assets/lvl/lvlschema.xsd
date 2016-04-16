@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://games.smeanox.com"
+    xmlns="http://games.smeanox.com"
+    elementFormDefault="qualified">
+    <xs:element name="level">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="description" type="xs:string"/>
+                <xs:element name="hero" type="hero"/>
+                <xs:element name="platforms" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="platform" maxOccurs="unbounded" type="platform"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="buttons" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="button" maxOccurs="unbounded" type="button"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="actors" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="actor" maxOccurs="unbounded" type="actor"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="hero">
+        <xs:attribute name="start_x" type="xs:float" use="required"/>
+        <xs:attribute name="start_y" type="xs:float" use="required"/>
+        <xs:attribute name="start_form" type="hero_form" use="optional" default="human"/>
+    </xs:complexType>
+
+    <xs:simpleType name="hero_form">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="human"/>
+            <xs:enumeration value="turtle"/>
+            <xs:enumeration value="wolf"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="platform">
+        <xs:attribute name="id" type="xs:int" use="required"/>
+        <xs:attribute name="x" type="xs:float" use="required"/>
+        <xs:attribute name="y" type="xs:float" use="required"/>
+        <xs:attribute name="width" type="xs:float" use="required"/>
+        <xs:attribute name="height" type="xs:float" use="required"/>
+        <xs:attribute name="start_x" type="xs:float" use="optional" default="0"/>
+        <xs:attribute name="start_y" type="xs:float" use="optional" default="0"/>
+        <xs:attribute name="end_x" type="xs:float" use="optional" default="0"/>
+        <xs:attribute name="end_y" type="xs:float" use="optional" default="0"/>
+        <xs:attribute name="moving_enabled" type="xs:boolean" use="optional" default="true"/>
+        <xs:attribute name="moving_velo" type="xs:float" use="optional" default="1"/>
+        <xs:attribute name="hold_time" type="xs:float" use="optional" default="1"/>
+    </xs:complexType>
+
+    <xs:complexType name="button">
+        <xs:sequence>
+            <xs:element name="toggle_interact" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="dest_id" type="xs:int" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="toggle_active" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="dest_id" type="xs:int" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:int" use="required"/>
+        <xs:attribute name="x" type="xs:float" use="required"/>
+        <xs:attribute name="y" type="xs:float" use="required"/>
+        <xs:attribute name="width" type="xs:float" use="required"/>
+        <xs:attribute name="height" type="xs:float" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="actor">
+        <xs:attribute name="id" type="xs:int" use="required"/>
+        <xs:attribute name="x" type="xs:float" use="required"/>
+        <xs:attribute name="y" type="xs:float" use="required"/>
+        <xs:attribute name="width" type="xs:float" use="required"/>
+        <xs:attribute name="height" type="xs:float" use="required"/>
+    </xs:complexType>
+</xs:schema>
