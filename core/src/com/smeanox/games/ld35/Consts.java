@@ -7,11 +7,17 @@ public class Consts {
 	public static final float HEIGHT = 30;
 	public static final float CAMERA_BORDER = 8;
 	public static final float DESKTOP_SCALE = 20;
-	public static final boolean USE_DEBUG_RENDERER = false;
+	public static final boolean USE_DEBUG_RENDERER = true;
 
 	public static final float BG1_DIST = 5;
+	public static final float BG1_HEIGHT_PART = 0.66f;
+	public static final float BG1_HEIGHT_OFF = 0.33f;
 	public static final float BG2_DIST = 3;
+	public static final float BG2_HEIGHT_PART = 0.66f;
+	public static final float BG2_HEIGHT_OFF = 0f;
 	public static final float BG3_DIST = 2;
+	public static final float BG3_HEIGHT_PART = 0.66f;
+	public static final float BG3_HEIGHT_OFF = 0.33f;
 
 	public static final float PHYS_GRAVITY = -10;
 	public static final float PHYS_TIME_STEP = 1/45f;

@@ -68,11 +68,11 @@ public class LevelReader {
 					xactor.getFloat("width"),
 					xactor.getFloat("height")));
 		}
-		for(XmlReader.Element xactor : xactors.getChildrenByName("ball")) {
-			actors.add(new Ball(xactor.getInt("id"),
-					xactor.getFloat("x"),
-					xactor.getFloat("y"),
-					xactor.getFloat("radius")));
+		for(XmlReader.Element xball : xactors.getChildrenByName("ball")) {
+			actors.add(new Ball(xball.getInt("id"),
+					xball.getFloat("x"),
+					xball.getFloat("y"),
+					xball.getFloat("radius")));
 		}
 		
 		return new GameWorld(xdescription.getText(), actors, buttons, platforms, hero);

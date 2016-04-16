@@ -159,7 +159,6 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
 		if (gameWorld.getHero().getBody().getPosition().x > cameraX + Consts.WIDTH / 2 - Consts.CAMERA_BORDER) {
 			cameraX = gameWorld.getHero().getBody().getPosition().x - Consts.WIDTH / 2 + Consts.CAMERA_BORDER;
 			camera.position.x = cameraX;
@@ -173,8 +172,22 @@ public class GameScreen implements Screen {
 
 		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
-		float width = Consts.HEIGHT * Textures.bg1.get().getWidth() / ((float) Textures.bg1.get().getHeight());
-		spriteBatch.draw(Textures.bg1.get(), -width / 2, -Consts.HEIGHT / 2, width, Consts.HEIGHT);
+
+		// bg1
+		float width = Consts.HEIGHT * Consts.BG1_HEIGHT_PART * Textures.bg1.get().getWidth() / ((float) Textures.bg1.get().getHeight());
+		float off = camera.position.x - camera.position.x / Consts.BG1_DIST;
+		for(int i = -10; i < 11; i++) {
+			spriteBatch.draw(Textures.bg1.get(), -width / 2 + off + i * width, -Consts.HEIGHT / 2 + Consts.HEIGHT * Consts.BG1_HEIGHT_OFF,
+					width, Consts.HEIGHT * Consts.BG1_HEIGHT_PART);
+		}
+
+		// bg2
+		width = Consts.HEIGHT * Consts.BG2_HEIGHT_PART * Textures.bg2.get().getWidth() / ((float) Textures.bg2.get().getHeight());
+		off = camera.position.x - camera.position.x / Consts.BG2_DIST;
+		for(int i = -10; i < 11; i++) {
+			spriteBatch.draw(Textures.bg2.get(), -width / 2 + off + i * width, -Consts.HEIGHT / 2 + Consts.HEIGHT * Consts.BG2_HEIGHT_OFF,
+					width, Consts.HEIGHT * Consts.BG2_HEIGHT_PART);
+		}
 
 		for (Renderable renderable : renderables) {
 			renderable.render(spriteBatch, delta);

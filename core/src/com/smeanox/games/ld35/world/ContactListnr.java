@@ -83,12 +83,9 @@ public class ContactListnr implements ContactListener {
 		}
 
 		if (hero.getBody().getUserData() == gameWorld.getHero()) {
-			if (!hero.isSensor() && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > 5) {
-				System.out.println(impulse.getNormalImpulses()[0]);
-			}
 			if (!hero.isSensor() && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > Consts.LETHAL_IMPULSE) {
 				gameWorld.setGameLost(true);
-			};
+			}
 		}
 
 	}

@@ -38,7 +38,7 @@ public class Ball extends Actor {
 		fixtureDef.shape = shape;
 		fixtureDef.density = 5000f;
 		fixtureDef.friction = 0.4f;
-		fixtureDef.restitution = 0f;
+		fixtureDef.restitution = 0.2f;
 
 		Fixture fixture = body.createFixture(fixtureDef);
 		shape.dispose();
@@ -51,8 +51,8 @@ public class Ball extends Actor {
 	public void render(SpriteBatch spriteBatch, float delta) {
 		animationTime += delta * Math.abs(getBody().getAngularVelocity());
 		spriteBatch.draw(animation.getKeyFrame(animationTime),
-			getBody().getPosition().x - getBody().getFixtureList().get(0).getShape().getRadius(),
-			getBody().getPosition().y - getBody().getFixtureList().get(0).getShape().getRadius(),
+			getBody().getPosition().x - width / 2,
+			getBody().getPosition().y - height / 2,
 			2*getBody().getFixtureList().get(0).getShape().getRadius(), 2*getBody().getFixtureList().get(0).getShape().getRadius());
 	}
 
