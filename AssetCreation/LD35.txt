@@ -1,0 +1,17 @@
+Ludum Dare 35
+=============
+Thema: Shapeshifting
+
+Ideen
+-----
+
+ -> Verwandlung zwischen Mensch, Wolf und Schildkröte. Jede Form hat Stärken (z.B. Schildkröte defensiv). Jump'n'Run.
+ - Als Frosch ein Schloss infiltrieren. Verwandlung zwischen Frosch und Prinz. Stealth
+ 
+Konzept
+-------
+Spieler kann zwischen verschiedenen Formen wechseln: Mensch, Wolf und Schildkröte. Jede Form hat verschiedene Stärken:
+
+ - Mensch: Wird von anderen Menschen nicht angegriffen, kann klettern, Schalter betätigen
+ - Wolf: Schnell laufen, weit springen, Instakill
+ - Schildkröte: Nimmt weniger Schaden, kann schwimmen, kann nicht springen
