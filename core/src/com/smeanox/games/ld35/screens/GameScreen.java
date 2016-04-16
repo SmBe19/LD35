@@ -28,8 +28,9 @@ public class GameScreen implements Screen {
 	GameWorld gameWorld;
 	SpriteBatch spriteBatch;
 	Box2DDebugRenderer debugRenderer;
-	Camera camera;
+	OrthographicCamera camera;
 	List<Renderable> renderables;
+	float cameraX;
 
 	public GameScreen() {
 		if (!loadGameWorld()) return;
@@ -40,6 +41,7 @@ public class GameScreen implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 
 		debugRenderer = new Box2DDebugRenderer();
+
 	}
 
 	private boolean loadGameWorld() {
@@ -156,6 +158,18 @@ public class GameScreen implements Screen {
 	private void renderWorld(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+		if (gameWorld.getHero().getBody().getPosition().x > cameraX + Consts.WIDTH / 2 - Consts.CAMERA_BORDER) {
+			cameraX = gameWorld.getHero().getBody().getPosition().x - Consts.WIDTH / 2 + Consts.CAMERA_BORDER;
+			camera.position.x = cameraX;
+			camera.update();
+		}
+		if (gameWorld.getHero().getBody().getPosition().x < cameraX - Consts.WIDTH / 2 + Consts.CAMERA_BORDER) {
+			cameraX = gameWorld.getHero().getBody().getPosition().x + Consts.WIDTH / 2 - Consts.CAMERA_BORDER;
+			camera.position.x = cameraX;
+			camera.update();
+		}
 
 		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
