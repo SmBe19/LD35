@@ -50,7 +50,7 @@ public class Hero implements PhysObject, Renderable {
 		hw = createAnimation(Textures.spritesheet.get(), 0, 1, 8, 10, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
 		t = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		tw = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 1, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
-		w = createAnimation(Textures.spritesheet.get(), 2, 3, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
+		w = createAnimation(Textures.spritesheet.get(), 2, 3, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		ww = createAnimation(Textures.spritesheet.get(), 2, 3, 4, 6, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
 		trht = createAnimation(Textures.spritesheet.get(), 3, 4, 0, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.NORMAL);
 		trth = createAnimation(Textures.spritesheet.get(), 3, 4, 0, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.REVERSED);

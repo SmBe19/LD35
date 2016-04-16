@@ -157,6 +157,7 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
 		float width = Consts.HEIGHT * Textures.bg1.get().getWidth() / ((float) Textures.bg1.get().getHeight());
 		spriteBatch.draw(Textures.bg1.get(), -width / 2, -Consts.HEIGHT / 2, width, Consts.HEIGHT);
