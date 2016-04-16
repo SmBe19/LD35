@@ -15,3 +15,13 @@ Spieler kann zwischen verschiedenen Formen wechseln: Mensch, Wolf und Schildkrö
  - Mensch: Wird von anderen Menschen nicht angegriffen, kann klettern, Schalter betätigen
  - Wolf: Schnell laufen, weit springen, Instakill
  - Schildkröte: Nimmt weniger Schaden, kann schwimmen, kann nicht springen
+
+Levels:
+ - Von einem Ende zum anderen kommen
+ - Wenn Ziel erreicht, Level fertig
+ - Jump'n'Run / Rätsel / Buttons
+ - Plattformen (teilweise bewegt)
+ - Buttons
+ - Fallende Steine
+ - Zerfallende Plattformen
+ - Gegner / Menschen
