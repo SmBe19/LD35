@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<level xmlns="http://games.smeanox.com"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
+    <description>Testlevel</description>
+    <hero start_x="0" start_y="5" dest_x="20" dest_y="2" start_form="human"/>
+    <platforms>
+        <platform id="1" x="-4" y="0" width="2" height="0.5" end_y="0" moving_velo="20" type="destr"/>
+        <platform id="1" x="0" y="-2" width="10" height="0.5" end_y="0" moving_velo="20"/>
+        <platform id="2" x="-12" y="-2" width="10" height="0.5" start_x="-20" moving_velo="2" moving_enabled="true"/>
+        <platform id="3" x="12" y="-2" width="10" height="0.5" end_x="18" end_y="2"/>
+        <platform id="6" x="19.5" y="-2.25" width="6" height="1" type="bridge"/>
+        <platform id="4" x="-16" y="0" width="10" height="10">
+            <point x="-5" y="-5"/>
+            <point x="5" y="-5"/>
+            <point x="5" y="0"/>
+            <point x="-5" y="0"/>
+
+            <point x="-5" y="-5"/>
+            <point x="0" y="-5"/>
+            <point x="0" y="5"/>
+            <point x="-5" y="5"/>
+        </platform>
+        <platform id="5" x="-20" y="-8" width="1000" height="0.5"/>
+    </platforms>
+    <ladders>
+        <ladder id="1" x="0" width="1" start_y="-8" end_y="-1.5"/>
+        <ladder id="1" x="2" width="1" start_y="-6" end_y="-1.5" in_air="true"/>
+    </ladders>
+    <buttons>
+        <button id="1" x="-4" y="5" width="1" height="1">
+            <toggle_interact dest_id="1"/>
+        </button>
+        <button id="2" x="-19" y="0" width="1" height="1">
+            <toggle_active dest_id="3"/>
+        </button>
+    </buttons>
+    <waters>
+        <water id="1" x="-20" y="-6" width="4" height="4"/>
+    </waters>
+    <actors>
+        <actor id="1" x="4" y="5" width="1" height="1" texture="signright"/>
+        <actor id="2" x="5" y="5" width="1" height="1" texture="signright"/>
+        <actor id="3" x="20" y="2" width="3" height="3" texture="sign" collision="false"/>
+        <actor id="4" x="8" y="5" width="1" height="1" texture="signleft"/>
+	    <ball id="5" x="0" y="30" vx="0" vy="0" radius="1"/>
+        <ball id="5" x="100" y="50" vx="-3" vy="0" radius="5"/>
+    </actors>
+    <texts>
+        <text x="19" y="2" scale="0.1" text="mountain"/>
+    </texts>
+</level>
