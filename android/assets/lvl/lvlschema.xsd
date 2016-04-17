@@ -44,6 +44,13 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="texts" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="text" type="text"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -143,4 +150,18 @@
         <xs:attribute name="width" type="xs:float" use="required"/>
         <xs:attribute name="height" type="xs:float" use="required"/>
     </xs:complexType>
+
+    <xs:complexType name="text">
+        <xs:attribute name="x" type="xs:float" use="required"/>
+        <xs:attribute name="y" type="xs:float" use="required"/>
+        <xs:attribute name="scale" type="xs:float" use="required"/>
+        <xs:attribute name="text" type="xs:string" use="required"/>
+        <xs:attribute name="color" type="color" use="optional" default="ffffffff"/>
+    </xs:complexType>
+
+    <xs:simpleType name="color">
+        <xs:restriction base="xs:string">
+            <xs:length value="8"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>
