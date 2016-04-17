@@ -33,7 +33,7 @@ public class Hero implements PhysObject, Renderable {
 	private Map<HeroForm, Boolean> heroFormPossible;
 	private boolean turtleActive;
 
-	private Animation activeAnimation, h, hw, t, tw, ta, w, ww, trht, trth, trhw, trwh, trtw, trwt;
+	private Animation activeAnimation, h, hw, hc, t, tw, ta, w, ww, trht, trth, trhw, trwh, trtw, trwt;
 	private float animationTime;
 	private boolean orientation, isTransforming;
 
@@ -56,6 +56,7 @@ public class Hero implements PhysObject, Renderable {
 	private void initAnimations(){
 		h = createAnimation(Textures.spritesheet.get(), 0, 1, 0, 8, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.15f, Animation.PlayMode.LOOP);
 		hw = createAnimation(Textures.spritesheet.get(), 0, 1, 8, 10, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
+		hc = createAnimation(Textures.spritesheet.get(), 0, 1, 10, 13, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP_PINGPONG);
 		t = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		tw = createAnimation(Textures.spritesheet.get(), 1, 2, 0, 1, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		ta = createAnimation(Textures.spritesheet.get(), 1, 2, 4, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
@@ -306,7 +307,7 @@ public class Hero implements PhysObject, Renderable {
 			animationTime += delta;
 			switch (currentForm){
 				case human:
-					activeAnimation = walking ? h : hw;
+					activeAnimation = (!isOnGround() && isOnLadder()) ? hc : (walking ? h : hw);
 					break;
 				case turtle:
 					activeAnimation = turtleActive ? ta : (walking ? t : tw);
