@@ -2,7 +2,6 @@ package com.smeanox.games.ld35.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,12 +16,9 @@ import com.smeanox.games.ld35.Consts;
 import com.smeanox.games.ld35.Font;
 import com.smeanox.games.ld35.io.LevelReader;
 import com.smeanox.games.ld35.io.Textures;
-import com.smeanox.games.ld35.world.Actor;
-import com.smeanox.games.ld35.world.Button;
 import com.smeanox.games.ld35.world.GameWorld;
-import com.smeanox.games.ld35.world.Hero;
 import com.smeanox.games.ld35.world.HeroForm;
-import com.smeanox.games.ld35.world.Platform;
+import com.smeanox.games.ld35.world.narrator.Narrator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,16 +26,18 @@ import java.util.List;
 
 public class GameScreen implements Screen {
 
-	GameWorld gameWorld;
-	SpriteBatch spriteBatch;
-	Box2DDebugRenderer debugRenderer;
-	OrthographicCamera camera;
-	List<Renderable> renderables;
-	ShaderProgram waterShader;
-	float cameraX;
+	private Narrator narrator;
+	private GameWorld gameWorld;
+	private SpriteBatch spriteBatch;
+	private Box2DDebugRenderer debugRenderer;
+	private OrthographicCamera camera;
+	private List<Renderable> renderables;
+	private ShaderProgram waterShader;
+	private float cameraX;
+	private String loadedLevel;
 
 	public GameScreen() {
-		if (!loadGameWorld()) return;
+		narrator = new Narrator();
 
 		spriteBatch = new SpriteBatch();
 		camera = new OrthographicCamera(Consts.WIDTH, Consts.HEIGHT);
@@ -86,18 +84,21 @@ public class GameScreen implements Screen {
 		System.out.println(waterShader.getLog());
 		ShaderProgram.pedantic = false;
 		debugRenderer = new Box2DDebugRenderer();
+
+		loadGameWorld(narrator.getCurrentFile());
 	}
 
-	private boolean loadGameWorld() {
-		//initDebugWorld();
+	private boolean loadGameWorld(String file) {
 		try {
-			gameWorld = LevelReader.readLevel(Gdx.files.internal("lvl/lvl1.xml"));
+			gameWorld = LevelReader.readLevel(Gdx.files.internal(file));
 		} catch (IOException e) {
 			e.printStackTrace();
 			Gdx.app.exit();
 			return false;
 		}
+		loadedLevel = file;
 		addGameWorldObjectsToRenderables();
+		narrator.loadedLevel(file);
 		return true;
 	}
 
@@ -120,7 +121,6 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void show() {
-
 	}
 
 	@Override
@@ -199,15 +199,15 @@ public class GameScreen implements Screen {
 			}
 		}
 		if (Gdx.input.isKeyJustPressed(Consts.KEY_RESTART)) {
-			gameWorld.setGameLost(true);
+			loadGameWorld(loadedLevel);
 		}
 	}
 
 	private void update(float delta) {
 		gameWorld.update(delta);
-
-		if(gameWorld.isGameLost()){
-			loadGameWorld();
+		narrator.update(gameWorld, delta);
+		if(narrator.isNeedLevelReload()) {
+			loadGameWorld(narrator.getCurrentFile());
 		}
 	}
 
@@ -277,10 +277,12 @@ public class GameScreen implements Screen {
 
 		if(gameWorld.isGameWon()) {
 			spriteBatch.setColor(Color.RED);
-			Font.FONT1.draw(spriteBatch, "WON", camera.position.x - 25, -5, 2f);
+			Font.FONT1.draw(spriteBatch, "WON", camera.position.x - 15, -5, 1f);
 			spriteBatch.setColor(Color.WHITE);
 		} else if(gameWorld.isGameLost()){
-			Font.FONT1.draw(spriteBatch, "LOST", camera.position.x - 10, -5, 2f);
+			spriteBatch.setColor(Color.RED);
+			Font.FONT1.draw(spriteBatch, "LOST", camera.position.x - 15, -5, 1f);
+			spriteBatch.setColor(Color.WHITE);
 		}
 
 		spriteBatch.end();

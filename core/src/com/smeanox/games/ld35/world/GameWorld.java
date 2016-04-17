@@ -106,6 +106,15 @@ public class GameWorld {
 		return platforms;
 	}
 
+	public Platform getPlatformById(int id){
+		for (Platform platform : getPlatforms()) {
+			if (platform.getId() == id) {
+				return platform;
+			}
+		}
+		return null;
+	}
+
 	public List<Text> getTexts() {
 		return texts;
 	}

@@ -61,21 +61,13 @@ public class Button implements PhysObject, Renderable {
 
 	public void startInteract(GameWorld gameWorld){
 		for (int i : destIdsActive) {
-			for (Platform platform : gameWorld.getPlatforms()) {
-				if (platform.getId() == i) {
-					platform.toggleMovingEnabled();
-				}
-			}
+			gameWorld.getPlatformById(i).toggleMovingEnabled();
 		}
 	}
 
 	public void endInteract(GameWorld gameWorld){
 		for (int i : destIdsActive) {
-			for (Platform platform : gameWorld.getPlatforms()) {
-				if (platform.getId() == i) {
-					platform.toggleMovingEnabled();
-				}
-			}
+			gameWorld.getPlatformById(i).toggleMovingEnabled();
 		}
 	}
 
