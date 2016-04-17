@@ -42,6 +42,8 @@ public class Platform implements PhysObject, Renderable {
 
 	private List<TextureRegion> textures;
 
+	private TextureRegion[][] regions;
+
 	public Platform(int id, float x, float y, float width, float height, List<Vector2> points, PlatformType platformType,
 					float startX, float startY, float endX, float endY, boolean movingEnabled, float movingVelo, float holdTime) {
 		this.id = id;
@@ -58,11 +60,15 @@ public class Platform implements PhysObject, Renderable {
 		this.movingEnabled = movingEnabled;
 		this.movingVelo = movingVelo;
 		this.holdTime = holdTime;
+		this.regions = null;
 		aHoldTime = 0;
 		direction = new Vector2(endX - startX, endY - startY).nor();
 		switch (platformType){
 			case normal:
-				initTextures(0, 6, 12, 13, Consts.TEX_WIDTH_PLATFORM, Consts.TEX_HEIGHT_PLATFORM);
+				if (points.size() > 0)
+					initTextures(0, 10, 22, 24, 16, 16);
+				else
+					initTextures(0, 6, 12, 13, Consts.TEX_WIDTH_PLATFORM, Consts.TEX_HEIGHT_PLATFORM);
 				break;
 			case bridge:
 				initTextures(0, 3, 9, 10, Consts.TEX_WIDTH_BRIDGE, Consts.TEX_HEIGHT_BRIDGE);
@@ -84,14 +90,18 @@ public class Platform implements PhysObject, Renderable {
 				possibleTextures.add(new TextureRegion(Textures.spritesheet.get(), x * texWidth, y * texHeight, texWidth, texHeight));
 			}
 		}
-		textures = new ArrayList<TextureRegion>();
-		textures.add(possibleTextures.get(0));
-		float step = height * texWidth / ((float) texHeight);
-		for(float x = step; x < width - step; x += step){
-			int rand = (int) ((possibleTextures.size() - 2) * Math.random()) + 1;
-			textures.add(possibleTextures.get(rand));
+		if (platformType == PlatformType.normal && points.size() > 0) {
+			textures = possibleTextures;
+		} else {
+			textures = new ArrayList<TextureRegion>();
+			textures.add(possibleTextures.get(0));
+			float step = height * texWidth / ((float) texHeight);
+			for(float x = step; x < width - step; x += step){
+				int rand = (int) ((possibleTextures.size() - 2) * Math.random()) + 1;
+				textures.add(possibleTextures.get(rand));
+			}
+			textures.add(possibleTextures.get(possibleTextures.size() - 1));
 		}
-		textures.add(possibleTextures.get(possibleTextures.size() - 1));
 	}
 
 	public int getId() {
@@ -219,6 +229,32 @@ public class Platform implements PhysObject, Renderable {
 		fixtureDef.restitution = 0f;
 
 		Fixture fixture = body.createFixture(fixtureDef);
+
+
+		if (platformType == PlatformType.normal && points.size() > 0) {
+			regions = new TextureRegion[2*(int)Math.ceil(height)][2*(int)Math.ceil(width)];
+			int iyi = 0;
+			for ( float iy = y - height/2; iy < y + height/2; iy += 1, iyi++) {
+				int ixi = 0;
+				for (float ix = x - width/2; ix < x + width/2; ix += 1, ixi++) {
+					boolean center = fixture.testPoint(ix, iy);
+					if (center) {
+						boolean l = fixture.testPoint(ix-1, iy);
+						boolean r = fixture.testPoint(ix+1, iy);
+						boolean t = fixture.testPoint(ix, iy+1);
+						boolean b = fixture.testPoint(ix, iy-1);
+
+						regions[2*iyi+0][2*ixi+0] = textures.get(0);
+						regions[2*iyi+0][2*ixi+1] = textures.get(0);
+						regions[2*iyi+1][2*ixi+0] = textures.get(0);
+						regions[2*iyi+1][2*ixi+1] = textures.get(0);
+
+					}
+				}
+			}
+		}
+
+
 		shape.dispose();
 
 		body.setUserData(this);
@@ -255,9 +291,23 @@ public class Platform implements PhysObject, Renderable {
 			return;
 		}
 
-		float step = height * texWidth / ((float) texHeight);
-		for (int i = 0; i < textures.size(); i++) {
-			spriteBatch.draw(textures.get(i), body.getPosition().x - width / 2 + step * i, body.getPosition().y - height / 2, step, height);
+
+		if (platformType == PlatformType.normal && points.size() > 0) {
+			if (regions == null) return;
+
+			for (int iy = 0; iy < regions.length; iy++) {
+				for (int ix = 0; ix < regions[iy].length; ix++) {
+					if (regions[iy][ix] != null) {
+						spriteBatch.draw(regions[iy][ix], body.getPosition().x - width/2 + ix*0.5f, body.getPosition().y - height /2 + iy*0.5f, 0.5f, 0.5f);
+					}
+				}
+			}
+		} else {
+			float step = height * texWidth / ((float)texHeight);
+			for (int i = 0; i < textures.size(); i++) {
+				spriteBatch.draw(textures.get(i), body.getPosition().x - width/2 + step*i, body.getPosition().y - height/2, step, height);
+			}
+
 		}
 	}
 }
