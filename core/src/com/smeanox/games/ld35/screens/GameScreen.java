@@ -105,19 +105,21 @@ public class GameScreen implements Screen {
 		if (gameWorld.getHero().isInWater()) {
 			maxVeloX = Consts.HERO_WATER_MAX_VELO_X;
 		}
-		if (Gdx.input.isKeyPressed(Consts.KEY_LEFT)) {
-			if(body.getLinearVelocity().x > -maxVeloX) {
-				body.applyLinearImpulse(new Vector2(-impulseX, 0), body.getWorldCenter(), true);
+		if(!gameWorld.getHero().isTurtleActive()) {
+			if (Gdx.input.isKeyPressed(Consts.KEY_LEFT)) {
+				if (body.getLinearVelocity().x > -maxVeloX) {
+					body.applyLinearImpulse(new Vector2(-impulseX, 0), body.getWorldCenter(), true);
+				}
 			}
-		}
-		if (Gdx.input.isKeyPressed(Consts.KEY_RIGHT)) {
-			if(body.getLinearVelocity().x < maxVeloX) {
-				body.applyLinearImpulse(new Vector2(impulseX, 0), body.getWorldCenter(), true);
+			if (Gdx.input.isKeyPressed(Consts.KEY_RIGHT)) {
+				if (body.getLinearVelocity().x < maxVeloX) {
+					body.applyLinearImpulse(new Vector2(impulseX, 0), body.getWorldCenter(), true);
+				}
 			}
-		}
-		if (Gdx.input.isKeyPressed(Consts.KEY_JUMP)) {
-			if(gameWorld.getHero().isOnGround() && Math.abs(body.getLinearVelocity().y) < Consts.HERO_JUMP_MAX_VELO_Y) {
-				body.applyLinearImpulse(new Vector2(0, gameWorld.getHero().getCurrentForm().getImpulseY()), body.getWorldCenter(), true);
+			if (Gdx.input.isKeyPressed(Consts.KEY_JUMP)) {
+				if (gameWorld.getHero().isOnGround() && Math.abs(body.getLinearVelocity().y) < Consts.HERO_JUMP_MAX_VELO_Y) {
+					body.applyLinearImpulse(new Vector2(0, gameWorld.getHero().getCurrentForm().getImpulseY()), body.getWorldCenter(), true);
+				}
 			}
 		}
 		if(!gameWorld.getHero().isOnGround() && gameWorld.getHero().isOnLadder() && gameWorld.getHero().getCurrentForm() == HeroForm.human) {
