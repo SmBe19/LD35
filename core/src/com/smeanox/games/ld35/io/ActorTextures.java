@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.smeanox.games.ld35.Consts;
 
 public enum ActorTextures {
-	turtle(Textures.spritesheet.get(), 0*Consts.TEX_WIDTH_HERO, 1*Consts.TEX_HEIGHT_HERO, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO),
+	signleft(Textures.spritesheet.get(), 0*Consts.TEX_WIDTH_HERO, 10*Consts.TEX_HEIGHT_HERO, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO),
+	signright(Textures.spritesheet.get(), 1*Consts.TEX_WIDTH_HERO, 10*Consts.TEX_HEIGHT_HERO, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO),
+	sign(Textures.spritesheet.get(), 2*Consts.TEX_WIDTH_HERO, 10*Consts.TEX_HEIGHT_HERO, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO),
 	;
 
 	private TextureRegion textureRegion;

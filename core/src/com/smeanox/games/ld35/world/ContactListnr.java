@@ -98,8 +98,10 @@ public class ContactListnr implements ContactListener {
 			other = contact.getFixtureA();
 		}
 
-		if(!gameWorld.getHero().isOnGround() && gameWorld.getHero().isOnLadder() && other.getBody().getUserData() instanceof Platform){
-			contact.setEnabled(false);
+		if(hero.getBody().getUserData() == gameWorld.getHero()){
+			if(!gameWorld.getHero().isOnGround() && gameWorld.getHero().isOnLadder() && other.getBody().getUserData() instanceof Platform) {
+				contact.setEnabled(false);
+			}
 		}
 	}
 
