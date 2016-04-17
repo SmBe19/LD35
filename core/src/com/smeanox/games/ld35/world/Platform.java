@@ -208,6 +208,14 @@ public class Platform implements PhysObject, Renderable {
 		}
 	}
 
+	private static boolean testPoint(Fixture[] fixtures, float x, float y) {
+		for (Fixture f : fixtures) {
+			if (f != null && f.testPoint(x,y))
+				return true;
+		}
+		return false;
+	}
+
 	@Override
 	public void addToWorld(World world) {
 		BodyDef bodyDef = new BodyDef();
@@ -216,81 +224,92 @@ public class Platform implements PhysObject, Renderable {
 
 		body = world.createBody(bodyDef);
 
-		PolygonShape shape = new PolygonShape();
 		if(points.size() == 0) {
+			PolygonShape shape = new PolygonShape();
 			shape.setAsBox(width / 2, height / 2);
+			FixtureDef fixtureDef = new FixtureDef();
+			fixtureDef.shape = shape;
+			fixtureDef.density = 0f;
+			fixtureDef.friction = 0.8f;
+			fixtureDef.restitution = 0f;
+			Fixture fixture = body.createFixture(fixtureDef);
+			shape.dispose();
 		} else {
-			shape.set(points.toArray(new Vector2[points.size()]));
-		}
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = shape;
-		fixtureDef.density = 0f;
-		fixtureDef.friction = 0.8f;
-		fixtureDef.restitution = 0f;
+			PolygonShape shape = new PolygonShape();
+			FixtureDef fixtureDef = new FixtureDef();
+			fixtureDef.shape = shape;
+			fixtureDef.density = 0f;
+			fixtureDef.friction = 0.8f;
+			fixtureDef.restitution = 0f;
+			Fixture[] fixtures = new Fixture[points.size()/4];
+			for (int i = 0; i+3 < points.size(); i+= 4) {
+				shape.set(points.subList(i, i+4).toArray(new Vector2[4]));
+				fixtures[i/4] = body.createFixture(fixtureDef);
+			}
+			if (platformType == PlatformType.normal && points.size() > 0) {
+				regions = new TextureRegion[2*(1+(int)Math.ceil(height))][2*(1+(int)Math.ceil(width))];
+				int iyi = 0;
+				for ( float iy = y - height/2; iy <= y + height/2; iy += 1, iyi++) {
+					int ixi = 0;
+					for (float ix = x - width/2; ix <= x + width/2; ix += 1, ixi++) {
+						boolean center = testPoint(fixtures, ix, iy);
+						if (center) {
+							boolean l = !testPoint(fixtures, ix-1, iy);
+							boolean r = !testPoint(fixtures, ix+1, iy);
+							boolean t = !testPoint(fixtures, ix, iy+1);
+							boolean b = !testPoint(fixtures, ix, iy-1);
 
-		Fixture fixture = body.createFixture(fixtureDef);
-
-
-		if (platformType == PlatformType.normal && points.size() > 0) {
-			regions = new TextureRegion[2*(1+(int)Math.ceil(height))][2*(1+(int)Math.ceil(width))];
-			int iyi = 0;
-			for ( float iy = y - height/2; iy <= y + height/2; iy += 1, iyi++) {
-				int ixi = 0;
-				for (float ix = x - width/2; ix <= x + width/2; ix += 1, ixi++) {
-					boolean center = fixture.testPoint(ix, iy);
-					if (center) {
-						boolean l = !fixture.testPoint(ix-1, iy);
-						boolean r = !fixture.testPoint(ix+1, iy);
-						boolean t = !fixture.testPoint(ix, iy+1);
-						boolean b = !fixture.testPoint(ix, iy-1);
-
-						if (l) {
-							regions[2*iyi+1][2*ixi+0] = textures.get(t?0:6);
-							regions[2*iyi+0][2*ixi+0] = textures.get(b?10:16);
-						} else {
-							if (t) {
-								regions[2*iyi+1][2*ixi+0] = textures.get(8);
+							if (l) {
+								regions[2*iyi+1][2*ixi+0] = textures.get(t?0:6);
+								regions[2*iyi+0][2*ixi+0] = textures.get(b?10:16);
 							} else {
-								boolean tl = !fixture.testPoint(ix-1, iy+1);
-								regions[2*iyi+1][2*ixi+0] = textures.get(tl?4:2);
-							}
-							if (b) {
-								regions[2*iyi+0][2*ixi+0] = textures.get(18);
-							} else {
-								boolean bl = !fixture.testPoint(ix-1, iy-1);
-								regions[2*iyi+0][2*ixi+0] = textures.get(bl?14:12);
+								if (t) {
+									regions[2*iyi+1][2*ixi+0] = textures.get(8);
+								} else {
+									boolean tl = !testPoint(fixtures, ix-1, iy+1);
+									regions[2*iyi+1][2*ixi+0] = textures.get(tl?4:2);
+								}
+								if (b) {
+									regions[2*iyi+0][2*ixi+0] = textures.get(18);
+								} else {
+									boolean bl = !testPoint(fixtures, ix-1, iy-1);
+									regions[2*iyi+0][2*ixi+0] = textures.get(bl?14:12);
 
+								}
 							}
+							if (r) {
+								regions[2*iyi+1][2*ixi+1] = textures.get(t?1:7);
+								regions[2*iyi+0][2*ixi+1] = textures.get(b?11:17);
+							} else {
+								if (t) {
+									regions[2*iyi+1][2*ixi+1] = textures.get(9);
+								} else {
+									boolean tr = !testPoint(fixtures, ix+1, iy+1);
+									regions[2*iyi+1][2*ixi+1] = textures.get(tr?5:3);
+								}
+								if (b) {
+									regions[2*iyi+0][2*ixi+1] = textures.get(19);
+								} else {
+									boolean br = !testPoint(fixtures,ix+1, iy-1);
+									regions[2*iyi+0][2*ixi+1] = textures.get(br?15:13);
+
+								}
+							}
+							//System.out.printf("%d/%d: %d\n", 2*iyi+0,2*ixi+0, textures.indexOf(regions[2*iyi+0][2*ixi+0]));
+							//System.out.printf("%d/%d: %d\n", 2*iyi+0,2*ixi+1, textures.indexOf(regions[2*iyi+0][2*ixi+1]));
+							//System.out.printf("%d/%d: %d\n", 2*iyi+1,2*ixi+0, textures.indexOf(regions[2*iyi+1][2*ixi+0]));
+							//System.out.printf("%d/%d: %d\n", 2*iyi+1,2*ixi+1, textures.indexOf(regions[2*iyi+1][2*ixi+1]));
 						}
-						if (r) {
-							regions[2*iyi+1][2*ixi+1] = textures.get(t?1:7);
-							regions[2*iyi+0][2*ixi+1] = textures.get(b?11:17);
-						} else {
-							if (t) {
-								regions[2*iyi+1][2*ixi+1] = textures.get(9);
-							} else {
-								boolean tr = !fixture.testPoint(ix+1, iy+1);
-								regions[2*iyi+1][2*ixi+1] = textures.get(tr?5:3);
-							}
-							if (b) {
-								regions[2*iyi+0][2*ixi+1] = textures.get(19);
-							} else {
-								boolean br = !fixture.testPoint(ix+1, iy-1);
-								regions[2*iyi+0][2*ixi+1] = textures.get(br?15:13);
-
-							}
-						}
-						System.out.printf("%d/%d: %d\n", 2*iyi+0,2*ixi+0, textures.indexOf(regions[2*iyi+0][2*ixi+0]));
-						System.out.printf("%d/%d: %d\n", 2*iyi+0,2*ixi+1, textures.indexOf(regions[2*iyi+0][2*ixi+1]));
-						System.out.printf("%d/%d: %d\n", 2*iyi+1,2*ixi+0, textures.indexOf(regions[2*iyi+1][2*ixi+0]));
-						System.out.printf("%d/%d: %d\n", 2*iyi+1,2*ixi+1, textures.indexOf(regions[2*iyi+1][2*ixi+1]));
 					}
 				}
 			}
+			shape.dispose();
 		}
 
 
-		shape.dispose();
+
+
+
 
 		body.setUserData(this);
 	}
