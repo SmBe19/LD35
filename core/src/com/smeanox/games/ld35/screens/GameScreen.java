@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
@@ -36,6 +37,8 @@ public class GameScreen implements Screen {
 	private float cameraX;
 	private String loadedLevel;
 
+	private float waveTime;
+
 	public GameScreen() {
 		narrator = new Narrator();
 
@@ -60,27 +63,29 @@ public class GameScreen implements Screen {
 				"varying vec2 v_texCoord;\n"+
 				"uniform sampler2D u_texture;\n"+
 				"uniform sampler2D u_texture2;\n"+
-				"uniform sampler2D u_texture3;\n"+
-				"uniform vec2 u_mult;\n"+
+				"uniform float u_mult;\n"+
 				"uniform vec2 u_offset;\n"+
-				"uniform vec2 u_offset2;\n"+
+				"uniform float u_time;\n"+
+				"vec4 text2D(sampler2D t, vec2 tc) {\n"+
+				"    vec4 col = texture2D(t,tc);\n"+
+				"    return col.a > 0.5 ? col : vec4(0.388, 0.607, 1.0, 1.0);\n"+
+				" }\n"+
+				"vec4 gaussSamp(sampler2D t, vec2 tc, vec2 d) {\n"+
+				"    return 0.4*text2D(t,tc)+0.24*text2D(t,tc+d)+0.24*text2D(t,tc-d)+0.06*text2D(t,tc-d-d)+0.06*text2D(t,tc+d+d);\n"+
+				"}\n"+
 				"void main() {\n"+
 				"    vec4 col = texture2D(u_texture, v_texCoord);\n"+
 				"    if (distance(col.rgb, vec3(1.0, 0.0, 1.0)) < 0.1f){\n"+
-				"        vec2 tc = v_texCoord*vec2(1.0f,-1.0f);\n"+
-				"        vec4 col2 = texture2D(u_texture2, tc + u_offset + u_mult * sin (dot(tc, vec2(50, 500))));\n"+
-				"        if (col2.a > 0.5f) {\n"+
-				"            gl_FragColor = col2 + 0.3f * texture2D(u_texture2, tc - u_mult + u_offset) + 0.3f*texture2D(u_texture2, tc + u_mult + u_offset);\n"+
-				"        } else {\n"+
-				"            gl_FragColor = texture2D(u_texture3, tc + u_offset2);\n"+
-				"        }\n"+
+				"        float z = 1.0f/v_texCoord.y;\n"+
+				"        vec2 tc = vec2(v_texCoord.x+0.007*cos(70.0*v_texCoord.x ), 1.0-1.3*v_texCoord.y+0.005*sin(300.0f*z + u_time));\n"+
+				"        gl_FragColor = gaussSamp(u_texture2, tc + u_offset, vec2(1.0/256.0, 0.0));\n"+
 				"    } else {\n"+
 				"        gl_FragColor = col;\n"+
 				"    }\n"+
 				"}\n"
 				);
-		Textures.bg1.get().setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
-		Textures.sky.get().setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+		Textures.bg1.get().setWrap(TextureWrap.Repeat, TextureWrap.ClampToEdge);
+		Textures.sky.get().setWrap(TextureWrap.Repeat, TextureWrap.ClampToEdge);
 		System.out.println(waterShader.getLog());
 		ShaderProgram.pedantic = false;
 		debugRenderer = new Box2DDebugRenderer();
@@ -248,15 +253,16 @@ public class GameScreen implements Screen {
 
 		spriteBatch.end();
 		spriteBatch.setShader(waterShader);
+		Textures.bg1.get().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		Textures.sky.get().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		spriteBatch.begin();
 
 		Textures.bg1.get().bind(1);
-		Textures.sky.get().bind(2);
+		waveTime += delta;
 		waterShader.setUniformi("u_texture2", 1);
-		waterShader.setUniformi("u_texture3", 2);
-		waterShader.setUniformf("u_mult", 1.0f/512, 0.0f);
-		waterShader.setUniformf("u_offset", -(cameraX/width)*(1.0f/Consts.BG2_DIST - 1.0f/Consts.BG1_DIST), 0.1f);
-		waterShader.setUniformf("u_offset2", -(cameraX/width)*(1.0f/Consts.BG2_DIST), 0.1f);
+		waterShader.setUniformf("u_mult", 1.0f/100f);
+		waterShader.setUniformf("u_time", waveTime);
+		waterShader.setUniformf("u_offset", -(cameraX/width)*(1.0f/Consts.BG2_DIST - 1.0f/Consts.BG1_DIST), 0.3f);
 		Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0);
 
 		// bg2
@@ -268,6 +274,8 @@ public class GameScreen implements Screen {
 		}
 
 		spriteBatch.end();
+		Textures.bg1.get().setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		Textures.sky.get().setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		spriteBatch.setShader(null);
 		spriteBatch.begin();
 
