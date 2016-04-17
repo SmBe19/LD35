@@ -93,6 +93,7 @@
     <xs:simpleType name="platform_type">
         <xs:restriction base="xs:string">
             <xs:enumeration value="normal"/>
+            <xs:enumeration value="oldschool"/>
             <xs:enumeration value="bridge"/>
             <xs:enumeration value="destr"/>
         </xs:restriction>
@@ -126,6 +127,7 @@
         <xs:attribute name="height" type="xs:float" use="required"/>
         <xs:attribute name="texture" type="xs:string" use="required"/>
         <xs:attribute name="collision" type="xs:boolean" use="optional" default="true"/>
+        <xs:attribute name="dynamic" type="xs:boolean" use="optional" default="true"/>
     </xs:complexType>
 
     <xs:complexType name="ball">

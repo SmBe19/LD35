@@ -20,7 +20,7 @@ public class Ball extends Actor {
 	private float vx, vy;
 
 	public Ball(int id, float x, float y, float vx, float vy, float radius) {
-		super(id, x, y, 2*radius, 2*radius, null, true);
+		super(id, x, y, 2*radius, 2*radius, null, true, true);
 		this.vx = vx;
 		this.vy = vy;
 		animation = Hero.createAnimation(Textures.spritesheet.get(), 7, 8, 0, 2, 32, 32, 0.2f, Animation.PlayMode.LOOP);

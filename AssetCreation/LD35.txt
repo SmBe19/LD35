@@ -33,4 +33,3 @@ Engine ToDo
  - Getötet werden
  - Verschiedene Actors (Bär, Reh)
  - Vertical Scrolling
- - Butten Grafik

@@ -23,6 +23,7 @@ public class Platform implements PhysObject, Renderable {
 
 	public enum PlatformType{
 		normal,
+		oldschool,
 		bridge,
 		destr,
 	}
@@ -65,10 +66,16 @@ public class Platform implements PhysObject, Renderable {
 		direction = new Vector2(endX - startX, endY - startY).nor();
 		switch (platformType){
 			case normal:
-				if (points.size() > 0)
-					initTextures(0, 10, 22, 24, 16, 16);
-				else
-					initTextures(0, 6, 12, 13, Consts.TEX_WIDTH_PLATFORM, Consts.TEX_HEIGHT_PLATFORM);
+				if(points.size() == 0) {
+					this.points.add(new Vector2(-width / 2, -height / 2));
+					this.points.add(new Vector2(width / 2, -height / 2));
+					this.points.add(new Vector2(width / 2, height / 2));
+					this.points.add(new Vector2(-width / 2, height / 2));
+				}
+				initTextures(0, 10, 22, 24, 16, 16);
+				break;
+			case oldschool:
+				initTextures(0, 6, 12, 13, Consts.TEX_WIDTH_PLATFORM, Consts.TEX_HEIGHT_PLATFORM);
 				break;
 			case bridge:
 				initTextures(0, 3, 9, 10, Consts.TEX_WIDTH_BRIDGE, Consts.TEX_HEIGHT_BRIDGE);
@@ -90,7 +97,7 @@ public class Platform implements PhysObject, Renderable {
 				possibleTextures.add(new TextureRegion(Textures.spritesheet.get(), x * texWidth, y * texHeight, texWidth, texHeight));
 			}
 		}
-		if (platformType == PlatformType.normal && points.size() > 0) {
+		if (platformType == PlatformType.normal) {
 			textures = possibleTextures;
 		} else {
 			textures = new ArrayList<TextureRegion>();
@@ -246,7 +253,7 @@ public class Platform implements PhysObject, Renderable {
 				shape.set(points.subList(i, i+4).toArray(new Vector2[4]));
 				fixtures[i/4] = body.createFixture(fixtureDef);
 			}
-			if (platformType == PlatformType.normal && points.size() > 0) {
+			if (platformType == PlatformType.normal) {
 				regions = new TextureRegion[2*(1+(int)Math.ceil(height/2.0f))][2*(1+(int)Math.ceil(width/2.0f))];
 				int iyi = 0;
 				for ( float iy = y - height/2; iy <= y + height/2; iy += 2, iyi++) {
@@ -317,6 +324,7 @@ public class Platform implements PhysObject, Renderable {
 	public void destroy(){
 		switch (platformType){
 			case normal:
+			case oldschool:
 				break;
 			case bridge:
 				destroying = true;

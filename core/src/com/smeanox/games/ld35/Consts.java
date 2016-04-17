@@ -7,7 +7,7 @@ public class Consts {
 	public static final float HEIGHT = 30;
 	public static final float CAMERA_BORDER = 20;
 	public static final float DESKTOP_SCALE = 20;
-	public static final boolean USE_DEBUG_RENDERER = false;
+	public static final boolean USE_DEBUG_RENDERER = true;
 
 	public static final float BG1_DIST = 8;
 	public static final float BG1_HEIGHT_PART = 0.66f;
@@ -19,7 +19,7 @@ public class Consts {
 	public static final float BG3_HEIGHT_PART = 0.66f;
 	public static final float BG3_HEIGHT_OFF = 0.33f;
 
-	public static final float PHYS_GRAVITY = -10;
+	public static final float PHYS_GRAVITY = -40;
 	public static final float PHYS_TIME_STEP = 1/45f;
 	public static final int PHYS_VELO_ITERATIONS = 6;
 	public static final int PHYS_POS_ITERATIONS = 2;
@@ -39,16 +39,16 @@ public class Consts {
 	public static final float HERO_LADDER_MAX_VELO_Y = 1f;
 	public static final float HERO_LADDER_IMPULSE_Y = 20;
 	public static final float HERO_IMPULSE_X = 10;
-	public static final float HERO_IMPULSE_Y = 60;
+	public static final float HERO_IMPULSE_Y = 120;
 	public static final float HERO_DAMPING_X_COEF = 2;
 	public static final float HERO_DAMPING_X_COEF_LADDER = 100;
 	public static final float HERO_GROUND_SENSOR_HEIGHT = 0.1f;
 	public static final float HERO_GROUND_SENSOR_WIDTH = 0.75f;
 	public static final float HERO_JUMP_MAX_VELO_Y = 1f;
 	public static final float HERO_IMPULSE_AIR_MODIFIER = 0.2f;
-	public static final float HERO_WATER_GRAVITY_SCALE = 0.2f;
-	public static final float HERO_WATER_MAX_VELO_X = 1f;
-	public static final float HERO_WATER_MAX_VELO_Y = 1f;
+	public static final float HERO_WATER_GRAVITY_SCALE = 0.1f;
+	public static final float HERO_WATER_MAX_VELO_X = 2f;
+	public static final float HERO_WATER_MAX_VELO_Y = 2f;
 	public static final float HERO_WATER_IMPULSE_X = 10;
 	public static final float HERO_WATER_IMPULSE_Y = 10;
 	public static final int TEX_WIDTH_HERO = 32;

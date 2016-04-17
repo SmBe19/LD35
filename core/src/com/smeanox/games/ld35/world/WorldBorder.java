@@ -19,7 +19,7 @@ public class WorldBorder implements PhysObject {
 	public void addToWorld(World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
-		bodyDef.position.set(0, -Consts.HEIGHT/2);
+		bodyDef.position.set(0, -Consts.HEIGHT/2 - 2);
 		bodyDef.fixedRotation = true;
 
 		body = world.createBody(bodyDef);

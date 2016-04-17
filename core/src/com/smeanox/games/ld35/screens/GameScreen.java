@@ -103,6 +103,9 @@ public class GameScreen implements Screen {
 			return false;
 		}
 		loadedLevel = file;
+		cameraX = 0;
+		camera.position.x = 0;
+		camera.update();
 		addGameWorldObjectsToRenderables();
 		narrator.loadedLevel(file);
 		return true;

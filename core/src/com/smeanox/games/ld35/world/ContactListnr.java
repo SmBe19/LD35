@@ -51,6 +51,9 @@ public class ContactListnr implements ContactListener {
 					((Platform) other.getBody().getUserData()).destroy();
 				}
 			}
+			if(!hero.isSensor() && other.getBody().getUserData() == gameWorld.getWorldBorder()){
+				gameWorld.setGameLost(true);
+			}
 		}
 	}
 
@@ -67,7 +70,7 @@ public class ContactListnr implements ContactListener {
 			if(hero.isSensor() && hero.getUserData() == Hero.SENSOR_GROUND && !other.isSensor()){
 				gameWorld.getHero().setOnGround(false);
 			}
-			if(hero.isSensor() && hero.getUserData() instanceof HeroForm && !other.isSensor()){
+			if (hero.isSensor() && hero.getUserData() instanceof HeroForm && !other.isSensor()){
 				gameWorld.getHero().setHeroFormPossible((HeroForm) hero.getUserData(), true);
 			}
 			if(!hero.isSensor() && other.getBody().getUserData() instanceof Ladder){
@@ -82,9 +85,6 @@ public class ContactListnr implements ContactListener {
 					gameWorld.getHero().setLastButton(null);
 				}
 				button.endInteract(gameWorld);
-			}
-			if(!hero.isSensor() && other.getBody().getUserData() == gameWorld.getWorldBorder()){
-				gameWorld.setGameLost(true);
 			}
 		}
 	}
