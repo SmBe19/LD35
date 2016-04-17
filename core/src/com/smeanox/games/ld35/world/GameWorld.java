@@ -17,7 +17,7 @@ public class GameWorld {
 	private List<Platform> platforms;
 	private Hero hero;
 	private WorldBorder worldBorder;
-	private boolean gameLost;
+	private boolean gameLost, gameWon;
 
 	private float phys_accumulator;
 
@@ -36,6 +36,7 @@ public class GameWorld {
 		phys_accumulator = 0;
 
 		gameLost = false;
+		gameWon = false;
 
 		addPhysObjects(actors);
 		addPhysObjects(buttons);
@@ -53,10 +54,17 @@ public class GameWorld {
 	}
 
 	public void update(float delta) {
+		if(gameWon || gameLost){
+			return;
+		}
 		for (Platform platform : platforms) {
 			platform.update(delta);
 		}
 		updatePhysics(delta);
+
+		if(getHero().reachedDest()){
+			gameWon = true;
+		}
 	}
 
 	private void updatePhysics(float delta) {
@@ -110,5 +118,13 @@ public class GameWorld {
 
 	public void setGameLost(boolean gameLost) {
 		this.gameLost = gameLost;
+	}
+
+	public boolean isGameWon() {
+		return gameWon;
+	}
+
+	public void setGameWon(boolean gameWon) {
+		this.gameWon = gameWon;
 	}
 }

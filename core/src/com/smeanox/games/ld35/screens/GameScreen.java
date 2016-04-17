@@ -3,6 +3,7 @@ package com.smeanox.games.ld35.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -114,7 +115,12 @@ public class GameScreen implements Screen {
 				body.applyLinearImpulse(new Vector2(impulseX, 0), body.getWorldCenter(), true);
 			}
 		}
-		if(gameWorld.getHero().isOnLadder() && gameWorld.getHero().getCurrentForm() == HeroForm.human) {
+		if (Gdx.input.isKeyPressed(Consts.KEY_JUMP)) {
+			if(gameWorld.getHero().isOnGround() && Math.abs(body.getLinearVelocity().y) < Consts.HERO_JUMP_MAX_VELO_Y) {
+				body.applyLinearImpulse(new Vector2(0, gameWorld.getHero().getCurrentForm().getImpulseY()), body.getWorldCenter(), true);
+			}
+		}
+		if(!gameWorld.getHero().isOnGround() && gameWorld.getHero().isOnLadder() && gameWorld.getHero().getCurrentForm() == HeroForm.human) {
 			if (Gdx.input.isKeyPressed(Consts.KEY_UP)) {
 				if (body.getLinearVelocity().y < Consts.HERO_LADDER_MAX_VELO_Y) {
 					body.applyLinearImpulse(new Vector2(0, Consts.HERO_LADDER_IMPULSE_Y), body.getWorldCenter(), true);
@@ -132,11 +138,6 @@ public class GameScreen implements Screen {
 				if (body.getLinearVelocity().y > -Consts.HERO_WATER_MAX_VELO_Y) {
 					body.applyLinearImpulse(new Vector2(0, -Consts.HERO_WATER_IMPULSE_Y), body.getWorldCenter(), true);
 				}
-			}
-		}
-		if (Gdx.input.isKeyPressed(Consts.KEY_JUMP)) {
-			if(gameWorld.getHero().isOnGround() && Math.abs(body.getLinearVelocity().y) < Consts.HERO_JUMP_MAX_VELO_Y) {
-				body.applyLinearImpulse(new Vector2(0, gameWorld.getHero().getCurrentForm().getImpulseY()), body.getWorldCenter(), true);
 			}
 		}
 		if(!Gdx.input.isKeyPressed(Consts.KEY_LEFT) && !Gdx.input.isKeyPressed(Consts.KEY_RIGHT)
@@ -204,6 +205,15 @@ public class GameScreen implements Screen {
 		for (Renderable renderable : renderables) {
 			renderable.render(spriteBatch, delta);
 		}
+
+		if(gameWorld.isGameWon()) {
+			spriteBatch.setColor(Color.RED);
+			Font.FONT1.draw(spriteBatch, "WON", camera.position.x - 10, -5);
+			spriteBatch.setColor(Color.WHITE);
+		} else if(gameWorld.isGameLost()){
+			Font.FONT1.draw(spriteBatch, "LOST", camera.position.x - 10, -5);
+		}
+
 		spriteBatch.end();
 
 		if (Consts.USE_DEBUG_RENDERER) {

@@ -23,7 +23,7 @@ public class LevelReader {
 		XmlReader.Element xlevel = xmlReader.parse(file);
 		XmlReader.Element xdescription = xlevel.getChildByName("description");
 		XmlReader.Element xhero = xlevel.getChildByName("hero");
-		Hero hero = new Hero(xhero.getFloat("start_x"), xhero.getFloat("start_y"), HeroForm.valueOf(xhero.get("start_form", "human")));
+		Hero hero = new Hero(xhero.getFloat("start_x"), xhero.getFloat("start_y"), xhero.getFloat("dest_x"), xhero.getFloat("dest_y"), HeroForm.valueOf(xhero.get("start_form", "human")));
 		XmlReader.Element xplatforms = xlevel.getChildByName("platforms");
 		List<Platform> platforms = new ArrayList<Platform>();
 		for(XmlReader.Element xplatform : xplatforms.getChildrenByName("platform")){
@@ -34,11 +34,12 @@ public class LevelReader {
 					y,
 					xplatform.getFloat("width"),
 					xplatform.getFloat("height"),
+					Platform.PlatformType.valueOf(xplatform.get("type", "normal")),
 					xplatform.getFloat("start_x", x),
 					xplatform.getFloat("start_y", y),
 					xplatform.getFloat("end_x", x),
 					xplatform.getFloat("end_y", y),
-					xplatform.getBoolean("moving_enabled", true),
+					xplatform.getBoolean("moving_enabled", false),
 					xplatform.getFloat("moving_velo", 1),
 					xplatform.getFloat("hold_time", 1)));
 		}
@@ -87,12 +88,16 @@ public class LevelReader {
 					xactor.getFloat("x"),
 					xactor.getFloat("y"),
 					xactor.getFloat("width"),
-					xactor.getFloat("height")));
+					xactor.getFloat("height"),
+					ActorTextures.valueOf(xactor.get("texture")).get(),
+					xactor.getBoolean("collision", true)));
 		}
 		for(XmlReader.Element xball : xactors.getChildrenByName("ball")) {
 			actors.add(new Ball(xball.getInt("id"),
 					xball.getFloat("x"),
 					xball.getFloat("y"),
+					xball.getFloat("vx"),
+					xball.getFloat("vy"),
 					xball.getFloat("radius")));
 		}
 		

@@ -34,4 +34,3 @@ Engine ToDo
  - Steine / Dinge zerstören
  - Verschiedene Actors (Bär, Reh)
  - Brökelnde Platformen
- - Ziel

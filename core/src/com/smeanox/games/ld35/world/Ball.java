@@ -17,9 +17,12 @@ public class Ball extends Actor {
 
 	private Animation animation;
 	private float animationTime;
+	private float vx, vy;
 
-	public Ball(int id, float x, float y, float radius) {
-		super(id, x, y, 2*radius, 2*radius);
+	public Ball(int id, float x, float y, float vx, float vy, float radius) {
+		super(id, x, y, 2*radius, 2*radius, null, true);
+		this.vx = vx;
+		this.vy = vy;
 		animation = Hero.createAnimation(Textures.spritesheet.get(), 7, 8, 0, 2, 32, 32, 0.2f, Animation.PlayMode.LOOP);
 		animationTime = 0;
 	}
@@ -45,6 +48,8 @@ public class Ball extends Actor {
 		shape.dispose();
 
 		body.setUserData(this);
+
+		body.setLinearVelocity(vx, vy);
 	}
 
 	@Override

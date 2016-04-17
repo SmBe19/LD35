@@ -23,7 +23,7 @@ public class Hero implements PhysObject, Renderable {
 
 	public static final Integer SENSOR_GROUND = 1;
 
-	private float x, y;
+	private float x, y, destX, destY;
 	private int onGround;
 	private int onLadder;
 	private int inWater;
@@ -37,9 +37,11 @@ public class Hero implements PhysObject, Renderable {
 	private float animationTime;
 	private boolean orientation, isTransforming;
 
-	public Hero(float x, float y, HeroForm currentForm) {
+	public Hero(float x, float y, float destX, float destY, HeroForm currentForm) {
 		this.x = x;
 		this.y = y;
+		this.destX = destX;
+		this.destY = destY;
 		this.currentForm = currentForm;
 		onGround = 0;
 		onLadder = 0;
@@ -88,6 +90,18 @@ public class Hero implements PhysObject, Renderable {
 
 	public float getY() {
 		return y;
+	}
+
+	public float getDestX() {
+		return destX;
+	}
+
+	public float getDestY() {
+		return destY;
+	}
+
+	public boolean reachedDest(){
+		return Vector2.len(getBody().getPosition().x - destX, getBody().getPosition().y - destY) < Consts.HERO_DEST_RADIUS;
 	}
 
 	public HeroForm getCurrentForm() {

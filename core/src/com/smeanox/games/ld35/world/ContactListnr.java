@@ -46,6 +46,11 @@ public class ContactListnr implements ContactListener {
 				gameWorld.getHero().setLastButton(button);
 				button.startInteract(gameWorld);
 			}
+			if (hero.isSensor() && hero.getUserData() == Hero.SENSOR_GROUND && other.getBody().getUserData() instanceof Platform) {
+				if (((Platform) other.getBody().getUserData()).getPlatformType() == Platform.PlatformType.destr) {
+					((Platform) other.getBody().getUserData()).destroy();
+				}
+			}
 		}
 	}
 
@@ -117,5 +122,18 @@ public class ContactListnr implements ContactListener {
 			}
 		}
 
+		hero = contact.getFixtureA();
+		other = contact.getFixtureB();
+		if(other.getBody().getUserData() instanceof Platform){
+			hero = contact.getFixtureB();
+			other = contact.getFixtureA();
+		}
+
+		if (hero.getBody().getUserData() instanceof Platform) {
+			if(((Platform) hero.getBody().getUserData()).getPlatformType() == Platform.PlatformType.bridge
+					&& impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > Consts.BRIDGE_LETHAL_IMPULSE){
+				((Platform) hero.getBody().getUserData()).destroy();
+			}
+		}
 	}
 }

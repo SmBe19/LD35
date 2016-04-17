@@ -1,6 +1,7 @@
 package com.smeanox.games.ld35.world;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -20,13 +21,17 @@ public class Actor implements PhysObject, Renderable {
 	protected Body body;
 	protected int id;
 	protected float x, y, width, height;
+	protected TextureRegion texture;
+	protected boolean collision;
 
-	public Actor(int id, float x, float y, float width, float height) {
+	public Actor(int id, float x, float y, float width, float height, TextureRegion texture, boolean collision) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.texture = texture;
+		this.collision = collision;
 	}
 
 	public int getId() {
@@ -49,10 +54,18 @@ public class Actor implements PhysObject, Renderable {
 		return height;
 	}
 
+	public TextureRegion getTexture() {
+		return texture;
+	}
+
+	public boolean isCollision() {
+		return collision;
+	}
+
 	@Override
 	public void addToWorld(World world) {
 		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyDef.BodyType.DynamicBody;
+		bodyDef.type = collision ? BodyDef.BodyType.DynamicBody : BodyDef.BodyType.StaticBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
 
@@ -65,8 +78,9 @@ public class Actor implements PhysObject, Renderable {
 		fixtureDef.density = 5f;
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0f;
-
-		Fixture fixture = body.createFixture(fixtureDef);
+		if(collision) {
+			Fixture fixture = body.createFixture(fixtureDef);
+		}
 		shape.dispose();
 
 		body.setUserData(this);
@@ -79,6 +93,6 @@ public class Actor implements PhysObject, Renderable {
 
 	@Override
 	public void render(SpriteBatch spriteBatch, float delta) {
-
+		spriteBatch.draw(texture, getBody().getPosition().x - width / 2, getBody().getPosition().y - height / 2, width, height);
 	}
 }
