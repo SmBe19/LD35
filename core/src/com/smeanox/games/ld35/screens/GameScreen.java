@@ -284,19 +284,24 @@ public class GameScreen implements Screen {
 
 		if(gameWorld.isGameWon()) {
 			spriteBatch.setColor(Color.RED);
-			Font.FONT1.draw(spriteBatch, "WON", camera.position.x - 15, -5, 1f);
+			Font.FONT1.drawBordered(spriteBatch, "WON", camera.position.x - 15, -5, 1f);
 			spriteBatch.setColor(Color.WHITE);
 		} else if(gameWorld.isGameLost()){
 			spriteBatch.setColor(Color.RED);
-			Font.FONT1.draw(spriteBatch, "LOST", camera.position.x - 15, -5, 1f);
+			Font.FONT1.drawBordered(spriteBatch, "LOST", camera.position.x - 15, -5, 1f);
 			spriteBatch.setColor(Color.WHITE);
 		}
 
+		narrator.setCameraX(cameraX);
+		narrator.drawSubtitles(spriteBatch, "Test subtitle");
 		spriteBatch.end();
+
+
 
 		if (Consts.USE_DEBUG_RENDERER) {
 			debugRenderer.render(gameWorld.getWorld(), camera.combined);
 		}
+
 	}
 
 	@Override

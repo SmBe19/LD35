@@ -1,6 +1,11 @@
 package com.smeanox.games.ld35.world.narrator;
 
 import com.smeanox.games.ld35.world.GameWorld;
+import com.smeanox.games.ld35.Consts;
+import com.smeanox.games.ld35.Font;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Narrator {
 
@@ -8,6 +13,8 @@ public class Narrator {
 	private boolean needLevelReload;
 
 	private float passedTime;
+
+	private float cameraX;
 
 	public Narrator() {
 		currentLevel = 0;
@@ -24,6 +31,33 @@ public class Narrator {
 			case 2:
 				update_lvl2(gameWorld, delta);
 				break;
+		}
+	}
+
+	public void setCameraX(float cameraX) {
+		this.cameraX = cameraX;
+	}
+
+	public void drawSubtitles(SpriteBatch batch, String subtitle) {
+		List<String> lines = new ArrayList<String>();
+		String line = "";
+		String[] words = subtitle.split(" ");
+		for (int i = 0; i < words.length; i++) {
+			if ( Consts.SUBTITLE_TEXT_SCALE * (line.length() + 1 + words[i].length()) > Consts.WIDTH) {
+				lines.add(line);
+				line = words[i] + " ";
+			} else {
+				line = line + words[i] + " ";
+			}
+		}
+		lines.add(line);
+		float y = - Consts.HEIGHT/2.f + 0.5f;
+		for (int i = 0; i < lines.size(); i++) {
+			String l = lines.get(i);
+			System.out.println(l);
+			float lw = l.length() * Consts.SUBTITLE_TEXT_SCALE * Font.FONT1.getGlyphWidth();
+			Font.FONT1.drawBordered(batch, l.toUpperCase(), cameraX-lw/2, y, Consts.SUBTITLE_TEXT_SCALE);
+			y += Consts.SUBTITLE_TEXT_SCALE * (4 * Font.FONT1.getGlyphHeight());
 		}
 	}
 

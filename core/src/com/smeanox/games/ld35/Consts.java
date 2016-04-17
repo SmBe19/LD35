@@ -8,6 +8,8 @@ public class Consts {
 	public static final float CAMERA_BORDER = 20;
 	public static final float DESKTOP_SCALE = 20;
 	public static final boolean USE_DEBUG_RENDERER = false;
+	public static final float SUBTITLE_TEXT_SCALE = 1f/8f;
+	public static final float FONT_BORDER_WIDTH = 0.7f;
 
 	public static final float BG1_DIST = 8;
 	public static final float BG1_HEIGHT_PART = 0.66f;
