@@ -1,6 +1,7 @@
 package com.smeanox.games.ld35.io;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.XmlReader;
 import com.smeanox.games.ld35.world.Actor;
 import com.smeanox.games.ld35.world.Ball;
@@ -10,6 +11,7 @@ import com.smeanox.games.ld35.world.Hero;
 import com.smeanox.games.ld35.world.HeroForm;
 import com.smeanox.games.ld35.world.Ladder;
 import com.smeanox.games.ld35.world.Platform;
+import com.smeanox.games.ld35.world.Text;
 import com.smeanox.games.ld35.world.Water;
 
 import java.io.IOException;
@@ -100,7 +102,16 @@ public class LevelReader {
 					xball.getFloat("vy"),
 					xball.getFloat("radius")));
 		}
+		XmlReader.Element xtexts = xlevel.getChildByName("texts");
+		List<Text> texts = new ArrayList<Text>();
+		for(XmlReader.Element xtext : xtexts.getChildrenByName("text")){
+			texts.add(new Text(xtext.getFloat("x"),
+					xtext.getFloat("y"),
+					xtext.getFloat("scale"),
+					xtext.get("text"),
+					Color.valueOf(xtext.get("color", "ffffffff"))));
+		}
 		
-		return new GameWorld(xdescription.getText(), actors, buttons, ladders, waters, platforms, hero);
+		return new GameWorld(xdescription.getText(), actors, buttons, ladders, waters, platforms, texts, hero);
 	}
 }

@@ -28,12 +28,12 @@ fetchLoop:	for (int y = 0; y < tex.getHeight(); y+=glyphHeight) {
 		this.drawWidth = drawWidth;
 	}
 
-	public void draw(SpriteBatch b, String text, float x, float y) {
+	public void draw(SpriteBatch b, String text, float x, float y, float scale) {
 		for (int i = 0; i < text.length(); i++) {
 			char c = text.charAt(i);
 			int ix = order.indexOf(c);
-			if (ix > 0) {
-				b.draw(regions[ix], x + i * drawWidth, y);
+			if (ix >= 0) {
+				b.draw(regions[ix], x + i * drawWidth * scale, y, regions[ix].getRegionWidth() * scale, regions[ix].getRegionHeight() * scale);
 			}
 		}
 	}
