@@ -1,0 +1,31 @@
+Beni:
+
+Physics:
+more gravity, more jumpforce => quicker jumps
+no impulse from side of wall
+make glowing orb fixed position
+rocks more friction in water
+bug: If platform and water are in the same spot (but no water above platform) wolf and human die if they stand on platform
+turtles quicker in water
+
+Mechancis:
+release stones by narrator
+death zone in right place
+
+Visuals:
+Stone Texture box (xml)
+scroll limits
+Transformation a little quicker
+Proper lost/won screen
+Beginning properly (freeze)
+End screen
+
+Engine:
+null pointer when xml shit is missing
+
+Philipp:
+
+Music
+
+Levels:
+Design levels 7 and 8, implement all levels
