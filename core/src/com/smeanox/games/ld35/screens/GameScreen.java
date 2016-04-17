@@ -255,7 +255,6 @@ public class GameScreen implements Screen {
 		spriteBatch.end();
 		spriteBatch.setShader(waterShader);
 		Textures.bg1.get().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		Textures.sky.get().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		spriteBatch.begin();
 
 		Textures.bg1.get().bind(1);
@@ -276,7 +275,6 @@ public class GameScreen implements Screen {
 
 		spriteBatch.end();
 		Textures.bg1.get().setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-		Textures.sky.get().setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		spriteBatch.setShader(null);
 		spriteBatch.begin();
 
