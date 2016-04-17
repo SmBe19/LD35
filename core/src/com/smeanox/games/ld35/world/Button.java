@@ -1,12 +1,14 @@
 package com.smeanox.games.ld35.world;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.smeanox.games.ld35.io.Textures;
 import com.smeanox.games.ld35.screens.Renderable;
 
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ public class Button implements PhysObject, Renderable {
 	private float x, y, width, height;
 	private List<Integer> destIdsInteract, destIdsActive;
 
+	private TextureRegion texture;
+
 	public Button(int id, float x, float y, float width, float height, List<Integer> destIdsInteract, List<Integer> destIdsActive) {
 		this.id = id;
 		this.x = x;
@@ -27,6 +31,7 @@ public class Button implements PhysObject, Renderable {
 		this.height = height;
 		this.destIdsInteract = new ArrayList<Integer>(destIdsInteract);
 		this.destIdsActive = new ArrayList<Integer>(destIdsActive);
+		this.texture = new TextureRegion(Textures.spritesheet.get(), 3*32, 10*32, 32, 32);
 	}
 
 	public int getId() {
@@ -101,6 +106,7 @@ public class Button implements PhysObject, Renderable {
 
 	@Override
 	public void render(SpriteBatch spriteBatch, float delta) {
+		spriteBatch.draw(texture, x-width/2, y-height/2, width, height);
 
 	}
 }

@@ -96,9 +96,9 @@ public class Ladder implements PhysObject, Renderable {
 	public void render(SpriteBatch spriteBatch, float delta) {
 		float step = width * Consts.TEX_HEIGHT_LADDER / ((float) Consts.TEX_WIDTH_LADDER);
 		spriteBatch.draw(textures.get(inAir ? 3 : 2), x - width / 2, startY, width, step);
-		for (float y = startY + step; y < endY - step; y += step) {
+		for (float y = startY + step; y < endY; y += step) {
 			spriteBatch.draw(textures.get(1), x - width / 2, y, width, step);
 		}
-		spriteBatch.draw(textures.get(0), x - width / 2, endY - step, width, step);
+		spriteBatch.draw(textures.get(0), x - width / 2, endY, width, step);
 	}
 }
