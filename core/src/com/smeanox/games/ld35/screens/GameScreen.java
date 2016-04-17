@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -189,8 +190,14 @@ public class GameScreen implements Screen {
 		// FIXME Remove me
 		Font.FONT1.draw(spriteBatch, gameWorld.getHero().getCurrentForm().name().toUpperCase(), camera.position.x - camera.position.x / 10f, 2, 0.5f);
 
+		// sky
+		float width = Consts.HEIGHT* Textures.sky.get().getWidth() / ((float) Textures.sky.get().getHeight());
+		for (int i = -10; i < 11; i++) {
+			spriteBatch.draw(Textures.sky.get(), -width / 2 + i * width + camera.position.x, -Consts.HEIGHT / 2, width, Consts.HEIGHT);
+		}
+
 		// bg1
-		float width = Consts.HEIGHT * Consts.BG1_HEIGHT_PART * Textures.bg1.get().getWidth() / ((float) Textures.bg1.get().getHeight());
+		width = Consts.HEIGHT * Consts.BG1_HEIGHT_PART * Textures.bg1.get().getWidth() / ((float) Textures.bg1.get().getHeight());
 		float off = camera.position.x - camera.position.x / Consts.BG1_DIST;
 		for(int i = -10; i < 11; i++) {
 			spriteBatch.draw(Textures.bg1.get(), -width / 2 + off + i * width, -Consts.HEIGHT / 2 + Consts.HEIGHT * Consts.BG1_HEIGHT_OFF,
