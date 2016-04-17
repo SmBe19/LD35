@@ -72,6 +72,9 @@
     </xs:simpleType>
     
     <xs:complexType name="platform">
+        <xs:sequence>
+            <xs:element name="point" minOccurs="0" maxOccurs="unbounded" type="vector2"/>
+        </xs:sequence>
         <xs:attribute name="id" type="xs:int" use="required"/>
         <xs:attribute name="x" type="xs:float" use="required"/>
         <xs:attribute name="y" type="xs:float" use="required"/>
@@ -164,4 +167,9 @@
             <xs:length value="8"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:complexType name="vector2">
+        <xs:attribute name="x" type="xs:float" use="required"/>
+        <xs:attribute name="y" type="xs:float" use="required"/>
+    </xs:complexType>
 </xs:schema>

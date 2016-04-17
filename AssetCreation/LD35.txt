@@ -32,3 +32,4 @@ Engine ToDo
  - Grafiken
  - Getötet werden
  - Verschiedene Actors (Bär, Reh)
+ - Polygon Platforms

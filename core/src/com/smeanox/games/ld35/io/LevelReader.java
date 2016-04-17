@@ -2,6 +2,7 @@ package com.smeanox.games.ld35.io;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader;
 import com.smeanox.games.ld35.world.Actor;
 import com.smeanox.games.ld35.world.Ball;
@@ -31,11 +32,16 @@ public class LevelReader {
 		for(XmlReader.Element xplatform : xplatforms.getChildrenByName("platform")){
 			float x = xplatform.getFloat("x");
 			float y = xplatform.getFloat("y");
+			List<Vector2> points = new ArrayList<Vector2>();
+			for(XmlReader.Element xpoint : xplatform.getChildrenByName("point")){
+				points.add(new Vector2(xpoint.getFloat("x"), xpoint.getFloat("y")));
+			}
 			platforms.add(new Platform(xplatform.getInt("id"),
 					x,
 					y,
 					xplatform.getFloat("width"),
 					xplatform.getFloat("height"),
+					points,
 					Platform.PlatformType.valueOf(xplatform.get("type", "normal")),
 					xplatform.getFloat("start_x", x),
 					xplatform.getFloat("start_y", y),

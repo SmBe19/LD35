@@ -30,6 +30,7 @@ public class Platform implements PhysObject, Renderable {
 	private Body body;
 	private int id;
 	private float x, y, width, height;
+	private List<Vector2> points;
 	private PlatformType platformType;
 	private float startX, startY, endX, endY;
 	private float movingVelo;
@@ -41,12 +42,14 @@ public class Platform implements PhysObject, Renderable {
 
 	private List<TextureRegion> textures;
 
-	public Platform(int id, float x, float y, float width, float height, PlatformType platformType, float startX, float startY, float endX, float endY, boolean movingEnabled, float movingVelo, float holdTime) {
+	public Platform(int id, float x, float y, float width, float height, List<Vector2> points, PlatformType platformType,
+					float startX, float startY, float endX, float endY, boolean movingEnabled, float movingVelo, float holdTime) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.points = new ArrayList<Vector2>(points);
 		this.platformType = platformType;
 		this.startX = startX;
 		this.startY = startY;
@@ -204,7 +207,11 @@ public class Platform implements PhysObject, Renderable {
 		body = world.createBody(bodyDef);
 
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(width / 2, height / 2);
+		if(points.size() == 0) {
+			shape.setAsBox(width / 2, height / 2);
+		} else {
+			shape.set(points.toArray(new Vector2[points.size()]));
+		}
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 0f;

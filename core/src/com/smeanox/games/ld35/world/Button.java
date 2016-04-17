@@ -25,10 +25,8 @@ public class Button implements PhysObject, Renderable {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.destIdsInteract = new ArrayList<Integer>();
-		this.destIdsInteract.addAll(destIdsInteract);
-		this.destIdsActive = new ArrayList<Integer>();
-		this.destIdsActive.addAll(destIdsActive);
+		this.destIdsInteract = new ArrayList<Integer>(destIdsInteract);
+		this.destIdsActive = new ArrayList<Integer>(destIdsActive);
 	}
 
 	public int getId() {
