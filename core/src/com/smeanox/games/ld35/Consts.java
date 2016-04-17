@@ -7,7 +7,7 @@ public class Consts {
 	public static final float HEIGHT = 30;
 	public static final float CAMERA_BORDER = 20;
 	public static final float DESKTOP_SCALE = 20;
-	public static final boolean USE_DEBUG_RENDERER = true;
+	public static final boolean USE_DEBUG_RENDERER = false;
 
 	public static final float BG1_DIST = 8;
 	public static final float BG1_HEIGHT_PART = 0.66f;

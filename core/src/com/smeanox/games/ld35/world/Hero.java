@@ -62,12 +62,12 @@ public class Hero implements PhysObject, Renderable {
 		ta = createAnimation(Textures.spritesheet.get(), 1, 2, 4, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		w = createAnimation(Textures.spritesheet.get(), 2, 3, 0, 4, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.1f, Animation.PlayMode.LOOP);
 		ww = createAnimation(Textures.spritesheet.get(), 2, 3, 4, 6, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.LOOP);
-		trht = createAnimation(Textures.spritesheet.get(), 3, 4, 0, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.NORMAL);
-		trth = createAnimation(Textures.spritesheet.get(), 3, 4, 0, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.REVERSED);
-		trhw = createAnimation(Textures.spritesheet.get(), 4, 5, 0, 3, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.NORMAL);
-		trwh = createAnimation(Textures.spritesheet.get(), 4, 5, 0, 3, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.REVERSED);
-		trtw = createAnimation(Textures.spritesheet.get(), 5, 6, 0, 3, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.REVERSED);
-		trwt = createAnimation(Textures.spritesheet.get(), 5, 6, 0, 3, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.2f, Animation.PlayMode.NORMAL);
+		trht = createAnimation(Textures.spritesheet.get(), 3, 4, 0, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.15f, Animation.PlayMode.NORMAL);
+		trth = createAnimation(Textures.spritesheet.get(), 3, 4, 0, 5, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.15f, Animation.PlayMode.REVERSED);
+		trhw = createAnimation(Textures.spritesheet.get(), 4, 5, 0, 3, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.15f, Animation.PlayMode.NORMAL);
+		trwh = createAnimation(Textures.spritesheet.get(), 4, 5, 0, 3, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.15f, Animation.PlayMode.REVERSED);
+		trtw = createAnimation(Textures.spritesheet.get(), 5, 6, 0, 3, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.15f, Animation.PlayMode.REVERSED);
+		trwt = createAnimation(Textures.spritesheet.get(), 5, 6, 0, 3, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO, 0.15f, Animation.PlayMode.NORMAL);
 
 		activeAnimation = h;
 	}
