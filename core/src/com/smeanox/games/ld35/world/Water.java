@@ -23,13 +23,23 @@ public class Water implements PhysObject, Renderable {
 	private float x, y, width, height;
 	private List<TextureRegion> textures;
 
+	private float[] anim;
+
 	public Water(int id, float x, float y, float width, float height) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+
 		textures = new ArrayList<TextureRegion>();
+		initTextures(8,14, 11, 12);
+
+		this.anim = new float[1+(int)(width/2)];
+		for (int i = 0; i < anim.length; i++) {
+			anim[i] = (float)Math.random()*(textures.size()-1);
+		}
+
 	}
 
 	private void initTextures(int startX, int endX, int startY, int endY) {
@@ -93,5 +103,17 @@ public class Water implements PhysObject, Renderable {
 
 	@Override
 	public void render(SpriteBatch spriteBatch, float delta) {
+		for (int ix = 0; ix < width; ix+=2) {
+			int animIx = 1+((int)anim[ix]) % (textures.size()-1);
+			anim[ix/2] += delta;
+			spriteBatch.draw(textures.get(animIx),  x-width/2.0f+ix,y+height/2.0f-1.0f, 2.0f, 2.0f);
+		}
+
+		for (int iy = 0; iy < height; iy+=2) {
+			for (int ix = 0; ix < width; ix+=2) {
+			//	System.out.printf("%f %f %f %f\n", y+height/2.0f-iy-2, x-width/2.0f+ix, 2.0f, 2.0f);
+				spriteBatch.draw(textures.get(0), x-width/2.0f + ix, y+height/2.0f-iy-2, 2.0f, 2.0f);
+			}
+		}
 	}
 }

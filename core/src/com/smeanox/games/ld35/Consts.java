@@ -5,14 +5,14 @@ import com.badlogic.gdx.Input;
 public class Consts {
 	public static float WIDTH = 40;
 	public static final float HEIGHT = 30;
-	public static final float CAMERA_BORDER = 8;
+	public static final float CAMERA_BORDER = 20;
 	public static final float DESKTOP_SCALE = 20;
 	public static final boolean USE_DEBUG_RENDERER = true;
 
-	public static final float BG1_DIST = 5;
+	public static final float BG1_DIST = 8;
 	public static final float BG1_HEIGHT_PART = 0.66f;
 	public static final float BG1_HEIGHT_OFF = 0.33f;
-	public static final float BG2_DIST = 3;
+	public static final float BG2_DIST = 4;
 	public static final float BG2_HEIGHT_PART = 0.66f;
 	public static final float BG2_HEIGHT_OFF = 0f;
 	public static final float BG3_DIST = 2;

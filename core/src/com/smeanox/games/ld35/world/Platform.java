@@ -247,17 +247,17 @@ public class Platform implements PhysObject, Renderable {
 				fixtures[i/4] = body.createFixture(fixtureDef);
 			}
 			if (platformType == PlatformType.normal && points.size() > 0) {
-				regions = new TextureRegion[2*(1+(int)Math.ceil(height))][2*(1+(int)Math.ceil(width))];
+				regions = new TextureRegion[2*(1+(int)Math.ceil(height/2.0f))][2*(1+(int)Math.ceil(width/2.0f))];
 				int iyi = 0;
-				for ( float iy = y - height/2; iy <= y + height/2; iy += 1, iyi++) {
+				for ( float iy = y - height/2; iy <= y + height/2; iy += 2, iyi++) {
 					int ixi = 0;
-					for (float ix = x - width/2; ix <= x + width/2; ix += 1, ixi++) {
+					for (float ix = x - width/2; ix <= x + width/2; ix += 2, ixi++) {
 						boolean center = testPoint(fixtures, ix, iy);
 						if (center) {
-							boolean l = !testPoint(fixtures, ix-1, iy);
-							boolean r = !testPoint(fixtures, ix+1, iy);
-							boolean t = !testPoint(fixtures, ix, iy+1);
-							boolean b = !testPoint(fixtures, ix, iy-1);
+							boolean l = !testPoint(fixtures, ix-2, iy);
+							boolean r = !testPoint(fixtures, ix+2, iy);
+							boolean t = !testPoint(fixtures, ix, iy+2);
+							boolean b = !testPoint(fixtures, ix, iy-2);
 
 							if (l) {
 								regions[2*iyi+1][2*ixi+0] = textures.get(t?0:6);
@@ -266,13 +266,13 @@ public class Platform implements PhysObject, Renderable {
 								if (t) {
 									regions[2*iyi+1][2*ixi+0] = textures.get(8);
 								} else {
-									boolean tl = !testPoint(fixtures, ix-1, iy+1);
+									boolean tl = !testPoint(fixtures, ix-2, iy+2);
 									regions[2*iyi+1][2*ixi+0] = textures.get(tl?4:2);
 								}
 								if (b) {
 									regions[2*iyi+0][2*ixi+0] = textures.get(18);
 								} else {
-									boolean bl = !testPoint(fixtures, ix-1, iy-1);
+									boolean bl = !testPoint(fixtures, ix-2, iy-2);
 									regions[2*iyi+0][2*ixi+0] = textures.get(bl?14:12);
 
 								}
@@ -284,13 +284,13 @@ public class Platform implements PhysObject, Renderable {
 								if (t) {
 									regions[2*iyi+1][2*ixi+1] = textures.get(9);
 								} else {
-									boolean tr = !testPoint(fixtures, ix+1, iy+1);
+									boolean tr = !testPoint(fixtures, ix+2, iy+2);
 									regions[2*iyi+1][2*ixi+1] = textures.get(tr?5:3);
 								}
 								if (b) {
 									regions[2*iyi+0][2*ixi+1] = textures.get(19);
 								} else {
-									boolean br = !testPoint(fixtures,ix+1, iy-1);
+									boolean br = !testPoint(fixtures,ix+2, iy-2);
 									regions[2*iyi+0][2*ixi+1] = textures.get(br?15:13);
 
 								}
@@ -352,7 +352,7 @@ public class Platform implements PhysObject, Renderable {
 			for (int iy = 0; iy < regions.length; iy++) {
 				for (int ix = 0; ix < regions[iy].length; ix++) {
 					if (regions[iy][ix] != null) {
-						spriteBatch.draw(regions[iy][ix], body.getPosition().x - width/2.0f + ix*0.5f - 0.5f, body.getPosition().y - height /2.0f + iy*0.5f - 0.5f, 0.5f, 0.5f);
+						spriteBatch.draw(regions[iy][ix], body.getPosition().x - width/2.0f + ix - 1.0f, body.getPosition().y - height /2.0f + iy - 1.0f, 1.0f, 1.0f);
 					}
 				}
 			}

@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -33,6 +35,7 @@ public class GameScreen implements Screen {
 	Box2DDebugRenderer debugRenderer;
 	OrthographicCamera camera;
 	List<Renderable> renderables;
+	ShaderProgram waterShader;
 	float cameraX;
 
 	public GameScreen() {
@@ -43,6 +46,45 @@ public class GameScreen implements Screen {
 		camera.update();
 		spriteBatch.setProjectionMatrix(camera.combined);
 
+		waterShader = new ShaderProgram(
+				"attribute vec4 a_position;\n" +
+				"attribute vec2 a_texCoord0;\n" +
+				"uniform mat4 u_projTrans;\n" +
+				"varying vec2 v_texCoord;\n" +
+				"void main() {\n" +
+				"    v_texCoord = a_texCoord0;\n" +
+				"    gl_Position = u_projTrans * a_position;\n" +
+				"}\n",
+
+				"#ifdef GL_ES\n"+
+				"    precision mediump float;\n"+
+				"#endif\n"+
+				"varying vec2 v_texCoord;\n"+
+				"uniform sampler2D u_texture;\n"+
+				"uniform sampler2D u_texture2;\n"+
+				"uniform sampler2D u_texture3;\n"+
+				"uniform vec2 u_mult;\n"+
+				"uniform vec2 u_offset;\n"+
+				"uniform vec2 u_offset2;\n"+
+				"void main() {\n"+
+				"    vec4 col = texture2D(u_texture, v_texCoord);\n"+
+				"    if (distance(col.rgb, vec3(1.0, 0.0, 1.0)) < 0.1f){\n"+
+				"        vec2 tc = v_texCoord*vec2(1.0f,-1.0f);\n"+
+				"        vec4 col2 = texture2D(u_texture2, tc + u_offset + u_mult * sin (dot(tc, vec2(50, 500))));\n"+
+				"        if (col2.a > 0.5f) {\n"+
+				"            gl_FragColor = col2 + 0.3f * texture2D(u_texture2, tc - u_mult + u_offset) + 0.3f*texture2D(u_texture2, tc + u_mult + u_offset);\n"+
+				"        } else {\n"+
+				"            gl_FragColor = texture2D(u_texture3, tc + u_offset2);\n"+
+				"        }\n"+
+				"    } else {\n"+
+				"        gl_FragColor = col;\n"+
+				"    }\n"+
+				"}\n"
+				);
+		Textures.bg1.get().setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+		Textures.sky.get().setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+		System.out.println(waterShader.getLog());
+		ShaderProgram.pedantic = false;
 		debugRenderer = new Box2DDebugRenderer();
 	}
 
@@ -204,6 +246,19 @@ public class GameScreen implements Screen {
 					width, Consts.HEIGHT * Consts.BG1_HEIGHT_PART);
 		}
 
+		spriteBatch.end();
+		spriteBatch.setShader(waterShader);
+		spriteBatch.begin();
+
+		Textures.bg1.get().bind(1);
+		Textures.sky.get().bind(2);
+		waterShader.setUniformi("u_texture2", 1);
+		waterShader.setUniformi("u_texture3", 2);
+		waterShader.setUniformf("u_mult", 1.0f/512, 0.0f);
+		waterShader.setUniformf("u_offset", -(cameraX/width)*(1.0f/Consts.BG2_DIST - 1.0f/Consts.BG1_DIST), 0.1f);
+		waterShader.setUniformf("u_offset2", -(cameraX/width)*(1.0f/Consts.BG2_DIST), 0.1f);
+		Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0);
+
 		// bg2
 		width = Consts.HEIGHT * Consts.BG2_HEIGHT_PART * Textures.bg2.get().getWidth() / ((float) Textures.bg2.get().getHeight());
 		off = camera.position.x - camera.position.x / Consts.BG2_DIST;
@@ -211,6 +266,10 @@ public class GameScreen implements Screen {
 			spriteBatch.draw(Textures.bg2.get(), -width / 2 + off + i * width, -Consts.HEIGHT / 2 + Consts.HEIGHT * Consts.BG2_HEIGHT_OFF,
 					width, Consts.HEIGHT * Consts.BG2_HEIGHT_PART);
 		}
+
+		spriteBatch.end();
+		spriteBatch.setShader(null);
+		spriteBatch.begin();
 
 		for (Renderable renderable : renderables) {
 			renderable.render(spriteBatch, delta);
