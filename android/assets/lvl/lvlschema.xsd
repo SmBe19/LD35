@@ -97,6 +97,7 @@
             <xs:enumeration value="oldschool"/>
             <xs:enumeration value="bridge"/>
             <xs:enumeration value="destr"/>
+            <xs:enumeration value="invisible"/>
         </xs:restriction>
     </xs:simpleType>
 

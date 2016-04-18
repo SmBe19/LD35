@@ -86,7 +86,7 @@ public class Water implements PhysObject, Renderable {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 0f;
-		fixtureDef.friction = 0.4f;
+		fixtureDef.friction = Consts.DEFAULT_FRICTION;
 		fixtureDef.restitution = 0f;
 		fixtureDef.isSensor = true;
 
@@ -105,7 +105,11 @@ public class Water implements PhysObject, Renderable {
 	public void render(SpriteBatch spriteBatch, float delta) {
 		for (int ix = 0; ix < width; ix+=2) {
 			int animIx = 1+((int)anim[ix/2]) % (textures.size()-1);
+<<<<<<< HEAD
 			anim[ix/2] += 5.0*delta;
+=======
+			anim[ix/2] += delta;
+>>>>>>> af86b4c7edfb199b4b65aac591a45c27f96f9f33
 			spriteBatch.draw(textures.get(animIx),  x-width/2.0f+ix,y+height/2.0f-1.0f, 2.0f, 2.0f);
 		}
 

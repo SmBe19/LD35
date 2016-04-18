@@ -3,36 +3,28 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
     <description>Level 1</description>
-    <camera/>
-    <hero start_x="-12" start_y="-2" dest_x="20.5" dest_y="5"/>
+    <camera min_x="-6" max_x="2" />
+    <hero start_x="-17" start_y="-2" dest_x="21.2" dest_y="5"/>
     <platforms>
-        <platform id="1" x="-15" y="-9" width="19" height="12"/>
-        <platform id="2" x="14" y="-10" width="21" height="11"/>
-        <platform id="3" x="18" y="-3" width="8" height="3"/>
-        <platform id="4" x="13" y="1" width="5" height="1"/>
-        <platform id="5" x="18" y="4" width="6" height="1"/>
+        <platform id="98" x="-25" y="0" width="2" height="30"/>
+        <platform id="99" x="23" y="0" width="2" height="30"/>
+
+        <platform id="1" x="-16" y="-9" width="20" height="12"/>
+        <platform id="3" x="18" y="-3.5" width="8" height="4"/>
+        <platform id="2" x="13.5" y="-10.5" width="22" height="12"/>
+        <platform id="4" x="14" y="1" width="5" height="1" type="oldschool"/>
+        <platform id="5" x="19" y="4" width="6" height="1" type="oldschool"/>
     </platforms>
-    <ladders>
-        <ladder id="1" x="0" width="1" start_y="-38" end_y="-31.5"/>
-    </ladders>
-    <buttons>
-        <button id="1" x="-4" y="35" width="1" height="1">
-            <toggle_interact dest_id="1"/>
-        </button>
-    </buttons>
-    <waters>
-        <water id="1" x="-20" y="-6" width="4" height="4"/>
-    </waters>
     <actors>
-        <actor id="1" x="20.5" y="5" width="1" height="1" texture="signright" collision="false"/>
-        <ball id="2" x="-16" y="10" vx="1.5" vy="0" radius="1"/>
-        <ball id="3" x="-16" y="11" vx="1.2" vy="0" radius="1"/>
-        <ball id="4" x="-14" y="11" vx="1.2" vy="0" radius="1"/>
-        <ball id="5" x="-12" y="11" vx="1.5" vy="0" radius="1"/>
-        <ball id="6" x="-13" y="13" vx="2" vy="0" radius="1"/>
-        <ball id="7" x="-10" y="12" vx="2" vy="0" radius="1"/>
-        <ball id="8" x="-13" y="15" vx="2" vy="0" radius="1"/>
-        <actor id="0" x="-15" y="-1.5" width="3" height="3" texture="sign"/>
+        <actor id="0" x="-20" y="-1.5" width="3" height="3" texture="sign" dynamic="false"/>
+        <actor id="1" x="21.2" y="5" width="1" height="1" texture="signright" collision="false"/>
+        <ball id="2" x="-21" y="30" vx="3" vy="0" radius="1"/>
+        <ball id="3" x="-21" y="31" vx="2.2" vy="1" radius="1"/>
+        <ball id="4" x="-19" y="31" vx="2.2" vy="0" radius="1"/>
+        <ball id="5" x="-17" y="31" vx="2.5" vy="-1" radius="1"/>
+        <ball id="6" x="-18" y="33" vx="3" vy="0" radius="1"/>
+        <ball id="7" x="-15" y="32" vx="1" vy="-1" radius="1"/>
+        <ball id="8" x="-18" y="33" vx="2" vy="0" radius="1"/>
     </actors>
     <texts>
         <text x="19" y="2" scale="0.1" text="mountain"/>

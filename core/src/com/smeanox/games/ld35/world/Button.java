@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.smeanox.games.ld35.Consts;
 import com.smeanox.games.ld35.io.Textures;
 import com.smeanox.games.ld35.screens.Renderable;
 
@@ -89,7 +90,7 @@ public class Button implements PhysObject, Renderable {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 0f;
-		fixtureDef.friction = 0.4f;
+		fixtureDef.friction = Consts.DEFAULT_FRICTION;
 		fixtureDef.restitution = 0f;
 		fixtureDef.isSensor = true;
 

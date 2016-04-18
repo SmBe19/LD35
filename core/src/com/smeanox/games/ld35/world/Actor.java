@@ -82,7 +82,7 @@ public class Actor implements PhysObject, Renderable {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = Consts.DEFAULT_DENSITY;
-		fixtureDef.friction = 0.4f;
+		fixtureDef.friction = Consts.DEFAULT_FRICTION;
 		fixtureDef.restitution = 0f;
 		if(collision) {
 			Fixture fixture = body.createFixture(fixtureDef);

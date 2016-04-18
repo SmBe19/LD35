@@ -239,7 +239,7 @@ public class Hero implements PhysObject, Renderable {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = Consts.DEFAULT_DENSITY;
-		fixtureDef.friction = 0.8f;
+		fixtureDef.friction = Consts.DEFAULT_FRICTION;
 		fixtureDef.restitution = 0f;
 		for (HeroForm form : HeroForm.values()) {
 			body = world.createBody(bodyDef);

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<level xmlns="http://games.smeanox.com"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
+    <description>Level 3</description>
+    <camera min_x="-6" max_x="9" start_x="0" />
+    <hero start_x="-23" start_y="-11" dest_x="28.5" dest_y="8.5"/>
+    <platforms>
+        <platform id="98" x="-27.3" y="0" width="2" height="30"/>
+        <platform id="99" x="30.3" y="0" width="2" height="30"/>
+
+        <platform id="1" x="-23" y="-13" width="8" height="2"/>
+        <platform id="2" x="-15" y="-9" width="8" height="10"/>
+        <platform id="3" x="-17" y="-2" width="4" height="4"/>
+        <platform id="4" x="-14" y="2" width="10" height="6"/>
+        <platform id="5" x="5" y="-12" width="32" height="4"/>
+        <platform id="6" x="25" y="-3" width="8" height="22"/>
+        <platform id="7" x="18" y="0" width="6" height="2"/>
+        <platform id="8" x="17" y="7" width="8" height="2"/>
+        <platform id="9" x="10" y="7.5" width="4" height="1" moving_enabled="false" start_x="10" start_y="7.5" end_x="10" end_y="2.5" hold_time="0.2" moving_velo="3" type="oldschool"/>
+        <platform id="10" x="-9" y="-9.5" width="4" height="1" moving_enabled="false" start_x="-9" start_y="-9.5" end_x="-9" end_y="-4.5" hold_time="0.2" moving_velo="3" type="oldschool"/>
+        <platform id="11" x="8" y="1.5" width="6" height="1" type="oldschool"/>
+    </platforms>
+    <ladders>
+        <ladder id="1" x="-19.5" width="1" start_y="-12" end_y="5"/>
+        <ladder id="2" x="18.5" width="1" start_y="-10" end_y="1"/>
+        <ladder id="3" x="13.5" width="1" start_y="0" end_y="5" in_air="true"/>
+    </ladders>
+    <buttons>
+        <button id="1" x="-14.5" y="-3.5" width="1" height="1">
+            <toggle_interact dest_id="9" />
+        </button>
+        <button id="1" x="6.5" y="2.5" width="1" height="1">
+            <toggle_interact dest_id="10" />
+        </button>
+    </buttons>
+    <actors>
+        <actor id="1" x="28.5" y="8.5" width="1" height="1" texture="signright" collision="false" dynamic="false"/>
+    </actors>
+</level>

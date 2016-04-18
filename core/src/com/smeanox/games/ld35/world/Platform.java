@@ -26,6 +26,7 @@ public class Platform implements PhysObject, Renderable {
 		oldschool,
 		bridge,
 		destr,
+		invisible,
 	}
 
 	private Body body;
@@ -82,6 +83,8 @@ public class Platform implements PhysObject, Renderable {
 				break;
 			case destr:
 				initTextures(0, 6, 12, 13, Consts.TEX_WIDTH_PLATFORM, Consts.TEX_HEIGHT_PLATFORM);
+				break;
+			case invisible:
 				break;
 		}
 	}
@@ -237,7 +240,7 @@ public class Platform implements PhysObject, Renderable {
 			FixtureDef fixtureDef = new FixtureDef();
 			fixtureDef.shape = shape;
 			fixtureDef.density = 0f;
-			fixtureDef.friction = 0.8f;
+			fixtureDef.friction = Consts.DEFAULT_FRICTION;
 			fixtureDef.restitution = 0f;
 			Fixture fixture = body.createFixture(fixtureDef);
 			shape.dispose();
@@ -246,7 +249,7 @@ public class Platform implements PhysObject, Renderable {
 			FixtureDef fixtureDef = new FixtureDef();
 			fixtureDef.shape = shape;
 			fixtureDef.density = 0f;
-			fixtureDef.friction = 0.8f;
+			fixtureDef.friction = Consts.DEFAULT_FRICTION;
 			fixtureDef.restitution = 0f;
 			Fixture[] fixtures = new Fixture[points.size()/4];
 			for (int i = 0; i+3 < points.size(); i+= 4) {
@@ -254,8 +257,8 @@ public class Platform implements PhysObject, Renderable {
 				fixtures[i/4] = body.createFixture(fixtureDef);
 			}
 			if (platformType == PlatformType.normal) {
-				float width = 2.0f*(float)Math.floor(this.width/2.0f);
-				float height = 2.0f*(float)Math.floor(this.height/2.0f);
+				float width = 2.0f*(float)Math.floor(this.width / 2.0f);
+				float height = 2.0f*(float)Math.floor(this.height / 2.0f);
 				regions = new TextureRegion[2*(1+(int)Math.ceil(height/2.0f))][2*(1+(int)Math.ceil(width/2.0f))];
 				int iyi = 0;
 				for ( float iy = y - height/2; iy <= y + height/2; iy += 2, iyi++) {
@@ -327,6 +330,7 @@ public class Platform implements PhysObject, Renderable {
 		switch (platformType){
 			case normal:
 			case oldschool:
+			case invisible:
 				break;
 			case bridge:
 				destroying = true;
@@ -351,16 +355,15 @@ public class Platform implements PhysObject, Renderable {
 
 	@Override
 	public void render(SpriteBatch spriteBatch, float delta) {
-		if(destroyed){
+		if(destroyed || platformType == PlatformType.invisible){
 			return;
 		}
-
 
 		if (platformType == PlatformType.normal && points.size() > 0) {
 			if (regions == null) return;
 
-			float width = 2.0f*(float)Math.floor(this.width/2.0f);
-			float height = 2.0f*(float)Math.floor(this.height/2.0f);
+			float width = 2.0f*(float)Math.floor(this.width / 2.0f);
+			float height = 2.0f*(float)Math.floor(this.height / 2.0f);
 
 
 			for (int iy = 0; iy < regions.length; iy++) {

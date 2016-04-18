@@ -1,16 +1,15 @@
 Beni:
 
 Physics:
-no impulse from side of wall -> retain Y impulse
 rocks more friction in water
 bug: If platform and water are in the same spot (but no water above platform) wolf and human die if they stand on platform
 turtles quicker in water
+Jump on Platform
 
 Mechancis:
 release stones by narrator
 
 Visuals:
-Stone Texture box (xml)
 Proper lost/won screen
 Beginning properly (freeze)
 End screen

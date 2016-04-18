@@ -43,13 +43,13 @@ public class Consts {
 	public static final float HERO_LADDER_IMPULSE_Y = 10;
 	public static final float HERO_IMPULSE_X = 5;
 	public static final float HERO_IMPULSE_Y = 25;
-	public static final float HERO_DAMPING_X_COEF = 2;
+	public static final float HERO_DAMPING_X_COEF = 5;
 	public static final float HERO_DAMPING_X_COEF_LADDER = 100;
 	public static final float HERO_GROUND_SENSOR_HEIGHT = 0.1f;
 	public static final float HERO_GROUND_SENSOR_WIDTH = 0.75f;
 	public static final float HERO_WALL_SENSOR_WIDTH = 0.1f;
 	public static final float HERO_WALL_SENSOR_HEIGHT = 0.9f;
-	public static final float HERO_JUMP_MAX_VELO_Y = 1f;
+	public static final float HERO_JUMP_FREEZE_TIME = 0.5f;
 	public static final float HERO_IMPULSE_AIR_MODIFIER = 0.2f;
 	public static final float HERO_WATER_GRAVITY_SCALE = 0.1f;
 	public static final float HERO_WATER_MAX_VELO_X = 2f;
@@ -57,6 +57,7 @@ public class Consts {
 	public static final float HERO_WATER_IMPULSE_X = 2;
 	public static final float HERO_WATER_IMPULSE_Y = 2;
 	public static final float DEFAULT_DENSITY = 1f;
+	public static final float DEFAULT_FRICTION = 0.4f;
 	public static final int TEX_WIDTH_HERO = 32;
 	public static final int TEX_HEIGHT_HERO = 32;
 	public static final int TEX_WIDTH_PLATFORM = 16;

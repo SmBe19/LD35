@@ -29,7 +29,7 @@ public class WorldBorder implements PhysObject {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 0f;
-		fixtureDef.friction = 0.4f;
+		fixtureDef.friction = Consts.DEFAULT_FRICTION;
 		fixtureDef.restitution = 0f;
 		fixtureDef.isSensor = true;
 

@@ -28,7 +28,7 @@ public class LevelReader {
 		XmlReader.Element xlevel = xmlReader.parse(file);
 		XmlReader.Element xdescription = xlevel.getChildByName("description");
 		XmlReader.Element xcamera = xlevel.getChildByName("camera");
-		CameraInfo cameraInfo = new CameraInfo(xcamera.getFloat("start_x", 0), xcamera.getFloat("min_x", Integer.MIN_VALUE), xcamera.getFloat("max_x", Integer.MAX_VALUE));
+		CameraInfo cameraInfo = new CameraInfo(xcamera.getFloat("start_x", 0), xcamera.getFloat("min_x", -Float.MAX_VALUE), xcamera.getFloat("max_x", Float.MAX_VALUE));
 		XmlReader.Element xhero = xlevel.getChildByName("hero");
 		Hero hero = new Hero(xhero.getFloat("start_x"), xhero.getFloat("start_y"), xhero.getFloat("dest_x"), xhero.getFloat("dest_y"), HeroForm.valueOf(xhero.get("start_form", "human")));
 		XmlReader.Element xplatforms = xlevel.getChildByName("platforms");
