@@ -21,10 +21,11 @@ import java.util.Map;
 
 public class Hero implements PhysObject, Renderable {
 
-	public static final Integer SENSOR_GROUND = 1;
+	public static final Integer SENSOR_GROUND = 1, SENSOR_WALL_LEFT = 2, SENSOR_WALL_RIGHT = 3;
 
 	private float x, y, destX, destY;
 	private int onGround;
+	private int onWallLeft, onWallRight;
 	private int onLadder;
 	private int inWater;
 	private Button lastButton;
@@ -44,6 +45,8 @@ public class Hero implements PhysObject, Renderable {
 		this.destY = destY;
 		this.currentForm = currentForm;
 		onGround = 0;
+		onWallLeft = 0;
+		onWallRight = 0;
 		onLadder = 0;
 		inWater = 0;
 		turtleActive = false;
@@ -139,6 +142,30 @@ public class Hero implements PhysObject, Renderable {
 		}
 	}
 
+	public boolean isOnWallLeft() {
+		return onWallLeft > 0;
+	}
+
+	public void setOnWallLeft(boolean onWall) {
+		if(onWall){
+			this.onWallLeft++;
+		} else {
+			this.onWallLeft--;
+		}
+	}
+
+	public boolean isOnWallRight() {
+		return onWallRight > 0;
+	}
+
+	public void setOnWallRight(boolean onWall) {
+		if(onWall){
+			this.onWallRight++;
+		} else {
+			this.onWallRight--;
+		}
+	}
+
 	public boolean isOnLadder() {
 		return onLadder > 0;
 	}
@@ -211,7 +238,7 @@ public class Hero implements PhysObject, Renderable {
 		PolygonShape shape = new PolygonShape();
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 5f;
+		fixtureDef.density = Consts.DEFAULT_DENSITY;
 		fixtureDef.friction = 0.8f;
 		fixtureDef.restitution = 0f;
 		for (HeroForm form : HeroForm.values()) {
@@ -222,7 +249,7 @@ public class Hero implements PhysObject, Renderable {
 
 			shape.setAsBox(form.getWidth() / 2, form.getHeight() / 2, new Vector2(form.getX(), form.getY()), 0);
 			fixtureDef.isSensor = false;
-			fixtureDef.density = 5f;
+			fixtureDef.density = Consts.DEFAULT_DENSITY;
 			fixture = body.createFixture(fixtureDef);
 
 			for (HeroForm sensorForm : HeroForm.values()) {
@@ -239,6 +266,16 @@ public class Hero implements PhysObject, Renderable {
 			fixtureDef.density = 0f;
 			fixture = body.createFixture(fixtureDef);
 			fixture.setUserData(SENSOR_GROUND);
+
+			shape.setAsBox(Consts.HERO_WALL_SENSOR_WIDTH / 2, form.getHeight() * Consts.HERO_WALL_SENSOR_HEIGHT / 2,
+					new Vector2(form.getX() - (form.getWidth() + Consts.HERO_WALL_SENSOR_WIDTH) / 2, form.getY()), 0);
+			fixture = body.createFixture(fixtureDef);
+			fixture.setUserData(SENSOR_WALL_LEFT);
+
+			shape.setAsBox(Consts.HERO_WALL_SENSOR_WIDTH / 2, form.getHeight() * Consts.HERO_WALL_SENSOR_HEIGHT / 2,
+					new Vector2(form.getX() + (form.getWidth() + Consts.HERO_WALL_SENSOR_WIDTH) / 2, form.getY()), 0);
+			fixture = body.createFixture(fixtureDef);
+			fixture.setUserData(SENSOR_WALL_RIGHT);
 
 			body.setUserData(this);
 		}

@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.smeanox.games.ld35.Consts;
 import com.smeanox.games.ld35.screens.Renderable;
 
 public class Actor implements PhysObject, Renderable {
@@ -80,7 +81,7 @@ public class Actor implements PhysObject, Renderable {
 		shape.setAsBox(width / 2, height / 2);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 5f;
+		fixtureDef.density = Consts.DEFAULT_DENSITY;
 		fixtureDef.friction = 0.4f;
 		fixtureDef.restitution = 0f;
 		if(collision) {

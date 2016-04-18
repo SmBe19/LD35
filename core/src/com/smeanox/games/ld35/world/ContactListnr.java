@@ -28,6 +28,12 @@ public class ContactListnr implements ContactListener {
 			if(hero.isSensor() && hero.getUserData() == Hero.SENSOR_GROUND && !other.isSensor()){
 				gameWorld.getHero().setOnGround(true);
 			}
+			if(hero.isSensor() && hero.getUserData() == Hero.SENSOR_WALL_LEFT && !other.isSensor()){
+				gameWorld.getHero().setOnWallLeft(true);
+			}
+			if(hero.isSensor() && hero.getUserData() == Hero.SENSOR_WALL_RIGHT && !other.isSensor()){
+				gameWorld.getHero().setOnWallRight(true);
+			}
 			if(hero.isSensor() && hero.getUserData() instanceof HeroForm && !other.isSensor()){
 				gameWorld.getHero().setHeroFormPossible((HeroForm) hero.getUserData(), false);
 			}
@@ -69,6 +75,12 @@ public class ContactListnr implements ContactListener {
 		if (hero.getBody().getUserData() == gameWorld.getHero()) {
 			if(hero.isSensor() && hero.getUserData() == Hero.SENSOR_GROUND && !other.isSensor()){
 				gameWorld.getHero().setOnGround(false);
+			}
+			if(hero.isSensor() && hero.getUserData() == Hero.SENSOR_WALL_LEFT && !other.isSensor()){
+				gameWorld.getHero().setOnWallLeft(false);
+			}
+			if(hero.isSensor() && hero.getUserData() == Hero.SENSOR_WALL_RIGHT && !other.isSensor()){
+				gameWorld.getHero().setOnWallRight(false);
 			}
 			if (hero.isSensor() && hero.getUserData() instanceof HeroForm && !other.isSensor()){
 				gameWorld.getHero().setHeroFormPossible((HeroForm) hero.getUserData(), true);

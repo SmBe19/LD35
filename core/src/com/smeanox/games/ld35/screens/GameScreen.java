@@ -159,14 +159,18 @@ public class GameScreen implements Screen {
 			maxVeloX = Consts.HERO_WATER_MAX_VELO_X;
 		}
 		if(!gameWorld.getHero().isTurtleActive()) {
-			if (Gdx.input.isKeyPressed(Consts.KEY_LEFT)) {
-				if (body.getLinearVelocity().x > -maxVeloX) {
-					body.applyLinearImpulse(new Vector2(-impulseX, 0), body.getWorldCenter(), true);
+			if(!gameWorld.getHero().isOnWallLeft()) {
+				if (Gdx.input.isKeyPressed(Consts.KEY_LEFT)) {
+					if (body.getLinearVelocity().x > -maxVeloX) {
+						body.applyLinearImpulse(new Vector2(-impulseX, 0), body.getWorldCenter(), true);
+					}
 				}
 			}
-			if (Gdx.input.isKeyPressed(Consts.KEY_RIGHT)) {
-				if (body.getLinearVelocity().x < maxVeloX) {
-					body.applyLinearImpulse(new Vector2(impulseX, 0), body.getWorldCenter(), true);
+			if(!gameWorld.getHero().isOnWallRight()){
+				if (Gdx.input.isKeyPressed(Consts.KEY_RIGHT)) {
+					if (body.getLinearVelocity().x < maxVeloX) {
+						body.applyLinearImpulse(new Vector2(impulseX, 0), body.getWorldCenter(), true);
+					}
 				}
 			}
 			if (Gdx.input.isKeyPressed(Consts.KEY_JUMP)) {
@@ -183,7 +187,7 @@ public class GameScreen implements Screen {
 				}
 			}
 		}
-		if(gameWorld.getHero().isInWater()){
+		if(gameWorld.getHero().isInWater() && !gameWorld.getHero().isTurtleActive()){
 			if(Gdx.input.isKeyPressed(Consts.KEY_UP)) {
 				if (body.getLinearVelocity().y < Consts.HERO_WATER_MAX_VELO_Y) {
 					body.applyLinearImpulse(new Vector2(0, Consts.HERO_WATER_IMPULSE_Y), body.getWorldCenter(), true);
