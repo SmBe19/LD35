@@ -11,8 +11,8 @@
                 <platform id="99" x="78.3" y="0" width="2" height="30"/> -->
 
         <platform id="1" x="0" y="0" width="160" height="40">
-            <rect x="-37" y="0" width="2.5" height="30"/>
-            <rect x="77" y="0" width="2.5" height="30"/>
+            <rect x="-37" y="0" width="2.5" height="50"/>
+            <rect x="77" y="0" width="2.5" height="50"/>
             <rect x="-30" y="-12" width="20.5" height="12.5"/>
             <rect x="0" y="-15" width="50" height="2.5"/>
             <rect x="52" y="-12" width="52.5" height="12.5"/>
