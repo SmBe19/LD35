@@ -134,6 +134,8 @@ public class ContactListnr implements ContactListener {
 			if(gameWorld.getHero().isTurtleActive()){
 				lethalImpulse *= Consts.LETHAL_IMPULSE_MULTIPLIER_TURTLE;
 			}
+//			if(impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > 2)
+//				System.out.println(impulse.getNormalImpulses()[0]);
 			if (!hero.isSensor() && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > lethalImpulse) {
 				gameWorld.setGameLost(true);
 				gameWorld.setDeathReason(GameWorld.DeathReason.impulse);

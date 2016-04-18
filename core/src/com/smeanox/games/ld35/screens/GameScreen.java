@@ -255,9 +255,6 @@ public class GameScreen implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
 
-		// FIXME Remove me
-		Font.FONT1.draw(spriteBatch, gameWorld.getHero().getCurrentForm().name().toUpperCase(), camera.position.x - camera.position.x / 10f, 2, 0.5f);
-
 		// sky
 		float width = Consts.HEIGHT* Textures.sky.get().getWidth() / ((float) Textures.sky.get().getHeight());
 		for (int i = -10; i < 11; i++) {
@@ -299,16 +296,16 @@ public class GameScreen implements Screen {
 		spriteBatch.begin();
 
 		for (Renderable renderable : renderables) {
-			renderable.render(spriteBatch, delta);
+			renderable.render(spriteBatch, gameWorld.isGameLost() ? 0 : delta);
 		}
 
 		if(gameWorld.isGameWon()) {
 			spriteBatch.setColor(Color.RED);
-			Font.FONT1.drawBordered(spriteBatch, "WON", camera.position.x - 15, -5, 1f);
+			Font.FONT1.drawBordered(spriteBatch, "LEVEL FINISHED", camera.position.x - 15, 5, 0.25f);
 			spriteBatch.setColor(Color.WHITE);
 		} else if(gameWorld.isGameLost()){
 			spriteBatch.setColor(Color.RED);
-			Font.FONT1.drawBordered(spriteBatch, "LOST", camera.position.x - 15, -5, 1f);
+			Font.FONT1.drawBordered(spriteBatch, "YOU DIED", camera.position.x - 15, 5, 0.5f);
 			spriteBatch.setColor(Color.WHITE);
 		}
 

@@ -55,12 +55,9 @@ public class NarratorState_Lvl3_2 extends NarratorState {
 								narratorSounds = NarratorSounds.lvl3_8;
 								break;
 							case 7:
-								narratorSounds = NarratorSounds.lvl3_9;
-								break;
-							case 8:
 								narratorSounds = NarratorSounds.lvl3_10;
 								break;
-							case 9:
+							case 8:
 								narratorSounds = NarratorSounds.lvl3_11;
 								break;
 							default:
@@ -73,12 +70,14 @@ public class NarratorState_Lvl3_2 extends NarratorState {
 					}
 				}
 			}
-			if(passedDrop){
-				passedDropSince += delta;
-			}
-			if(!passedDrop && gameWorld.getHero().getBody().getPosition().x > -9){
-				passedDrop = true;
-				passedDropSince = 0;
+			if(!gameWorld.isGameLost()) {
+				if (passedDrop) {
+					passedDropSince += delta;
+				}
+				if (!passedDrop && gameWorld.getHero().getBody().getPosition().x > -9) {
+					passedDrop = true;
+					passedDropSince = 0;
+				}
 			}
 		}
 	}

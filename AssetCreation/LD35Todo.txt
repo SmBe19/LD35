@@ -9,7 +9,6 @@ Mechancis:
 
 Visuals:
 Proper lost/won screen
-Beginning properly (freeze)
 End screen
 
 Engine:

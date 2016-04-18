@@ -9,12 +9,12 @@ public class Consts {
 	public static final float DESKTOP_SCALE = 20;
 	public static final boolean USE_DEBUG_RENDERER = true;
 
-	public static boolean SUBTITLES_ENABLED = false;
+	public static boolean SUBTITLES_ENABLED = true;
 	public static boolean MUSIC_ENABLED = true;
 	public static boolean NARRATION_ENABLED = true;
 
 	public static final float SUBTITLE_TEXT_SCALE = 1f/8f;
-	public static final float SUBTITLE_DIST_Y = 3;
+	public static final float SUBTITLE_DIST_Y = 2;
 	public static final float FONT_BORDER_WIDTH = 0.7f;
 
 	public static final float BG1_DIST = 8;
@@ -76,7 +76,7 @@ public class Consts {
 	public static final int TEX_WIDTH_WATER = 32;
 	public static final int TEX_HEIGHT_WATER = 32;
 	public static final float TEX_WAIT_MAX_VELO = 1f;
-	public static final float LETHAL_IMPULSE = 50;
+	public static final float LETHAL_IMPULSE = 60;
 	public static final float LETHAL_IMPULSE_MULTIPLIER_TURTLE = 2;
 	public static final float BRIDGE_LETHAL_IMPULSE = 50;
 	public static final float DESTR_TIMEOUT = 1.5f;

@@ -14,6 +14,7 @@ public class LD35 extends Game {
 	@Override
 	public void create() {
 		setScreen(new MenuScreen(this));
+		showGameScreen();
 	}
 
 	public void showGameScreen() {

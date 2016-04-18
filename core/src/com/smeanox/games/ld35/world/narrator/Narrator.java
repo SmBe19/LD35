@@ -21,12 +21,12 @@ public class Narrator {
 	private float cameraX;
 
 	public Narrator() {
-		currentLevel = 2;
+		currentLevel = 4;
 		passedTime = 0;
 		needLevelReload = false;
 		heroFrozen = false;
 
-		currentState = new NarratorState_Lvl0();
+		currentState = new NarratorState_Lvl4_1();
 	}
 
 	public void update(float delta, GameWorld gameWorld) {
@@ -46,6 +46,9 @@ public class Narrator {
 	}
 
 	public void drawSubtitles(SpriteBatch batch, String subtitle) {
+		if(!Consts.SUBTITLES_ENABLED){
+			return;
+		}
 		List<String> lines = new ArrayList<String>();
 		String line = "";
 		String[] words = subtitle.split(" ");
@@ -76,6 +79,9 @@ public class Narrator {
 	}
 
 	public void play(NarratorSounds narratorSound){
+		if(!Consts.NARRATION_ENABLED){
+			return;
+		}
 		if(lastSound != null){
 			lastSound.dispose();
 		}
