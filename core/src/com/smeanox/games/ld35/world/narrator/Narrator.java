@@ -43,7 +43,7 @@ public class Narrator {
 		String line = "";
 		String[] words = subtitle.split(" ");
 		for (int i = 0; i < words.length; i++) {
-			if ( Consts.SUBTITLE_TEXT_SCALE * (line.length() + 1 + words[i].length()) > Consts.WIDTH) {
+			if ( Font.FONT1.getGlyphWidth() * Consts.SUBTITLE_TEXT_SCALE * (line.length() + 1 + words[i].length()) > Consts.WIDTH) {
 				lines.add(line);
 				line = words[i] + " ";
 			} else {
@@ -52,9 +52,8 @@ public class Narrator {
 		}
 		lines.add(line);
 		float y = - Consts.HEIGHT/2.f + 0.5f;
-		for (int i = 0; i < lines.size(); i++) {
+		for (int i = lines.size()-1; i >= 0; i--) {
 			String l = lines.get(i);
-			System.out.println(l);
 			float lw = l.length() * Consts.SUBTITLE_TEXT_SCALE * Font.FONT1.getGlyphWidth();
 			Font.FONT1.drawBordered(batch, l.toUpperCase(), cameraX-lw/2, y, Consts.SUBTITLE_TEXT_SCALE);
 			y += Consts.SUBTITLE_TEXT_SCALE * (4 * Font.FONT1.getGlyphHeight());
