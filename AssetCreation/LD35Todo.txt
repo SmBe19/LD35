@@ -6,10 +6,12 @@ bug: If platform and water are in the same spot (but no water above platform) wo
 turtles quicker in water
 
 Mechancis:
+Lvl6 oldschool
+Debugrenderer
+Id's in Narrator überprüfen
 
 Visuals:
 Proper lost/won screen
-End screen
 
 Engine:
 

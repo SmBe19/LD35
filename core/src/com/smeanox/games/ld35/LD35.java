@@ -18,7 +18,7 @@ public class LD35 extends Game {
 		creditsScreen = new CreditsScreen(this);
 
 		showMenuScreen();
-//		showGameScreen();
+		showGameScreen();
 //		showCreditsScreen();
 	}
 

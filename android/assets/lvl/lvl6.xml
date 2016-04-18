@@ -3,8 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
     <description>Level 6</description>
-    <camera min_x="-1000" max_x="1000" start_x="-25"/>
-    <hero start_x="55" start_y="5" dest_x="60" dest_y="10.5"/>
+    <camera min_x="-20" max_x="58" start_x="-10"/>
+    <hero start_x="-35" start_y="-5" dest_x="60" dest_y="10.5"/>
     <platforms>
             <!--
         <platform id="98" x="-38.3" y="0" width="2" height="30"/>

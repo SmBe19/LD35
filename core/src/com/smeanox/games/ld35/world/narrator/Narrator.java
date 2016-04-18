@@ -24,7 +24,7 @@ public class Narrator {
 	private float cameraX;
 
 	public Narrator() {
-		currentLevel = 1;
+		currentLevel = 7;
 		passedTime = 0;
 		needLevelReload = false;
 		heroFrozen = false;
