@@ -18,9 +18,9 @@ public class NarratorState_Lvl5_1 extends NarratorState {
 		} else {
 			if (!narratorSounds.get().isPlaying()){
 				// FIXME Platform Id
-				if(gameWorld.getPlatformById(14).isMovingEnabled()){
-					nextState = new NarratorState_Lvl5_2();
-				}
+				//if(gameWorld.getPlatformById(14).isMovingEnabled()){
+				//	nextState = new NarratorState_Lvl5_2();
+				//}
 			}
 			if(gameWorld.isGameLost()){
 				passedTimeSinceDead += delta;

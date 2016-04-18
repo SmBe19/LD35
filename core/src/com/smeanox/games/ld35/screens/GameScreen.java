@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.smeanox.games.ld35.Consts;
 import com.smeanox.games.ld35.Font;
 import com.smeanox.games.ld35.LD35;
+import com.smeanox.games.ld35.Sounds;
 import com.smeanox.games.ld35.io.LevelReader;
 import com.smeanox.games.ld35.io.Textures;
 import com.smeanox.games.ld35.world.GameWorld;
@@ -226,6 +227,7 @@ public class GameScreen implements Screen {
 		}
 		if(Gdx.input.isKeyJustPressed(Consts.KEY_INTERACT)) {
 			if (gameWorld.getHero().getLastButton() != null && gameWorld.getHero().getCurrentForm() == HeroForm.human) {
+				Sounds.BUTTON.play();
 				gameWorld.getHero().getLastButton().interact(gameWorld);
 			}
 			if(gameWorld.getHero().getCurrentForm() == HeroForm.turtle){

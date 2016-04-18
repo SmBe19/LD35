@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<level xmlns="http://games.smeanox.com"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
+    <description>Level 5</description>
+    <camera min_x="-6" max_x="11" start_x="0" />
+    <hero start_x="-23" start_y="-11" dest_x="28.5" dest_y="8.5"/>
+    <!--<hero start_x="28.5" start_y="-9" dest_x="28.5" dest_y="8.5"/>-->
+    <platforms>
+        <platform id="100" x="2" y="-15.4" width="50" height="1"/>
+
+	<platform id="51" x="-22" y="0.75" width="12" height="32">
+		<rect x="-27" y="0" width="2" height="34"/>
+		<rect x="-23" y="-13.25" width="10" height="4.5"/>
+		<rect x="-23" y="4.75" width="6.5" height="0.5"/>
+	</platform>
+
+        <platform id="2" x="-12" y="-10" width="4" height="1" type="oldschool"/>
+        <platform id="3" x="-2" y="-10" width="4" height="1" type="oldschool"/>
+        <platform id="4" x="8" y="-9" width="4" height="1" type="oldschool"/>
+        <platform id="5" x="18" y="-11" width="4" height="1" type="oldschool"/>
+	<!--
+        <platform id="98" x="-27.3" y="0" width="2" height="30"/>
+        <platform id="1" x="-23" y="-14" width="8" height="4"/>
+        <platform id="17" x="-23" y="4.75" width="6.5" height="0.5"/>
+
+        <platform id="14" x="22.75" y="4.75" width="0.5" height="3"/>
+        <platform id="8" x="25.7" y="2.9" width="6" height="2"/>
+        <platform id="15" x="26" y="7" width="8" height="2"/>
+        <platform id="99" x="32.3" y="0" width="2" height="30"/>
+        <platform id="6" x="30" y="-13" width="8" height="6"/>
+
+	  <platform id="7" x="31.3" y="-4" width="2" height="22"/>-->
+
+	<platform id="50" x="28" y="1" width="12" height="32">
+		<rect x="22" y="5" width="0.5" height="4.5"/>
+		<rect x="25" y="2.9" width="6.5" height="0.5"/>
+		<rect x="27" y="7" width="10.5" height="0.5"/>
+		<rect x="33" y="0" width="2" height="30"/>
+		<rect x="30" y="-13" width="8" height="4.5"/>
+	</platform>
+
+        <platform id="16" x="-6" y="-1" width="0.5" height="2.5 "/>
+
+        <platform id="10" x="-12" y="-2" width="4" height="1" type="oldschool" moving_enabled="false" end_x="-2" end_y="-2" hold_time="0.2" moving_velo="3"/>
+        <platform id="11" x="8" y="-2" width="4" height="1" type="oldschool"/>
+        <platform id="12" x="13" y="-3" width="4" height="1" type="oldschool" moving_enabled="false" end_x="18" end_y="-3" hold_time="0.2" moving_velo="3"/>
+        <platform id="13" x="26" y="-2" width="4" height="1" type="oldschool"/>
+
+        <!--3 * t = 8
+        v * 8/3 = sqrt(6^2+2^2)
+        => v = 2.371708245-->
+        <platform id="18" x="-2" y="6" width="4" height="1" type="oldschool" moving_enabled="false" end_x="-10" end_y="6" hold_time="0.2" moving_velo="3"/>
+        <platform id="19" x="10" y="5" width="4" height="1" type="oldschool" moving_enabled="false" end_x="16" end_y="7" hold_time="0.2" moving_velo="2.37108245"/>
+
+    </platforms>
+    <ladders>
+        <ladder id="1" x="-20.5" width="1" start_y="-3" end_y="5" in_air="true"/>
+        <ladder id="2" x="29.5" width="1" start_y="-10.75" end_y="6.75" top_mount="true"/>
+    </ladders>
+    <buttons>
+        <button id="1" x="-24.5" y="5.5" width="1" height="1">
+            <toggle_interact dest_id="18" />
+            <toggle_interact dest_id="19" />
+        </button>
+        <button id="2" x="24.5" y="4.5" width="1" height="1">
+            <toggle_interact dest_id="10" />
+            <toggle_interact dest_id="12" />
+        </button>
+    </buttons>
+    <waters>
+        <water id="1" x="3.5" y="-14.1" width="45" height="4"/>
+    </waters>
+    <actors>
+        <actor id="1" x="28.5" y="8.5" width="1" height="1" texture="signright" collision="false" dynamic="false"/>
+    </actors>
+</level>
