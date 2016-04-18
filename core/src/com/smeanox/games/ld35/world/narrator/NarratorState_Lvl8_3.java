@@ -19,7 +19,7 @@ public class NarratorState_Lvl8_3 extends NarratorState {
 			playSound(narrator);
 		} else {
 			if (!narratorSounds.get().isPlaying()){
-				// roll credits
+				narrator.setRollCredits(true);
 			}
 		}
 	}

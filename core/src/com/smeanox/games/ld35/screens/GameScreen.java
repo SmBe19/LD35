@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.smeanox.games.ld35.Consts;
 import com.smeanox.games.ld35.Font;
+import com.smeanox.games.ld35.LD35;
 import com.smeanox.games.ld35.io.LevelReader;
 import com.smeanox.games.ld35.io.Textures;
 import com.smeanox.games.ld35.world.GameWorld;
@@ -26,6 +27,7 @@ import java.util.List;
 
 public class GameScreen implements Screen {
 
+	private LD35 game;
 	private Narrator narrator;
 	private GameWorld gameWorld;
 	private SpriteBatch spriteBatch;
@@ -38,7 +40,8 @@ public class GameScreen implements Screen {
 	private float jumpFreezeTime;
 	private float waveTime;
 
-	public GameScreen() {
+	public GameScreen(LD35 game) {
+		this.game = game;
 		narrator = new Narrator();
 
 		spriteBatch = new SpriteBatch();
@@ -143,6 +146,10 @@ public class GameScreen implements Screen {
 		if(Gdx.input.isKeyJustPressed(Consts.KEY_SKIP)){
 			narrator.skip(gameWorld);
 		}
+		if(Gdx.input.isKeyJustPressed(Consts.KEY_BACK_TO_MENU)){
+			game.showMenuScreen();
+			return;
+		}
 		if(narrator.isHeroFrozen()){
 			return;
 		}
@@ -230,7 +237,9 @@ public class GameScreen implements Screen {
 	private void update(float delta) {
 		gameWorld.update(delta);
 		narrator.update(delta, gameWorld);
-		if(narrator.isNeedLevelReload()) {
+		if(narrator.isRollCredits()){
+			game.showCreditsScreen();
+		} else if(narrator.isNeedLevelReload()) {
 			loadGameWorld(narrator.getCurrentFile());
 		}
 	}

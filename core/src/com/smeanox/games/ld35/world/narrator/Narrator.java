@@ -13,6 +13,7 @@ public class Narrator {
 
 	private int currentLevel;
 	private boolean needLevelReload;
+	private boolean rollCredits;
 	private boolean heroFrozen;
 
 	private float passedTime;
@@ -23,7 +24,7 @@ public class Narrator {
 	private float cameraX;
 
 	public Narrator() {
-		currentLevel = 2;
+		currentLevel = 1;
 		passedTime = 0;
 		needLevelReload = false;
 		heroFrozen = false;
@@ -144,6 +145,13 @@ public class Narrator {
 		return heroFrozen;
 	}
 
+	public boolean isRollCredits() {
+		return rollCredits;
+	}
+
+	public void setRollCredits(boolean rollCredits) {
+		this.rollCredits = rollCredits;
+	}
 
 	public void setCurrentLevel(int currentLevel) {
 		this.currentLevel = currentLevel;

@@ -3,11 +3,12 @@ package com.smeanox.games.ld35;
 import com.badlogic.gdx.Input;
 
 public class Consts {
+	public static final String GAME_NAME = "Mike's golden sphere";
 	public static float WIDTH = 40;
 	public static final float HEIGHT = 30;
 	public static final float CAMERA_BORDER = 15;
 	public static final float DESKTOP_SCALE = 20;
-	public static final boolean USE_DEBUG_RENDERER = true;
+	public static final boolean USE_DEBUG_RENDERER = false;
 
 	public static boolean SUBTITLES_ENABLED = true;
 	public static boolean MUSIC_ENABLED = true;
@@ -40,15 +41,16 @@ public class Consts {
 	public static final int KEY_HUMAN = Input.Keys.NUM_1;
 	public static final int KEY_TURTLE = Input.Keys.NUM_2;
 	public static final int KEY_WOLF = Input.Keys.NUM_3;
-	public static final int KEY_RESTART = Input.Keys.R;
+	public static final int KEY_RESTART = Input.Keys.P;
 	public static final int KEY_SKIP = Input.Keys.ENTER;
+	public static final int KEY_BACK_TO_MENU = Input.Keys.ESCAPE;
 	public static final float HERO_WIDTH = 1;
 	public static final float HERO_HEIGHT = 2;
 	public static final float HERO_MAX_VELO = 5;
 	public static final float HERO_LADDER_MAX_VELO_Y = 1f;
 	public static final float HERO_LADDER_IMPULSE_Y = 10;
 	public static final float HERO_IMPULSE_X = 5;
-	public static final float HERO_IMPULSE_Y = 25;
+	public static final float HERO_IMPULSE_Y = 26;
 	public static final float HERO_DAMPING_X_COEF = 5;
 	public static final float HERO_DAMPING_X_COEF_LADDER = 100;
 	public static final float HERO_GROUND_SENSOR_HEIGHT = 0.1f;
@@ -78,7 +80,7 @@ public class Consts {
 	public static final float TEX_WAIT_MAX_VELO = 1f;
 	public static final float LETHAL_IMPULSE = 60;
 	public static final float LETHAL_IMPULSE_MULTIPLIER_TURTLE = 2;
-	public static final float BRIDGE_LETHAL_IMPULSE = 50;
+	public static final float BRIDGE_LETHAL_IMPULSE = 70;
 	public static final float DESTR_TIMEOUT = 1.5f;
 	public static final float HERO_DEST_RADIUS = 1;
 	public static final float NARRATOR_DEAD_PAUSE = 1f;

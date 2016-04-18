@@ -52,6 +52,8 @@ public class MenuScreen implements Screen {
 
 	@Override
 	public void show() {
+		orbTouched = false;
+		transitionTime = 0;
 	}
 
 	@Override

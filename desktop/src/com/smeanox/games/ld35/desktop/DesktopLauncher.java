@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = (int) (Consts.WIDTH * Consts.DESKTOP_SCALE);
 		config.height = ((int) (Consts.HEIGHT * Consts.DESKTOP_SCALE));
+		config.title = Consts.GAME_NAME;
 		new LwjglApplication(new LD35(), config);
 	}
 }
