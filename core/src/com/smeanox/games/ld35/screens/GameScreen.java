@@ -140,6 +140,9 @@ public class GameScreen implements Screen {
 	}
 
 	private void updateInput(float delta) {
+		if(narrator.isHeroFrozen()){
+			return;
+		}
 		if (Gdx.input.isKeyJustPressed(Consts.KEY_HUMAN)) {
 			gameWorld.getHero().setCurrentForm(HeroForm.human);
 		}

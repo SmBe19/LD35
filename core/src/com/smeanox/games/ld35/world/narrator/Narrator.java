@@ -13,14 +13,17 @@ public class Narrator {
 
 	private int currentLevel;
 	private boolean needLevelReload;
+	private boolean heroFrozen;
 
 	private float passedTime;
 
 	private float cameraX;
 
 	public Narrator() {
-		currentLevel = 1;
+		currentLevel = 2;
 		passedTime = 0;
+		needLevelReload = false;
+		heroFrozen = false;
 	}
 
 	public void update(GameWorld gameWorld, float delta) {
@@ -247,6 +250,10 @@ public class Narrator {
 
 	public boolean isNeedLevelReload() {
 		return needLevelReload;
+	}
+
+	public boolean isHeroFrozen() {
+		return heroFrozen;
 	}
 
 	public String getCurrentFile(){

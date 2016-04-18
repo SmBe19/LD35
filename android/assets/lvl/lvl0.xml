@@ -22,7 +22,7 @@
             <point x="0.2" y="6.2"/>
             <point x="-6.2" y="6.2"/>
         </platform>
-        <platform id="7" x="0" y="10.5" width="20.5" height="4.5"/>
+        <platform id="7" x="0" y="10" width="20" height="4"/>
         <platform id="5" x="-20" y="-8" width="1000" height="0.5" type="oldschool"/>
     </platforms>
     <ladders>

@@ -62,7 +62,7 @@ public class Ball extends Actor {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 500f * Consts.DEFAULT_DENSITY;
-		fixtureDef.friction = 0.4f;
+		fixtureDef.friction = Consts.DEFAULT_FRICTION;
 		fixtureDef.restitution = 0.2f;
 
 		Fixture fixture = body.createFixture(fixtureDef);
