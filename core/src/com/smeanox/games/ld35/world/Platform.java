@@ -67,10 +67,10 @@ public class Platform implements PhysObject, Renderable {
 		switch (platformType){
 			case normal:
 				if(points.size() == 0) {
-					this.points.add(new Vector2(-width / 2 - 0.2f, -height / 2 - 0.2f));
-					this.points.add(new Vector2(width / 2 + 0.2f, -height / 2 - 0.2f));
-					this.points.add(new Vector2(width / 2 + 0.2f, height / 2 + 0.2f));
-					this.points.add(new Vector2(-width / 2 - 0.2f, height / 2 + 0.2f));
+					this.points.add(new Vector2(-width / 2, -height / 2));
+					this.points.add(new Vector2(width / 2, -height / 2));
+					this.points.add(new Vector2(width / 2, height / 2));
+					this.points.add(new Vector2(-width / 2, height / 2));
 				}
 				initTextures(0, 10, 22, 24, 16, 16);
 				break;
@@ -254,6 +254,8 @@ public class Platform implements PhysObject, Renderable {
 				fixtures[i/4] = body.createFixture(fixtureDef);
 			}
 			if (platformType == PlatformType.normal) {
+				float width = 2.0f*(float)Math.floor(this.width/2.0f);
+				float height = 2.0f*(float)Math.floor(this.height/2.0f);
 				regions = new TextureRegion[2*(1+(int)Math.ceil(height/2.0f))][2*(1+(int)Math.ceil(width/2.0f))];
 				int iyi = 0;
 				for ( float iy = y - height/2; iy <= y + height/2; iy += 2, iyi++) {
@@ -356,6 +358,10 @@ public class Platform implements PhysObject, Renderable {
 
 		if (platformType == PlatformType.normal && points.size() > 0) {
 			if (regions == null) return;
+
+			float width = 2.0f*(float)Math.floor(this.width/2.0f);
+			float height = 2.0f*(float)Math.floor(this.height/2.0f);
+
 
 			for (int iy = 0; iy < regions.length; iy++) {
 				for (int ix = 0; ix < regions[iy].length; ix++) {
