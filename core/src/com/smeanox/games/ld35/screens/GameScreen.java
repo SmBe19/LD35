@@ -75,9 +75,9 @@ public class GameScreen implements Screen {
 				"}\n"+
 				"void main() {\n"+
 				"    vec4 col = texture2D(u_texture, v_texCoord);\n"+
-				"    if (distance(col.rgb, vec3(1.0, 0.0, 1.0)) < 0.1f){\n"+
-				"        float z = 1.0f/v_texCoord.y;\n"+
-				"        vec2 tc = vec2(v_texCoord.x+0.007*cos(70.0*v_texCoord.x ), 1.0-1.3*v_texCoord.y+0.005*sin(300.0f*z + u_time));\n"+
+				"    if (distance(col.rgb, vec3(1.0, 0.0, 1.0)) < 0.1){\n"+
+				"        float z = 1.0/v_texCoord.y;\n"+
+				"        vec2 tc = vec2(v_texCoord.x+0.007*cos(70.0*v_texCoord.x ), 1.0-1.3*v_texCoord.y+0.005*sin(300.0*z + u_time));\n"+
 				"        gl_FragColor = gaussSamp(u_texture2, tc + u_offset, vec2(1.0/256.0, 0.0));\n"+
 				"        gl_FragColor.xyz *= 0.8;\n"+
 				"    } else {\n"+
