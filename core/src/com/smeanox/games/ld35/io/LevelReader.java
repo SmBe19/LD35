@@ -119,7 +119,8 @@ public class LevelReader {
 						xball.getFloat("y"),
 						xball.getFloat("vx"),
 						xball.getFloat("vy"),
-						xball.getFloat("radius")));
+						xball.getFloat("radius"),
+						xball.getBoolean("frozen", false)));
 			}
 		}
 		XmlReader.Element xtexts = xlevel.getChildByName("texts");

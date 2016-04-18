@@ -19,7 +19,7 @@ public class Narrator {
 	private float cameraX;
 
 	public Narrator() {
-		currentLevel = 0;
+		currentLevel = 1;
 		passedTime = 0;
 	}
 
@@ -79,8 +79,7 @@ public class Narrator {
 			case 0:
 				if(!NarratorSounds.lvl1_1.get().isPlaying()) {
 					if(!lvl1_played1) {
-						NarratorSounds.lvl1_1.get().play();
-						lastSound = NarratorSounds.lvl1_1;
+						play(NarratorSounds.lvl1_1);
 						lvl1_played1 = true;
 					} else {
 						NarratorSounds.lvl1_1.dispose();
@@ -107,8 +106,7 @@ public class Narrator {
 								needLevelReload = true;
 						}
 						if(lvl1_currentNarration != null){
-							lastSound = lvl1_current_Narration;
-							lvl1_currentNarration.get().play();
+							play(lvl1_currentNarration);
 						}
 					}
 					if(gameWorld.isGameWon()){
@@ -126,8 +124,7 @@ public class Narrator {
 								lvl1_currentNarration = NarratorSounds.lvl1_5;
 						}
 						if(lvl1_currentNarration != null){
-							lastSound = lvl1_current_Narration;
-							lvl1_currentNarration.get().play();
+							play(lvl1_currentNarration);
 						}
 					}
 				} else {
@@ -142,14 +139,12 @@ public class Narrator {
 								lvl1_currentNarration.dispose();
 								lvl1_currentNarration = null;
 								lvl1_currentNarration = NarratorSounds.lvl1_9;
-								lastSound = lvl1_current_Narration;
-								lvl1_currentNarration.get().play();
+								play(lvl1_currentNarration);
 							} else {
 								lvl1_currentNarration.dispose();
 								lvl1_currentNarration = null;
 								lvl1_currentNarration = NarratorSounds.lvl1_8;
-								lastSound = lvl1_current_Narration;
-								lvl1_currentNarration.get().play();
+								play(lvl1_currentNarration);
 							}
 						} else {
 							needLevelReload = true;
@@ -182,8 +177,7 @@ public class Narrator {
 							break;
 					}
 					if(lvl2_currentNarration != null) {
-						lastSound = lvl2_current_Narration;
-						lvl2_currentNarration.get().play();
+						play(lvl2_currentNarration);
 					} else {
 						needLevelReload = true;
 						passedTime = 0;
@@ -191,8 +185,7 @@ public class Narrator {
 				} else if (lvl2_stage == 2){
 					lvl2_stage++;
 					lvl2_currentNarration = NarratorSounds.lvl2_7;
-					lastSound = lvl2_current_Narration;
-					lvl2_currentNarration.get().play();
+					play(lvl2_currentNarration);
 				} else {
 					needLevelReload = true;
 				}
@@ -205,8 +198,7 @@ public class Narrator {
 						} else {
 							lvl2_currentNarration = NarratorSounds.lvl2_4;
 						}
-						lastSound = lvl2_current_Narration;
-						lvl2_currentNarration.get().play();
+						play(lvl2_currentNarration);
 					}
 				}
 				if(lvl2_stage >= 2 && gameWorld.isGameWon()){
@@ -229,8 +221,7 @@ public class Narrator {
 						lvl2_stage++;
 						lvl2_currentNarration.dispose();
 						lvl2_currentNarration = NarratorSounds.lvl2_6;
-						lastSound = lvl2_current_Narration;
-						lvl2_currentNarration.get().play();
+						play(lvl2_currentNarration);
 						break;
 					case 2:
 					case 3:
@@ -243,6 +234,11 @@ public class Narrator {
 				}
 			}
 		}
+	}
+
+	private void play(NarratorSounds narratorSound){
+		narratorSound.get().play();
+		lastSound = narratorSound;
 	}
 
 	public void loadedLevel(String file){

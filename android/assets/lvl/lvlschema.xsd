@@ -138,6 +138,7 @@
         <xs:attribute name="vx" type="xs:float" use="required"/>
         <xs:attribute name="vy" type="xs:float" use="required"/>
         <xs:attribute name="radius" type="xs:float" use="required"/>
+        <xs:attribute name="frozen" type="xs:boolean" use="optional" default="false"/>
     </xs:complexType>
 
     <xs:complexType name="ladder">

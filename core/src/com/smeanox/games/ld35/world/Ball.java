@@ -19,13 +19,32 @@ public class Ball extends Actor {
 	private Animation animation;
 	private float animationTime;
 	private float vx, vy;
+	private boolean frozen;
 
-	public Ball(int id, float x, float y, float vx, float vy, float radius) {
+	public Ball(int id, float x, float y, float vx, float vy, float radius, boolean frozen) {
 		super(id, x, y, 2*radius, 2*radius, null, true, true);
 		this.vx = vx;
 		this.vy = vy;
+		this.frozen = false;
 		animation = Hero.createAnimation(Textures.spritesheet.get(), 7, 8, 0, 2, 32, 32, 0.2f, Animation.PlayMode.LOOP);
 		animationTime = 0;
+	}
+
+	public float getVx() {
+		return vx;
+	}
+
+	public float getVy() {
+		return vy;
+	}
+
+	public boolean isFrozen() {
+		return frozen;
+	}
+
+	public void setFrozen(boolean frozen) {
+		this.frozen = frozen;
+		body.setActive(!frozen);
 	}
 
 	@Override
@@ -34,6 +53,7 @@ public class Ball extends Actor {
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = false;
+		bodyDef.active = !frozen;
 
 		body = world.createBody(bodyDef);
 
