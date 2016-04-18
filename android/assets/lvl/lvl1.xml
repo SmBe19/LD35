@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
     <description>Level 1</description>
+    <camera/>
     <hero start_x="-12" start_y="-2" dest_x="20.5" dest_y="5"/>
     <platforms>
         <platform id="1" x="-15" y="-9" width="19" height="12"/>

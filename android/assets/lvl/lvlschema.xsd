@@ -7,6 +7,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="description" type="xs:string"/>
+                <xs:element name="camera" type="camera"/>
                 <xs:element name="hero" type="hero"/>
                 <xs:element name="platforms" minOccurs="0">
                     <xs:complexType>
@@ -173,5 +174,11 @@
     <xs:complexType name="vector2">
         <xs:attribute name="x" type="xs:float" use="required"/>
         <xs:attribute name="y" type="xs:float" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="camera">
+        <xs:attribute name="start_x" type="xs:float" use="optional" default="0"/>
+        <xs:attribute name="min_x" type="xs:float" use="optional" default="-1000000"/>
+        <xs:attribute name="max_x" type="xs:float" use="optional" default="1000000"/>
     </xs:complexType>
 </xs:schema>
