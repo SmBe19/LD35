@@ -116,6 +116,15 @@ public class LevelReader {
 		XmlReader.Element xactors = xlevel.getChildByName("actors");
 		List<Actor> actors = new ArrayList<Actor>();
 		if(xactors != null) {
+			for(XmlReader.Element xball : xactors.getChildrenByName("ball")) {
+				actors.add(new Ball(xball.getInt("id"),
+						xball.getFloat("x"),
+						xball.getFloat("y"),
+						xball.getFloat("vx"),
+						xball.getFloat("vy"),
+						xball.getFloat("radius"),
+						xball.getBoolean("frozen", false)));
+			}
 			for (XmlReader.Element xactor : xactors.getChildrenByName("actor")) {
 				actors.add(new Actor(xactor.getInt("id"),
 						xactor.getFloat("x"),
@@ -126,15 +135,6 @@ public class LevelReader {
 						xactor.getBoolean("collision", true),
 						xactor.getBoolean("dynamic", true),
 						xactor.getBoolean("frozen", false)));
-			}
-			for(XmlReader.Element xball : xactors.getChildrenByName("ball")) {
-				actors.add(new Ball(xball.getInt("id"),
-						xball.getFloat("x"),
-						xball.getFloat("y"),
-						xball.getFloat("vx"),
-						xball.getFloat("vy"),
-						xball.getFloat("radius"),
-						xball.getBoolean("frozen", false)));
 			}
 		}
 		XmlReader.Element xtexts = xlevel.getChildByName("texts");
