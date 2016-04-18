@@ -43,6 +43,7 @@ public class ContactListnr implements ContactListener {
 			if(!hero.isSensor() && other.getBody().getUserData() instanceof Water){
 				if(gameWorld.getHero().getCurrentForm() != HeroForm.turtle){
 					gameWorld.setGameLost(true);
+					gameWorld.setDeathReason(GameWorld.DeathReason.water);
 				} else {
 					gameWorld.getHero().setInWater(true);
 				}
@@ -59,6 +60,7 @@ public class ContactListnr implements ContactListener {
 			}
 			if(!hero.isSensor() && other.getBody().getUserData() == gameWorld.getWorldBorder()){
 				gameWorld.setGameLost(true);
+				gameWorld.setDeathReason(GameWorld.DeathReason.outOfBounds);
 			}
 		}
 	}
@@ -134,6 +136,7 @@ public class ContactListnr implements ContactListener {
 			}
 			if (!hero.isSensor() && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > lethalImpulse) {
 				gameWorld.setGameLost(true);
+				gameWorld.setDeathReason(GameWorld.DeathReason.impulse);
 			}
 		}
 

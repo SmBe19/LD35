@@ -24,8 +24,9 @@ public class Actor implements PhysObject, Renderable {
 	protected float x, y, width, height;
 	protected TextureRegion texture;
 	protected boolean collision, dynamicBody;
+	protected boolean frozen;
 
-	public Actor(int id, float x, float y, float width, float height, TextureRegion texture, boolean collision, boolean dynamicBody) {
+	public Actor(int id, float x, float y, float width, float height, TextureRegion texture, boolean collision, boolean dynamicBody, boolean frozen) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -34,6 +35,7 @@ public class Actor implements PhysObject, Renderable {
 		this.texture = texture;
 		this.collision = collision;
 		this.dynamicBody = dynamicBody;
+		this.frozen = frozen;
 	}
 
 	public int getId() {
@@ -68,12 +70,22 @@ public class Actor implements PhysObject, Renderable {
 		return dynamicBody;
 	}
 
+	public boolean isFrozen() {
+		return frozen;
+	}
+
+	public void setFrozen(boolean frozen) {
+		this.frozen = frozen;
+		body.setActive(!frozen);
+	}
+
 	@Override
 	public void addToWorld(World world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = (collision && dynamicBody) ? BodyDef.BodyType.DynamicBody : BodyDef.BodyType.StaticBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
+		bodyDef.active = !frozen;
 
 		body = world.createBody(bodyDef);
 

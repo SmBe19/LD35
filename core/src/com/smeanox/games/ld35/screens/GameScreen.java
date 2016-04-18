@@ -140,7 +140,16 @@ public class GameScreen implements Screen {
 	}
 
 	private void updateInput(float delta) {
+		if(Gdx.input.isKeyJustPressed(Consts.KEY_SKIP)){
+			narrator.skip(gameWorld);
+		}
 		if(narrator.isHeroFrozen()){
+			return;
+		}
+		if (Gdx.input.isKeyJustPressed(Consts.KEY_RESTART)) {
+			loadGameWorld(loadedLevel);
+		}
+		if(gameWorld.isGameLost()){
 			return;
 		}
 		jumpFreezeTime -= delta;
@@ -216,14 +225,11 @@ public class GameScreen implements Screen {
 				gameWorld.getHero().toggleTurtleActive();
 			}
 		}
-		if (Gdx.input.isKeyJustPressed(Consts.KEY_RESTART)) {
-			loadGameWorld(loadedLevel);
-		}
 	}
 
 	private void update(float delta) {
 		gameWorld.update(delta);
-		narrator.update(gameWorld, delta);
+		narrator.update(delta, gameWorld);
 		if(narrator.isNeedLevelReload()) {
 			loadGameWorld(narrator.getCurrentFile());
 		}

@@ -8,6 +8,13 @@ import java.util.List;
 
 public class GameWorld {
 
+	public enum DeathReason{
+		none,
+		impulse,
+		water,
+		outOfBounds,
+	}
+
 	private String description;
 	private World world;
 	private CameraInfo cameraInfo;
@@ -21,6 +28,7 @@ public class GameWorld {
 	private Hero hero;
 	private WorldBorder worldBorder;
 	private boolean gameLost, gameWon;
+	private DeathReason deathReason;
 
 	private float phys_accumulator;
 
@@ -43,6 +51,7 @@ public class GameWorld {
 
 		gameLost = false;
 		gameWon = false;
+		deathReason = DeathReason.none;
 
 		addPhysObjects(actors);
 		addPhysObjects(buttons);
@@ -153,5 +162,13 @@ public class GameWorld {
 
 	public void setGameWon(boolean gameWon) {
 		this.gameWon = gameWon;
+	}
+
+	public DeathReason getDeathReason() {
+		return deathReason;
+	}
+
+	public void setDeathReason(DeathReason deathReason) {
+		this.deathReason = deathReason;
 	}
 }

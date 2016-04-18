@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 public enum NarratorSounds {
-	lvl1_1("nar/Lvl1_1.mp3", 15.05f, new String[]{"Ah, I see you have touched my golden orb of infinity.", "For that reason, I will reward you with a nice little gift:", "From now on, you will be able to transform yourself into a wolf or a turtle at your will. However, there is a catch to this."}),
+	lvl1_1("nar/Lvl1_1.mp3", 15.05f, new String[]{"Ah, I see you have touched my golden orb of infinity.", "For that reason, I will reward you with a nice little gift:", "From now on, you will be able to transform yourself into", "a wolf or a turtle at your will. However, there is a catch to this."}),
 	lvl1_2("nar/Lvl1_2.mp3", 11.21f, new String[]{"Hey! I wasn't even done with my monologue and you already died.", "That's no fun! But I will give you a second chance at this.", "How about you try to transform into a wolf to outrun these rocks?"}),
 	lvl1_3("nar/Lvl1_3.mp3", 04.73f, new String[]{"My grandma always used to say: 'Don't get crushed by falling rocks'. Try again!"}),
 	lvl1_4("nar/Lvl1_4.mp3", 07.01f, new String[]{"Again? Well I guess everyone learns at their own pace. I'll let you have as much time as you want with this."}),
@@ -12,8 +12,8 @@ public enum NarratorSounds {
 	lvl1_6("nar/Lvl1_6.mp3", 03.82f, new String[]{"That's how it's done. It wasn't that hard, was it? Anyway..."}),
 	lvl1_7("nar/Lvl1_7.mp3", 08.72f, new String[]{"That's better. I could have saved you the pain of dying once if I told you this right away, but honestly that would have been much less enjoyable. Anyway..."}),
 	lvl1_8("nar/Lvl1_8.mp3", 02.43f, new String[]{"Ah yeah, I was talking about the catch..."}),
-	lvl1_9("nar/Lvl1_9.mp3", 08.53f, new String[]{"That wasn't the catch yet, that was just a cheap attempt at murdering you. Good job dodging that, by the way. The actual catch is this: ..."}),
-	lvl1_10("nar/Lvl1_10.mp3", 07.85f, new String[]{"I have a job for you: Get to the top of this mountain. Sounds nice? Ok, do it! No questions please, 'JUST DO IT'"}),
+	lvl1_9("nar/Lvl1_9.mp3", 07.85f, new String[]{"I have a job for you: Get to the top of this mountain. Sounds nice? Ok, do it! No questions please, 'JUST DO IT'"}),
+	lvl1_10("nar/Lvl1_10.mp3", 08.53f, new String[]{"That wasn't the catch yet, that was just a cheap attempt at murdering you. Good job dodging that, by the way. The actual catch is this: ..."}),
 	lvl2_1("nar/Lvl2_1.mp3", 08.05f, new String[]{"Be careful, falling rocks right there. Oh, too late, my bad. Maybe you could try transforming into your turtle shell to survive this?"}),
 	lvl2_2("nar/Lvl2_2.mp3", 06.58f, new String[]{"Studies have shown that falling rocks can be very unhealthy.", "I suggest you use your turtle form to protect yourself."}),
 	lvl2_3("nar/Lvl2_3.mp3", 03.75f, new String[]{"Take as long as you need. It's not like you have anything important to do."}),
