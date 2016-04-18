@@ -18,7 +18,7 @@ public class NarratorState_Lvl4_1 extends NarratorState {
 		} else {
 			if (!narratorSounds.get().isPlaying()){
 				if(gameWorld.getPlatformById(14).isMovingEnabled()){
-					// next state
+					nextState = new NarratorState_Lvl4_2();
 				}
 			}
 			if(gameWorld.isGameLost()){

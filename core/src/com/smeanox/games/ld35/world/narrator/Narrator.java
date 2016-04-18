@@ -21,12 +21,12 @@ public class Narrator {
 	private float cameraX;
 
 	public Narrator() {
-		currentLevel = 4;
+		currentLevel = 0;
 		passedTime = 0;
 		needLevelReload = false;
 		heroFrozen = false;
 
-		currentState = new NarratorState_Lvl4_1();
+		currentState = new NarratorState_Lvl8_1();
 	}
 
 	public void update(float delta, GameWorld gameWorld) {
@@ -82,8 +82,11 @@ public class Narrator {
 		if(!Consts.NARRATION_ENABLED){
 			return;
 		}
+		if(narratorSound == lastSound){
+			return;
+		}
 		if(lastSound != null){
-			lastSound.dispose();
+			stop(lastSound);
 		}
 		narratorSound.get().play();
 		lastSound = narratorSound;
@@ -91,7 +94,10 @@ public class Narrator {
 
 	public void stop(NarratorSounds narratorSound){
 		narratorSound.get().stop();
-		lastSound = null;
+		if(lastSound == narratorSound) {
+			lastSound.dispose();
+			lastSound = null;
+		}
 	}
 
 	public void loadedLevel(String file){

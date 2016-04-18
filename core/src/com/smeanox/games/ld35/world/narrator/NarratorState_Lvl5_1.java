@@ -3,12 +3,12 @@ package com.smeanox.games.ld35.world.narrator;
 import com.smeanox.games.ld35.Consts;
 import com.smeanox.games.ld35.world.GameWorld;
 
-public class NarratorState_Lvl3_13 extends NarratorState {
+public class NarratorState_Lvl5_1 extends NarratorState {
 
 	private float passedTimeSinceDead;
 
-	public NarratorState_Lvl3_13() {
-		super(NarratorSounds.lvl3_13);
+	public NarratorState_Lvl5_1() {
+		super(NarratorSounds.lvl5_1);
 	}
 
 	@Override
@@ -17,10 +17,9 @@ public class NarratorState_Lvl3_13 extends NarratorState {
 			playSound(narrator);
 		} else {
 			if (!narratorSounds.get().isPlaying()){
-				if(gameWorld.isGameWon()){
-					nextState = new NarratorState_Lvl4_1();
-					narrator.setCurrentLevel(4);
-					narrator.setNeedLevelReload(true);
+				// FIXME Platform Id
+				if(gameWorld.getPlatformById(14).isMovingEnabled()){
+					nextState = new NarratorState_Lvl5_2();
 				}
 			}
 			if(gameWorld.isGameLost()){
