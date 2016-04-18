@@ -67,10 +67,10 @@ public class Platform implements PhysObject, Renderable {
 		switch (platformType){
 			case normal:
 				if(points.size() == 0) {
-					this.points.add(new Vector2(-width / 2, -height / 2));
-					this.points.add(new Vector2(width / 2, -height / 2));
-					this.points.add(new Vector2(width / 2, height / 2));
-					this.points.add(new Vector2(-width / 2, height / 2));
+					this.points.add(new Vector2(-width / 2 - 0.2f, -height / 2 - 0.2f));
+					this.points.add(new Vector2(width / 2 + 0.2f, -height / 2 - 0.2f));
+					this.points.add(new Vector2(width / 2 + 0.2f, height / 2 + 0.2f));
+					this.points.add(new Vector2(-width / 2 - 0.2f, height / 2 + 0.2f));
 				}
 				initTextures(0, 10, 22, 24, 16, 16);
 				break;
