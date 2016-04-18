@@ -41,6 +41,16 @@ public class LevelReader {
 				for (XmlReader.Element xpoint : xplatform.getChildrenByName("point")) {
 					points.add(new Vector2(xpoint.getFloat("x"), xpoint.getFloat("y")));
 				}
+				for (XmlReader.Element xrect : xplatform.getChildrenByName("rect")) {
+					float rx = xrect.getFloat("x");
+					float ry = xrect.getFloat("y");
+					float rw = xrect.getFloat("w");
+					float rh = xrect.getFloat("h");
+					points.add(new Vector2(rx - x - rw/2, ry - y - rh/2));
+					points.add(new Vector2(rx - x + rw/2, ry - y - rh/2));
+					points.add(new Vector2(rx - x + rw/2, ry - y + rh/2));
+					points.add(new Vector2(rx - x - rw/2, ry - y + rh/2));
+				}
 				platforms.add(new Platform(xplatform.getInt("id"),
 						x,
 						y,
@@ -88,7 +98,8 @@ public class LevelReader {
 						xladder.getFloat("width"),
 						xladder.getFloat("start_y"),
 						xladder.getFloat("end_y"),
-						xladder.getBoolean("in_air", false)));
+						xladder.getBoolean("in_air", false),
+						xladder.getBoolean("top_mount", false)));
 			}
 		}
 		XmlReader.Element xwaters = xlevel.getChildByName("waters");
