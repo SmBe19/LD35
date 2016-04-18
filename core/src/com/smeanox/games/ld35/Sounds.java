@@ -25,6 +25,6 @@ public enum Sounds {
 		if (System.currentTimeMillis() - lastPlayTime < minWait)
 			return;
 		lastPlayTime = System.currentTimeMillis();
-		sound.play(1.0f);
+		sound.play(0.3f);
 	}
 }

@@ -42,7 +42,8 @@ public class ContactListnr implements ContactListener {
 				gameWorld.getHero().setOnLadder(true);
 			}
 			if(!hero.isSensor() && other.getBody().getUserData() instanceof Water){
-				Sounds.WATER.play();
+				if (hero.getBody().getLinearVelocity().y < -5)
+					Sounds.WATER.play();
 				if(gameWorld.getHero().getCurrentForm() != HeroForm.turtle){
 					gameWorld.setGameLost(true);
 					gameWorld.setDeathReason(GameWorld.DeathReason.water);
