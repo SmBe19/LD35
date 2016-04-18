@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<level xmlns="http://games.smeanox.com"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
+    <description>Level 6</description>
+    <camera min_x="-1000" max_x="1000" start_x="-25"/>
+    <hero start_x="55" start_y="5" dest_x="60" dest_y="10.5"/>
+    <platforms>
+        <platform id="98" x="-38.3" y="0" width="2" height="30"/>
+        <platform id="99" x="78.3" y="0" width="2" height="30"/>
+
+        <platform id="1" x="0" y="0" width="160" height="40">
+            <rect x="-30" y="-12" width="20" height="12"/>
+            <rect x="0" y="-15" width="50" height="2"/>
+            <rect x="52" y="-12" width="52" height="12"/>
+        </platform>
+        <platform id="2" x="64" y="9.75" width="26" height="0.5"/>
+        <platform id="3" x="46" y="8" width="10" height="4" ladder_passable="false"/>
+        <platform id="4" x="38.5" y="10" width="4" height="0.5" start_y="6" end_y="2" moving_velo="2"/>
+        <platform id="5" x="28" y="5" width="8" height="0.5"/>
+        <platform id="6" x="20" y="-13.5" width="2" height="0.5" start_y="-8" end_y="4" moving_velo="4" hold_time="2"/>
+        <platform id="7" x="14" y="1" width="2" height="0.5"/>
+        <platform id="8" x="2" y="-3" width="22" height="10">
+            <rect x="1" y="0" width="4" height="0.5"/>
+            <rect x="9" y="0" width="4" height="0.5"/>
+            <rect x="-1" y="-3" width="0.5" height="6"/>
+            <rect x="11" y="-3" width="0.5" height="6"/>
+            <rect x="1" y="-6.25" width="4" height="0.5"/>
+            <rect x="9" y="-6.25" width="4" height="0.5"/>
+        </platform>
+        <platform id="9" x="5" y="-0.25" width="4" height="1" type="bridge"/>
+        <platform id="10" x="5" y="-6.25" width="4" height="1" type="bridge"/>
+        <platform id="11" x="5" y="10" width="4" height="4">
+            <rect x="5" y="12" width="4" height="0.5"/>
+            <rect x="3" y="10" width="0.5" height="4"/>
+            <rect x="7" y="10" width="0.5" height="4"/>
+        </platform>
+        <platform id="12" x="6.25" y="7" width="2.5" height="2.5" end_x="8" moving_velo="0.5"/>
+        <platform id="13" x="3.75" y="7" width="2.5" height="2.5" end_x="2" moving_velo="0.5"/>
+        <platform id="14" x="-6" y="2" width="4" height="0.5" end_y="-2" moving_velo="2"/>
+        <platform id="15" x="-12" y="4" width="6" height="0.5"/>
+        <platform id="16" x="-13" y="-4" width="8" height="8">
+            <rect x="-13" y="-2" width="8" height="0.5"/>
+            <rect x="-9" y="-4" width="0.5" height="4"/>
+            <rect x="-17" y="-4" width="0.5" height="4"/>
+            <rect x="-10" y="-6.25" width="2" height="0.5"/>
+            <rect x="-16" y="-6.25" width="2" height="0.5"/>
+        </platform>
+        <platform id="17" x="-20" y="-3.5" width="2.5" height="0.5"/>
+        <platform id="18" x="-23" y="-5" width="2.5" height="0.5"/>
+    </platforms>
+    <ladders>
+        <ladder id="1" x="44" width="1" start_y="0.25" end_y="5.75" in_air="true" top_mount="true"/>
+        <ladder id="2" x="47" width="1" start_y="0." end_y="5.75" in_air="true" top_mount="true"/>
+        <ladder id="3" x="50" width="1" start_y="0.75" end_y="5.75" in_air="true" top_mount="true"/>
+        <ladder id="4" x="53" width="1" start_y="0.5" end_y="10" in_air="true" />
+    </ladders>
+    <buttons>
+        <button id="1" x="-16" y="-5" width="1" height="1">
+            <toggle_interact dest_id="14"/>
+        </button>
+        <button id="2" x="-14" y="4.5" width="1" height="1">
+            <toggle_interact dest_id="4"/>
+        </button>
+        <button id="3" x="9" y="0.5" width="1" height="1">
+            <toggle_interact dest_id="12"/>
+            <toggle_interact dest_id="13"/>
+        </button>
+        <button id="4" x="9" y="-5.5" width="1" height="1">
+            <toggle_interact dest_id="6"/>
+        </button>
+    </buttons>
+    <waters>
+        <water id="1" x="3" y="-10.1" width="48" height="8"/>
+    </waters>
+    <actors>
+        <actor id="1" x="60" y="11.5" width="3" height="3" texture="signright" collision="false"/>
+        <ball id="2" x="5" y="10" vx="0" vy="0" radius="1"/>
+    </actors>
+</level>
