@@ -44,8 +44,8 @@ public class LevelReader {
 				for (XmlReader.Element xrect : xplatform.getChildrenByName("rect")) {
 					float rx = xrect.getFloat("x");
 					float ry = xrect.getFloat("y");
-					float rw = xrect.getFloat("w");
-					float rh = xrect.getFloat("h");
+					float rw = xrect.getFloat("width");
+					float rh = xrect.getFloat("height");
 					points.add(new Vector2(rx - x - rw/2, ry - y - rh/2));
 					points.add(new Vector2(rx - x + rw/2, ry - y - rh/2));
 					points.add(new Vector2(rx - x + rw/2, ry - y + rh/2));
