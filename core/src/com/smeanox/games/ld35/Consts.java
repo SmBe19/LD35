@@ -10,6 +10,7 @@ public class Consts {
 	public static final boolean USE_DEBUG_RENDERER = true;
 
 	public static final float SUBTITLE_TEXT_SCALE = 1f/8f;
+	public static final float SUBTITLE_DIST_Y = 3;
 	public static final float FONT_BORDER_WIDTH = 0.7f;
 
 	public static final float BG1_DIST = 8;
@@ -36,6 +37,7 @@ public class Consts {
 	public static final int KEY_TURTLE = Input.Keys.NUM_2;
 	public static final int KEY_WOLF = Input.Keys.NUM_3;
 	public static final int KEY_RESTART = Input.Keys.R;
+	public static final int KEY_SKIP = Input.Keys.ENTER;
 	public static final float HERO_WIDTH = 1;
 	public static final float HERO_HEIGHT = 2;
 	public static final float HERO_MAX_VELO = 5;
@@ -74,4 +76,5 @@ public class Consts {
 	public static final float BRIDGE_LETHAL_IMPULSE = 10;
 	public static final float DESTR_TIMEOUT = 1.5f;
 	public static final float HERO_DEST_RADIUS = 1;
+	public static final float NARRATOR_DEAD_PAUSE = 1f;
 }
