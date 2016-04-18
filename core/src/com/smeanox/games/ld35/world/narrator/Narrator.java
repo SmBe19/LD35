@@ -16,7 +16,9 @@ public class Narrator {
 	private boolean heroFrozen;
 
 	private float passedTime;
+	private float lastSoundPlayed;
 	private NarratorState currentState;
+	private int lastLvlX;
 
 	private float cameraX;
 
@@ -26,6 +28,8 @@ public class Narrator {
 		needLevelReload = false;
 		heroFrozen = false;
 
+		lastLvlX = 0;
+
 		currentState = new NarratorState_Lvl8_1();
 	}
 
@@ -34,6 +38,24 @@ public class Narrator {
 
 		currentState.update(delta, passedTime, gameWorld, this);
 		currentState = currentState.getNarratorState();
+
+		if(lastLvlX < 4 && passedTime - lastSoundPlayed > 62){
+			switch (lastLvlX){
+				case 0:
+					play(NarratorSounds.lvlX_1);
+					break;
+				case 1:
+					play(NarratorSounds.lvlX_2);
+					break;
+				case 2:
+					play(NarratorSounds.lvlX_3);
+					break;
+				case 3:
+					play(NarratorSounds.lvlX_4);
+					break;
+			}
+			lastLvlX++;
+		}
 	}
 
 	public void skip(GameWorld gameWorld){
@@ -90,6 +112,7 @@ public class Narrator {
 		}
 		narratorSound.get().play();
 		lastSound = narratorSound;
+		lastSoundPlayed = passedTime;
 	}
 
 	public void stop(NarratorSounds narratorSound){
@@ -114,7 +137,6 @@ public class Narrator {
 	}
 
 	public void setHeroFrozen(boolean heroFrozen) {
-		System.out.println("HeroFrozen " + heroFrozen);
 		this.heroFrozen = heroFrozen;
 	}
 

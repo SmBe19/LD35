@@ -15,15 +15,11 @@ public abstract class NarratorState {
 	public NarratorState(NarratorSounds narratorSounds) {
 		this.narratorSounds = narratorSounds;
 		nextState = this;
-
-		System.out.println("init " + narratorSounds.name());
 	}
 
 	protected void playSound(Narrator narrator){
 		narrator.play(narratorSounds);
 		playedSound = true;
-
-		System.out.println("play sound " + narratorSounds.name());
 	}
 
 	protected void stopSound(Narrator narrator){
@@ -37,8 +33,6 @@ public abstract class NarratorState {
 			}
 		}
 		releasedRocks = true;
-
-		System.out.println("release rocks");
 	}
 
 	protected void freezeRocks(GameWorld gameWorld){
@@ -48,8 +42,6 @@ public abstract class NarratorState {
 			}
 		}
 		releasedRocks = false;
-
-		System.out.println("freeze rocks");
 	}
 
 	protected void releaseActors(GameWorld gameWorld){
@@ -59,8 +51,6 @@ public abstract class NarratorState {
 			}
 		}
 		releasedActors = true;
-
-		System.out.println("release actors");
 	}
 
 	protected void freezeActors(GameWorld gameWorld){
@@ -70,8 +60,6 @@ public abstract class NarratorState {
 			}
 		}
 		releasedActors = false;
-
-		System.out.println("freeze actors");
 	}
 
     public abstract void update(float delta, float passedTime, GameWorld gameWorld, Narrator narrator);
