@@ -105,7 +105,7 @@ public class Water implements PhysObject, Renderable {
 	public void render(SpriteBatch spriteBatch, float delta) {
 		for (int ix = 0; ix < width; ix+=2) {
 			int animIx = 1+((int)anim[ix/2]) % (textures.size()-1);
-			anim[ix/2] += delta;
+			anim[ix/2] += 5.0*delta;
 			spriteBatch.draw(textures.get(animIx),  x-width/2.0f+ix,y+height/2.0f-1.0f, 2.0f, 2.0f);
 		}
 

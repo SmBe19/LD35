@@ -118,6 +118,7 @@ public class GameScreen implements Screen {
 		addGameWorldObjectsToRenderables(gameWorld.getButtons());
 		addGameWorldObjectsToRenderables(gameWorld.getActors());
 		addGameWorldObjectsToRenderables(gameWorld.getTexts());
+		addGameWorldObjectsToRenderables(gameWorld.getDecos());
 		renderables.add(gameWorld.getHero());
 	}
 
