@@ -8,6 +8,7 @@ import com.smeanox.games.ld35.world.Actor;
 import com.smeanox.games.ld35.world.Ball;
 import com.smeanox.games.ld35.world.Button;
 import com.smeanox.games.ld35.world.CameraInfo;
+import com.smeanox.games.ld35.world.Deco;
 import com.smeanox.games.ld35.world.GameWorld;
 import com.smeanox.games.ld35.world.Hero;
 import com.smeanox.games.ld35.world.HeroForm;
@@ -134,7 +135,17 @@ public class LevelReader {
 						Color.valueOf(xtext.get("color", "ffffffff"))));
 			}
 		}
+		XmlReader.Element xdecos = xlevel.getChildByName("decos");
+		List<Deco> decos = new ArrayList<Deco>();
+		if (xdecos != null) {
+			for (XmlReader.Element xdeco : xdecos.getChildrenByName("deco")) {
+				decos.add(new Deco(xdeco.getFloat("x"),
+						xdeco.getFloat("y"),
+						xdeco.getFloat("scale"),
+						xdeco.getInt("index")));
+			}
+		}
 		
-		return new GameWorld(xdescription.getText(), cameraInfo, actors, buttons, ladders, waters, platforms, texts, hero);
+		return new GameWorld(xdescription.getText(), cameraInfo, actors, buttons, ladders, waters, platforms, texts, decos, hero);
 	}
 }

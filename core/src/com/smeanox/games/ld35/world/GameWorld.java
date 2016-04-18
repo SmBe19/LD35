@@ -17,13 +17,14 @@ public class GameWorld {
 	private List<Water> waters;
 	private List<Platform> platforms;
 	private List<Text> texts;
+	private List<Deco> decos;
 	private Hero hero;
 	private WorldBorder worldBorder;
 	private boolean gameLost, gameWon;
 
 	private float phys_accumulator;
 
-	public GameWorld(String description, CameraInfo cameraInfo, List<Actor> actors, List<Button> buttons, List<Ladder> ladders, List<Water> waters, List<Platform> platforms, List<Text> texts, Hero hero) {
+	public GameWorld(String description, CameraInfo cameraInfo, List<Actor> actors, List<Button> buttons, List<Ladder> ladders, List<Water> waters, List<Platform> platforms, List<Text> texts, List<Deco> decos, Hero hero) {
 		this.description = description;
 		this.cameraInfo = cameraInfo;
 		this.actors = actors;
@@ -32,6 +33,7 @@ public class GameWorld {
 		this.waters = waters;
 		this.platforms = platforms;
 		this.texts = texts;
+		this.decos = decos;
 		this.hero = hero;
 		this.worldBorder = new WorldBorder();
 
@@ -123,6 +125,10 @@ public class GameWorld {
 
 	public List<Text> getTexts() {
 		return texts;
+	}
+
+	public List<Deco> getDecos() {
+		return decos;
 	}
 
 	public Hero getHero() {
