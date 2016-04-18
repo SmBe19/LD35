@@ -6,17 +6,26 @@
     <camera min_x="-6" max_x="1" start_x="0"/>
     <hero start_x="-12" start_y="-2" dest_x="20.5" dest_y="0.5"/>
     <platforms>
-        <platform id="98" x="-27.3" y="0" width="2" height="30"/>
-        <platform id="99" x="22.3" y="0" width="2" height="30"/>
-        <platform id="100" x="2" y="-15.4" width="20" height="1" type="oldschool"/>
+        <platform id="100" x="2" y="-15" width="20" height="0.5"/>
 
-        <platform id="1" x="-17" y="-9" width="22" height="12"/>
-        <platform id="2" x="17" y="-15" width="12" height="6"/>
-        <platform id="3" x="17" y="-6.9" width="6" height="2"/>
-        <platform id="7" x="21" y="-6.3" width="2" height="12" />
-        <platform id="4" x="13" y="-3.5" width="5" height="1" type="oldschool"/>
+        <platform id="98" x="-18" y="0" width="28" height="30">
+		<rect x="-27" y="0" w="2.5" h="30"/>
+		<rect x="-17" y="-9" w="22.5" h="12.5"/>
+	</platform>
+	<platform id="99" x="17" y="1" width="14" height="35">
+		<rect x="23" y="0" w="2.5" h="35"/>
+		<rect x="17" y="-16" w="10.5" h="4.5"/>
+		<rect x="17" y="-7" w="6.5" h="2.3"/>
+		<rect x="21" y="-7" w="2.5" h="14.5"/>
+	</platform>
+
+
+
+        <platform id="4" x="13" y="-3.25" width="5" height="1" type="oldschool"/>
         <platform id="5" x="18" y="-0.5" width="6" height="1" type="oldschool"/>
-        <platform id="6" x="10" y="-6" width="2" height="6" />
+
+        <platform id="6" x="10" y="-6" width="2.5" height="6.5" />
+
         <platform id="10" x="1.5" y="-3.5" width="15" height="1" type="bridge"/>
     </platforms>
     <waters>
