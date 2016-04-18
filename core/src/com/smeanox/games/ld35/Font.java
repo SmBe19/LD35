@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public enum Font {
-	FONT1(Textures.font.get(), "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?.,<>0123456789'%", 8, 8, 8);
+	FONT1(Textures.font.get(), "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?.,<>0123456789'%`:", 8, 8, 8);
 
 	private String order;
 	private TextureRegion[] regions;

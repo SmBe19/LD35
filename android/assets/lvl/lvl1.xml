@@ -6,14 +6,22 @@
     <camera min_x="-6" max_x="2" />
     <hero start_x="-17" start_y="-2" dest_x="21.2" dest_y="5"/>
     <platforms>
-        <platform id="98" x="-25" y="0" width="2" height="30"/>
-        <platform id="99" x="23" y="0" width="2" height="30"/>
 
-        <platform id="1" x="-16" y="-9" width="20" height="12"/>
-        <platform id="3" x="18" y="-3.5" width="8" height="4"/>
-        <platform id="2" x="13.5" y="-10.5" width="22" height="12"/>
-        <platform id="4" x="14" y="1" width="5" height="1" type="oldschool"/>
-        <platform id="5" x="19" y="4" width="6" height="1" type="oldschool"/>
+        <platform id="50" x="-16" y="-1" width="20" height="32">
+                <rect x="-25" y="0" w="2.5" h="30.5"/>
+                <rect x="-16" y="-9" w="20.5" h="12.5"/>
+        </platform>
+
+        <platform id="4" x="13" y="0.75" width="6" height="1" type="oldschool"/>
+        <platform id="4" x="20" y="4" width="8" height="1" type="oldschool"/>
+
+        <platform id="99" x="14.5" y="0.5" width="24" height="30">
+                <rect x="18.5" y="-3.5" w="8.5" h="2.5"/>
+                <rect x="13.5" y="-10.5" w="22.5" h="12.5"/>
+                <rect x="23.5" y="4" w="2.5" h="30"/>
+        </platform>
+
+
     </platforms>
     <actors>
         <actor id="0" x="-20" y="-1.5" width="3" height="3" texture="goldenball" dynamic="false"/>
@@ -28,5 +36,8 @@
     </actors>
     <decos>
         <deco x="-15" y="-9" scale="2" index="0"/>
+        <deco x="-23" y="-7" scale="2" index="1"/>
+        <deco x="16" y="-12" scale="2" index="2"/>
+        <deco x="12" y="-3.25" scale="2" index="5"/>
     </decos>
 </level>
