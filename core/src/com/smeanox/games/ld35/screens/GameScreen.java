@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -36,7 +35,7 @@ public class GameScreen implements Screen {
 	private ShaderProgram waterShader;
 	private float cameraX;
 	private String loadedLevel;
-
+	private float jumpFreezeTime;
 	private float waveTime;
 
 	public GameScreen() {
@@ -143,6 +142,7 @@ public class GameScreen implements Screen {
 		if(narrator.isHeroFrozen()){
 			return;
 		}
+		jumpFreezeTime -= delta;
 		if (Gdx.input.isKeyJustPressed(Consts.KEY_HUMAN)) {
 			gameWorld.getHero().setCurrentForm(HeroForm.human);
 		}
@@ -177,8 +177,9 @@ public class GameScreen implements Screen {
 				}
 			}
 			if (Gdx.input.isKeyPressed(Consts.KEY_JUMP)) {
-				if (gameWorld.getHero().isOnGround() && Math.abs(body.getLinearVelocity().y) < Consts.HERO_JUMP_MAX_VELO_Y) {
+				if (gameWorld.getHero().isOnGround() && jumpFreezeTime < 0) {
 					body.applyLinearImpulse(new Vector2(0, gameWorld.getHero().getCurrentForm().getImpulseY()), body.getWorldCenter(), true);
+					jumpFreezeTime = Consts.HERO_JUMP_FREEZE_TIME;
 				}
 			}
 		}
@@ -307,8 +308,6 @@ public class GameScreen implements Screen {
 		narrator.setCameraX(cameraX);
 		narrator.drawSubtitles(spriteBatch, "Test subtitle");
 		spriteBatch.end();
-
-
 
 		if (Consts.USE_DEBUG_RENDERER) {
 			debugRenderer.render(gameWorld.getWorld(), camera.combined);

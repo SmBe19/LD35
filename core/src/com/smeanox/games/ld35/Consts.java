@@ -49,7 +49,7 @@ public class Consts {
 	public static final float HERO_GROUND_SENSOR_WIDTH = 0.75f;
 	public static final float HERO_WALL_SENSOR_WIDTH = 0.1f;
 	public static final float HERO_WALL_SENSOR_HEIGHT = 0.9f;
-	public static final float HERO_JUMP_MAX_VELO_Y = 1f;
+	public static final float HERO_JUMP_FREEZE_TIME = 0.5f;
 	public static final float HERO_IMPULSE_AIR_MODIFIER = 0.2f;
 	public static final float HERO_WATER_GRAVITY_SCALE = 0.1f;
 	public static final float HERO_WATER_MAX_VELO_X = 2f;
