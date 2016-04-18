@@ -1,6 +1,7 @@
 package com.smeanox.games.ld35.world;
 
 import com.smeanox.games.ld35.Consts;
+import com.smeanox.games.ld35.Sounds;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -41,6 +42,7 @@ public class ContactListnr implements ContactListener {
 				gameWorld.getHero().setOnLadder(true);
 			}
 			if(!hero.isSensor() && other.getBody().getUserData() instanceof Water){
+				Sounds.WATER.play();
 				if(gameWorld.getHero().getCurrentForm() != HeroForm.turtle){
 					gameWorld.setGameLost(true);
 					gameWorld.setDeathReason(GameWorld.DeathReason.water);
@@ -74,6 +76,7 @@ public class ContactListnr implements ContactListener {
 		if (hero.getBody().getUserData() instanceof Actor) {
 			if(other.getBody().getUserData() instanceof Water){
 				((Actor) hero.getBody().getUserData()).setInWater(true);
+				Sounds.WATER.play();
 			}
 		}
 	}
@@ -178,7 +181,11 @@ public class ContactListnr implements ContactListener {
 		if (hero.getBody().getUserData() instanceof Platform) {
 			if(((Platform) hero.getBody().getUserData()).getPlatformType() == Platform.PlatformType.bridge
 					&& impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > Consts.BRIDGE_LETHAL_IMPULSE){
+				Sounds.BRIDGE.play();
 				((Platform) hero.getBody().getUserData()).destroy();
+			}
+			if (other.getBody().getUserData() instanceof Ball && impulse.getCount() >= 1 && impulse.getNormalImpulses()[0] > 10000) {
+				Sounds.BALL.play();
 			}
 		}
 	}

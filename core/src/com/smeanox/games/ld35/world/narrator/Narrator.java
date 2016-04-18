@@ -30,7 +30,7 @@ public class Narrator {
 
 		lastLvlX = 0;
 
-		currentState = new NarratorState_Lvl0();
+		currentState = new NarratorState_Lvl2_1();
 	}
 
 	public void update(float delta, GameWorld gameWorld) {
