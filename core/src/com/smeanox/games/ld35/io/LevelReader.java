@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.smeanox.games.ld35.world.Actor;
 import com.smeanox.games.ld35.world.Ball;
 import com.smeanox.games.ld35.world.Button;
+import com.smeanox.games.ld35.world.CameraInfo;
 import com.smeanox.games.ld35.world.GameWorld;
 import com.smeanox.games.ld35.world.Hero;
 import com.smeanox.games.ld35.world.HeroForm;
@@ -25,6 +26,8 @@ public class LevelReader {
 		XmlReader xmlReader = new XmlReader();
 		XmlReader.Element xlevel = xmlReader.parse(file);
 		XmlReader.Element xdescription = xlevel.getChildByName("description");
+		XmlReader.Element xcamera = xlevel.getChildByName("camera");
+		CameraInfo cameraInfo = new CameraInfo(xcamera.getFloat("start_x", 0), xcamera.getFloat("min_x", Integer.MIN_VALUE), xcamera.getFloat("max_x", Integer.MAX_VALUE));
 		XmlReader.Element xhero = xlevel.getChildByName("hero");
 		Hero hero = new Hero(xhero.getFloat("start_x"), xhero.getFloat("start_y"), xhero.getFloat("dest_x"), xhero.getFloat("dest_y"), HeroForm.valueOf(xhero.get("start_form", "human")));
 		XmlReader.Element xplatforms = xlevel.getChildByName("platforms");
@@ -131,6 +134,6 @@ public class LevelReader {
 			}
 		}
 		
-		return new GameWorld(xdescription.getText(), actors, buttons, ladders, waters, platforms, texts, hero);
+		return new GameWorld(xdescription.getText(), cameraInfo, actors, buttons, ladders, waters, platforms, texts, hero);
 	}
 }

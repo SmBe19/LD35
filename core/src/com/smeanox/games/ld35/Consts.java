@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 public class Consts {
 	public static float WIDTH = 40;
 	public static final float HEIGHT = 30;
-	public static final float CAMERA_BORDER = 20;
+	public static final float CAMERA_BORDER = 15;
 	public static final float DESKTOP_SCALE = 20;
 	public static final boolean USE_DEBUG_RENDERER = true;
 

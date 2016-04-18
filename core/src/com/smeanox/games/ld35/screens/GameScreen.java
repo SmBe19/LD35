@@ -103,8 +103,8 @@ public class GameScreen implements Screen {
 			return false;
 		}
 		loadedLevel = file;
-		cameraX = 0;
-		camera.position.x = 0;
+		cameraX = gameWorld.getCameraInfo().getStartX();
+		camera.position.x = gameWorld.getCameraInfo().getStartX();
 		camera.update();
 		addGameWorldObjectsToRenderables();
 		narrator.loadedLevel(file);
@@ -230,11 +230,13 @@ public class GameScreen implements Screen {
 
 		if (gameWorld.getHero().getBody().getPosition().x > cameraX + Consts.WIDTH / 2 - Consts.CAMERA_BORDER) {
 			cameraX = gameWorld.getHero().getBody().getPosition().x - Consts.WIDTH / 2 + Consts.CAMERA_BORDER;
+			cameraX = Math.min(gameWorld.getCameraInfo().getMaxX(), cameraX);
 			camera.position.x = cameraX;
 			camera.update();
 		}
 		if (gameWorld.getHero().getBody().getPosition().x < cameraX - Consts.WIDTH / 2 + Consts.CAMERA_BORDER) {
 			cameraX = gameWorld.getHero().getBody().getPosition().x + Consts.WIDTH / 2 - Consts.CAMERA_BORDER;
+			cameraX = Math.max(gameWorld.getCameraInfo().getMinX(), cameraX);
 			camera.position.x = cameraX;
 			camera.update();
 		}

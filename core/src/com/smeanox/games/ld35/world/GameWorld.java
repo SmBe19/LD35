@@ -10,6 +10,7 @@ public class GameWorld {
 
 	private String description;
 	private World world;
+	private CameraInfo cameraInfo;
 	private List<Actor> actors;
 	private List<Button> buttons;
 	private List<Ladder> ladders;
@@ -22,8 +23,9 @@ public class GameWorld {
 
 	private float phys_accumulator;
 
-	public GameWorld(String description, List<Actor> actors, List<Button> buttons, List<Ladder> ladders, List<Water> waters, List<Platform> platforms, List<Text> texts, Hero hero) {
+	public GameWorld(String description, CameraInfo cameraInfo, List<Actor> actors, List<Button> buttons, List<Ladder> ladders, List<Water> waters, List<Platform> platforms, List<Text> texts, Hero hero) {
 		this.description = description;
+		this.cameraInfo = cameraInfo;
 		this.actors = actors;
 		this.buttons = buttons;
 		this.ladders = ladders;
@@ -80,6 +82,10 @@ public class GameWorld {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public CameraInfo getCameraInfo() {
+		return cameraInfo;
 	}
 
 	public World getWorld() {
