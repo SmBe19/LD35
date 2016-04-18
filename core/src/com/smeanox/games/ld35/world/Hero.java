@@ -190,6 +190,9 @@ public class Hero implements PhysObject, Renderable {
 		}
 		if(isInWater()){
 			getBody().setGravityScale(Consts.HERO_WATER_GRAVITY_SCALE);
+			if(this.inWater == 1){
+				getBody().setLinearVelocity(getBody().getLinearVelocity().x * Consts.WATER_ENTRY_DAMPING_X, getBody().getLinearVelocity().y * Consts.WATER_ENTRY_DAMPING_Y);
+			}
 		} else {
 			getBody().setGravityScale(1f);
 		}

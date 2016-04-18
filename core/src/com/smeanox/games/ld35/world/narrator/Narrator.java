@@ -23,14 +23,14 @@ public class Narrator {
 	private float cameraX;
 
 	public Narrator() {
-		currentLevel = 6;
+		currentLevel = 2;
 		passedTime = 0;
 		needLevelReload = false;
 		heroFrozen = false;
 
 		lastLvlX = 0;
 
-		currentState = new NarratorState_Lvl8_1();
+		currentState = new NarratorState_Lvl0();
 	}
 
 	public void update(float delta, GameWorld gameWorld) {

@@ -9,17 +9,15 @@
         <platform id="100" x="2" y="-15" width="20" height="0.5"/>
 
         <platform id="98" x="-18" y="0" width="28" height="30">
-		<rect x="-27" y="0" w="2.5" h="30"/>
-		<rect x="-17" y="-9" w="22.5" h="12.5"/>
-	</platform>
-	<platform id="99" x="17" y="1" width="14" height="35">
-		<rect x="23" y="0" w="2.5" h="35"/>
-		<rect x="17" y="-16" w="10.5" h="4.5"/>
-		<rect x="17" y="-7" w="6.5" h="2.3"/>
-		<rect x="21" y="-7" w="2.5" h="14.5"/>
-	</platform>
-
-
+            <rect x="-27" y="0" width="2.5" height="30"/>
+            <rect x="-17" y="-9" width="22.5" height="12.5"/>
+        </platform>
+        <platform id="99" x="17" y="1" width="14" height="35">
+            <rect x="23" y="0" width="2.5" height="35"/>
+            <rect x="17" y="-16" width="10.5" height="4.5"/>
+            <rect x="17" y="-7" width="6.5" height="2.3"/>
+            <rect x="21" y="-7" width="2.5" height="14"/>
+        </platform>
 
         <platform id="4" x="13" y="-3.25" width="5" height="1" type="oldschool"/>
         <platform id="5" x="18" y="-0.5" width="6" height="1" type="oldschool"/>
@@ -33,13 +31,18 @@
     </waters>
     <actors>
         <actor id="1" x="20.5" y="0.5" width="1" height="1" texture="signright" collision="false"/>
-        <ball id="2" x="-16" y="10" vx="1.5" vy="0" radius="1"/>
-        <ball id="3" x="-16" y="11" vx="1.2" vy="0" radius="1"/>
-        <ball id="4" x="-14" y="11" vx="1.2" vy="0" radius="1"/>
+        <actor id="11" x="-15" y="-1.75" width="2" height="2" texture="sign" collision="false" dynamic="false"/>
+        <ball id="2" x="-16" y="9" vx="1.5" vy="0" radius="1"/>
+        <ball id="3" x="-17" y="11" vx="1.2" vy="0" radius="1"/>
+        <ball id="4" x="-15" y="11" vx="1.2" vy="0" radius="1"/>
         <ball id="5" x="-12" y="11" vx="1.5" vy="0" radius="1"/>
         <ball id="6" x="-13" y="13" vx="2" vy="0" radius="1"/>
         <ball id="7" x="-10" y="12" vx="2" vy="0" radius="1"/>
-        <ball id="8" x="-13" y="15" vx="2" vy="0" radius="1"/>
+        <!--<ball id="8" x="-13" y="16" vx="2" vy="0" radius="1"/>-->
         <ball id="9" x="-10" y="15" vx="2.5" vy="0" radius="1"/>
+        <ball id="10" x="-8" y="15" vx="4.5" vy="0" radius="1"/>
     </actors>
+    <texts>
+        <text x="-15.25" y="-2" scale="0.08" text="2"/>
+    </texts>
 </level>

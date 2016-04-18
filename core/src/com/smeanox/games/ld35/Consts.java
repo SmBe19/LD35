@@ -82,4 +82,6 @@ public class Consts {
 	public static final float DESTR_TIMEOUT = 1.5f;
 	public static final float HERO_DEST_RADIUS = 1;
 	public static final float NARRATOR_DEAD_PAUSE = 1f;
+	public static final float WATER_ENTRY_DAMPING_X = 0.8f;
+	public static final float WATER_ENTRY_DAMPING_Y = 0.1f;
 }

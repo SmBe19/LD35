@@ -48,14 +48,14 @@
                 <xs:element name="texts" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="text" type="text"/>
+                            <xs:element name="text" type="text" maxOccurs="unbounded"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="decos" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="deco" type="deco"/>
+                            <xs:element name="deco" type="deco" maxOccurs="unbounded"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

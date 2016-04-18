@@ -63,6 +63,19 @@ public class ContactListnr implements ContactListener {
 				gameWorld.setDeathReason(GameWorld.DeathReason.outOfBounds);
 			}
 		}
+
+		hero = contact.getFixtureA();
+		other = contact.getFixtureB();
+		if(other.getBody().getUserData() instanceof Actor){
+			hero = contact.getFixtureB();
+			other = contact.getFixtureA();
+		}
+
+		if (hero.getBody().getUserData() instanceof Actor) {
+			if(other.getBody().getUserData() instanceof Water){
+				((Actor) hero.getBody().getUserData()).setInWater(true);
+			}
+		}
 	}
 
 	@Override
@@ -99,6 +112,19 @@ public class ContactListnr implements ContactListener {
 					gameWorld.getHero().setLastButton(null);
 				}
 				button.endInteract(gameWorld);
+			}
+		}
+
+		hero = contact.getFixtureA();
+		other = contact.getFixtureB();
+		if(other.getBody().getUserData() instanceof Actor){
+			hero = contact.getFixtureB();
+			other = contact.getFixtureA();
+		}
+
+		if (hero.getBody().getUserData() instanceof Actor) {
+			if(other.getBody().getUserData() instanceof Water){
+				((Actor) hero.getBody().getUserData()).setInWater(true);
 			}
 		}
 	}
