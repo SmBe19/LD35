@@ -8,7 +8,7 @@ public class NarratorState_Lvl2_4 extends NarratorState {
 	private float passedTimeSinceDead;
 
 	public NarratorState_Lvl2_4() {
-		super(NarratorSounds.lvl2_5);
+		super(NarratorSounds.lvl2_4);
 	}
 
 	@Override
@@ -17,7 +17,7 @@ public class NarratorState_Lvl2_4 extends NarratorState {
 			playSound(narrator);
 		} else {
 			if(!narratorSounds.get().isPlaying()){
-				// next state
+				nextState = new NarratorState_Lvl2_6();
 			}
 			if(gameWorld.isGameLost()){
 				passedTimeSinceDead += delta;

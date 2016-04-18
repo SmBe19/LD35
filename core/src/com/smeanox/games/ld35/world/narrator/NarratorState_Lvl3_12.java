@@ -3,12 +3,12 @@ package com.smeanox.games.ld35.world.narrator;
 import com.smeanox.games.ld35.Consts;
 import com.smeanox.games.ld35.world.GameWorld;
 
-public class NarratorState_Lvl1_6 extends NarratorState {
+public class NarratorState_Lvl3_12 extends NarratorState {
 
 	private float passedTimeSinceDead;
 
-	public NarratorState_Lvl1_6() {
-		super(NarratorSounds.lvl1_6);
+	public NarratorState_Lvl3_12() {
+		super(NarratorSounds.lvl3_12);
 	}
 
 	@Override
@@ -16,12 +16,14 @@ public class NarratorState_Lvl1_6 extends NarratorState {
 		if(!playedSound){
 			playSound(narrator);
 		} else {
-			if(!narratorSounds.get().isPlaying()){
-				nextState = new NarratorState_Lvl1_8();
+			if (!narratorSounds.get().isPlaying()){
+				if(gameWorld.getPlatformById(10).isMovingEnabled()){
+					nextState = new NarratorState_Lvl3_13();
+				}
 			}
 			if(gameWorld.isGameLost()){
 				passedTimeSinceDead += delta;
-				if(passedTimeSinceDead > Consts.NARRATOR_DEAD_PAUSE) {
+				if (passedTimeSinceDead > Consts.NARRATOR_DEAD_PAUSE) {
 					narrator.setNeedLevelReload(true);
 					passedTimeSinceDead = 0;
 				}

@@ -4,10 +4,8 @@ Physics:
 rocks more friction in water
 bug: If platform and water are in the same spot (but no water above platform) wolf and human die if they stand on platform
 turtles quicker in water
-Jump on Platform
 
 Mechancis:
-release stones by narrator
 
 Visuals:
 Proper lost/won screen

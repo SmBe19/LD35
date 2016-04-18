@@ -10,6 +10,7 @@ public abstract class NarratorState {
 	protected NarratorSounds narratorSounds;
 	protected boolean playedSound;
 	protected boolean releasedRocks;
+	protected boolean releasedActors;
 
 	public NarratorState(NarratorSounds narratorSounds) {
 		this.narratorSounds = narratorSounds;
@@ -32,7 +33,7 @@ public abstract class NarratorState {
 	protected void releaseRocks(GameWorld gameWorld){
 		for(Actor actor : gameWorld.getActors()){
 			if(actor instanceof Ball){
-				((Ball) actor).setFrozen(false);
+				actor.setFrozen(false);
 			}
 		}
 		releasedRocks = true;
@@ -43,12 +44,34 @@ public abstract class NarratorState {
 	protected void freezeRocks(GameWorld gameWorld){
 		for(Actor actor : gameWorld.getActors()){
 			if(actor instanceof Ball){
-				((Ball) actor).setFrozen(true);
+				actor.setFrozen(true);
 			}
 		}
 		releasedRocks = false;
 
 		System.out.println("freeze rocks");
+	}
+
+	protected void releaseActors(GameWorld gameWorld){
+		for(Actor actor : gameWorld.getActors()){
+			if(!(actor instanceof Ball)){
+				actor.setFrozen(false);
+			}
+		}
+		releasedActors = true;
+
+		System.out.println("release actors");
+	}
+
+	protected void freezeActors(GameWorld gameWorld){
+		for(Actor actor : gameWorld.getActors()){
+			if(!(actor instanceof Ball)){
+				actor.setFrozen(true);
+			}
+		}
+		releasedActors = false;
+
+		System.out.println("freeze actors");
 	}
 
     public abstract void update(float delta, float passedTime, GameWorld gameWorld, Narrator narrator);

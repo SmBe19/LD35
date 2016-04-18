@@ -8,7 +8,7 @@ public class NarratorState_Lvl2_7 extends NarratorState {
 	private float passedTimeSinceDead;
 
 	public NarratorState_Lvl2_7() {
-		super(NarratorSounds.lvl2_6);
+		super(NarratorSounds.lvl2_7);
 	}
 
 	@Override
@@ -17,12 +17,12 @@ public class NarratorState_Lvl2_7 extends NarratorState {
 			playSound(narrator);
 		} else {
 			if(!narratorSounds.get().isPlaying()){
-				// next state
-			}
-			if(gameWorld.isGameLost()){
-				if(gameWorld.getDeathReason() == GameWorld.DeathReason.water){
-					// next state
-				} else {
+				if(gameWorld.isGameWon()) {
+					nextState = new NarratorState_Lvl3_1();
+					narrator.setCurrentLevel(3);
+					narrator.setNeedLevelReload(true);
+				}
+				if(gameWorld.isGameLost()){
 					passedTimeSinceDead += delta;
 					if (passedTimeSinceDead > Consts.NARRATOR_DEAD_PAUSE) {
 						narrator.setNeedLevelReload(true);

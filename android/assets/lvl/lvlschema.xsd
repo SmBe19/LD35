@@ -96,6 +96,7 @@
         <xs:attribute name="moving_enabled" type="xs:boolean" use="optional" default="false"/>
         <xs:attribute name="moving_velo" type="xs:float" use="optional" default="1"/>
         <xs:attribute name="hold_time" type="xs:float" use="optional" default="1"/>
+        <xs:attribute name="ladder_passable" type="xs:boolean" use="optional" default="true"/>
     </xs:complexType>
 
     <xs:simpleType name="platform_type">
@@ -137,6 +138,7 @@
         <xs:attribute name="texture" type="xs:string" use="required"/>
         <xs:attribute name="collision" type="xs:boolean" use="optional" default="true"/>
         <xs:attribute name="dynamic" type="xs:boolean" use="optional" default="true"/>
+        <xs:attribute name="frozen" type="xs:boolean" use="optional" default="false"/>
     </xs:complexType>
 
     <xs:complexType name="ball">

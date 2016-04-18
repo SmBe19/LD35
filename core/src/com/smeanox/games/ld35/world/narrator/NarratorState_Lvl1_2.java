@@ -20,7 +20,7 @@ public class NarratorState_Lvl1_2 extends NarratorState {
 					narrator.setNeedLevelReload(true);
 					reloadedLevel = true;
 				} else {
-					if(passedTime > 5){
+					if(passedTime > NarratorState_Lvl1_1.ROCKS_TIME){
 						nextState = new NarratorState_Lvl1_7();
 					}
 					if(gameWorld.isGameLost()) {

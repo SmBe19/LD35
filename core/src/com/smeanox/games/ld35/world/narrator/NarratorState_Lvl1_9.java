@@ -9,7 +9,6 @@ public class NarratorState_Lvl1_9 extends NarratorState {
 
 	public NarratorState_Lvl1_9() {
 		super(NarratorSounds.lvl1_9);
-		releasedRocks = true;
 	}
 
 	@Override
@@ -19,14 +18,15 @@ public class NarratorState_Lvl1_9 extends NarratorState {
 		} else {
 			if(!narratorSounds.get().isPlaying()){
 				if(gameWorld.isGameWon()){
-					// nextState
+					nextState = new NarratorState_Lvl2_0();
+					narrator.setCurrentLevel(2);
+					narrator.setNeedLevelReload(true);
 				}
 			}
 			if(gameWorld.isGameLost()){
 				passedTimeSinceDead += delta;
 				if(passedTimeSinceDead > Consts.NARRATOR_DEAD_PAUSE) {
 					narrator.setNeedLevelReload(true);
-					releasedRocks = false;
 					passedTimeSinceDead = 0;
 				}
 			}

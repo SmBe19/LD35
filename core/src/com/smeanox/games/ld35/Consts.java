@@ -60,6 +60,7 @@ public class Consts {
 	public static final float HERO_WATER_IMPULSE_Y = 2;
 	public static final float DEFAULT_DENSITY = 1f;
 	public static final float DEFAULT_FRICTION = 0.4f;
+	public static final float BALL_DENSITY_MULTIPLIER = 500;
 	public static final int TEX_WIDTH_HERO = 32;
 	public static final int TEX_HEIGHT_HERO = 32;
 	public static final int TEX_WIDTH_PLATFORM = 16;
@@ -71,9 +72,9 @@ public class Consts {
 	public static final int TEX_WIDTH_WATER = 32;
 	public static final int TEX_HEIGHT_WATER = 32;
 	public static final float TEX_WAIT_MAX_VELO = 1f;
-	public static final float LETHAL_IMPULSE = 500;
+	public static final float LETHAL_IMPULSE = 50;
 	public static final float LETHAL_IMPULSE_MULTIPLIER_TURTLE = 2;
-	public static final float BRIDGE_LETHAL_IMPULSE = 10;
+	public static final float BRIDGE_LETHAL_IMPULSE = 50;
 	public static final float DESTR_TIMEOUT = 1.5f;
 	public static final float HERO_DEST_RADIUS = 1;
 	public static final float NARRATOR_DEAD_PAUSE = 1f;

@@ -9,7 +9,6 @@ public class NarratorState_Lvl1_10 extends NarratorState {
 
 	public NarratorState_Lvl1_10() {
 		super(NarratorSounds.lvl1_10);
-		releasedRocks = true;
 	}
 
 	@Override
@@ -24,7 +23,6 @@ public class NarratorState_Lvl1_10 extends NarratorState {
 				passedTimeSinceDead += delta;
 				if(passedTimeSinceDead > Consts.NARRATOR_DEAD_PAUSE) {
 					narrator.setNeedLevelReload(true);
-					releasedRocks = false;
 					passedTimeSinceDead = 0;
 				}
 			}

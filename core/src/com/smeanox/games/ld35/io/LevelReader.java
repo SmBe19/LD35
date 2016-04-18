@@ -113,7 +113,8 @@ public class LevelReader {
 						xactor.getFloat("height"),
 						ActorTextures.valueOf(xactor.get("texture")).get(),
 						xactor.getBoolean("collision", true),
-						xactor.getBoolean("dynamic", true)));
+						xactor.getBoolean("dynamic", true),
+						xactor.getBoolean("frozen", false)));
 			}
 			for(XmlReader.Element xball : xactors.getChildrenByName("ball")) {
 				actors.add(new Ball(xball.getInt("id"),

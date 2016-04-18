@@ -4,6 +4,8 @@ import com.smeanox.games.ld35.world.GameWorld;
 
 public class NarratorState_Lvl1_1 extends NarratorState {
 
+	public static final float ROCKS_TIME = 4;
+
 	private float passedTimeSinceRocks;
 
 	public NarratorState_Lvl1_1() {
@@ -24,7 +26,7 @@ public class NarratorState_Lvl1_1 extends NarratorState {
 					passedTimeSinceRocks = 0;
 				} else {
 					passedTimeSinceRocks += delta;
-					if(passedTimeSinceRocks > 5){
+					if(passedTimeSinceRocks > NarratorState_Lvl1_1.ROCKS_TIME){
 						nextState = new NarratorState_Lvl1_10();
 					}
 					if(gameWorld.isGameLost()){

@@ -28,7 +28,7 @@ public class NarratorState_Lvl1_4 extends NarratorState {
 						if(passedTimeSinceDead > Consts.NARRATOR_DEAD_PAUSE){
 							reloadedLevel = false;
 						}
-					} else if(passedTime > 5){
+					} else if(passedTime > NarratorState_Lvl1_1.ROCKS_TIME){
 						nextState = new NarratorState_Lvl1_5();
 					}
 				}
