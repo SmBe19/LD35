@@ -76,6 +76,16 @@ public enum NarratorSounds {
 		return subtitles;
 	}
 
+	public String getCurrentSubtitle() {
+		if (music == null)
+			return null;
+		int ix = (int)(Math.floor(subtitles.length * music.getPosition() / duration));
+		if (ix >= 0 && ix < subtitles.length) {
+			return subtitles[ix];
+		}
+		return null;
+	}
+
 	public float getDuration() {
 		return duration;
 	}
