@@ -25,6 +25,7 @@ public class Actor implements PhysObject, Renderable {
 	protected TextureRegion texture;
 	protected boolean collision, dynamicBody;
 	protected boolean frozen;
+	private int inWater;
 
 	public Actor(int id, float x, float y, float width, float height, TextureRegion texture, boolean collision, boolean dynamicBody, boolean frozen) {
 		this.id = id;
@@ -77,6 +78,26 @@ public class Actor implements PhysObject, Renderable {
 	public void setFrozen(boolean frozen) {
 		this.frozen = frozen;
 		body.setActive(!frozen);
+	}
+
+	public boolean isInWater() {
+		return inWater > 0;
+	}
+
+	public void setInWater(boolean inWater) {
+		if(inWater){
+			this.inWater++;
+		} else {
+			this.inWater--;
+		}
+		if(isInWater()){
+			getBody().setGravityScale(Consts.HERO_WATER_GRAVITY_SCALE);
+			if(this.inWater == 1){
+				getBody().setLinearVelocity(getBody().getLinearVelocity().x * Consts.WATER_ENTRY_DAMPING_X, getBody().getLinearVelocity().y * Consts.WATER_ENTRY_DAMPING_Y);
+			}
+		} else {
+			getBody().setGravityScale(1f);
+		}
 	}
 
 	@Override
