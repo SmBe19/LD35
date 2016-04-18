@@ -107,7 +107,7 @@ public class Narrator {
 								needLevelReload = true;
 						}
 						if(lvl1_currentNarration != null){
-							lastSound = lvl1_current_Narration;
+							lastSound = lvl1_currentNarration;
 							lvl1_currentNarration.get().play();
 						}
 					}
@@ -126,7 +126,7 @@ public class Narrator {
 								lvl1_currentNarration = NarratorSounds.lvl1_5;
 						}
 						if(lvl1_currentNarration != null){
-							lastSound = lvl1_current_Narration;
+							lastSound = lvl1_currentNarration;
 							lvl1_currentNarration.get().play();
 						}
 					}
@@ -142,13 +142,13 @@ public class Narrator {
 								lvl1_currentNarration.dispose();
 								lvl1_currentNarration = null;
 								lvl1_currentNarration = NarratorSounds.lvl1_9;
-								lastSound = lvl1_current_Narration;
+								lastSound = lvl1_currentNarration;
 								lvl1_currentNarration.get().play();
 							} else {
 								lvl1_currentNarration.dispose();
 								lvl1_currentNarration = null;
 								lvl1_currentNarration = NarratorSounds.lvl1_8;
-								lastSound = lvl1_current_Narration;
+								lastSound = lvl1_currentNarration;
 								lvl1_currentNarration.get().play();
 							}
 						} else {
@@ -182,7 +182,7 @@ public class Narrator {
 							break;
 					}
 					if(lvl2_currentNarration != null) {
-						lastSound = lvl2_current_Narration;
+						lastSound = lvl2_currentNarration;
 						lvl2_currentNarration.get().play();
 					} else {
 						needLevelReload = true;
@@ -191,7 +191,7 @@ public class Narrator {
 				} else if (lvl2_stage == 2){
 					lvl2_stage++;
 					lvl2_currentNarration = NarratorSounds.lvl2_7;
-					lastSound = lvl2_current_Narration;
+					lastSound = lvl2_currentNarration;
 					lvl2_currentNarration.get().play();
 				} else {
 					needLevelReload = true;
@@ -205,7 +205,7 @@ public class Narrator {
 						} else {
 							lvl2_currentNarration = NarratorSounds.lvl2_4;
 						}
-						lastSound = lvl2_current_Narration;
+						lastSound = lvl2_currentNarration;
 						lvl2_currentNarration.get().play();
 					}
 				}
@@ -229,7 +229,7 @@ public class Narrator {
 						lvl2_stage++;
 						lvl2_currentNarration.dispose();
 						lvl2_currentNarration = NarratorSounds.lvl2_6;
-						lastSound = lvl2_current_Narration;
+						lastSound = lvl2_currentNarration;
 						lvl2_currentNarration.get().play();
 						break;
 					case 2:
