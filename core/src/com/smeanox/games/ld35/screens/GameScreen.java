@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -37,6 +38,9 @@ public class GameScreen implements Screen {
 	private List<Renderable> renderables;
 	private ShaderProgram waterShader;
 	private float cameraX;
+
+	private TextureRegion overlayRegion;
+
 	private String loadedLevel;
 	private float jumpFreezeTime;
 	private float waveTime;
@@ -93,6 +97,7 @@ public class GameScreen implements Screen {
 		System.out.println(waterShader.getLog());
 		ShaderProgram.pedantic = false;
 		debugRenderer = new Box2DDebugRenderer();
+		overlayRegion = new TextureRegion(Textures.spritesheet.get(), 3*32, 7*32, 32, 32);
 
 		loadGameWorld(narrator.getCurrentFile());
 	}
@@ -315,6 +320,8 @@ public class GameScreen implements Screen {
 			Font.FONT1.drawBordered(spriteBatch, "LEVEL FINISHED", camera.position.x - 15, 5, 0.25f);
 			spriteBatch.setColor(Color.WHITE);
 		} else if(gameWorld.isGameLost()){
+			spriteBatch.setColor(1, 0, 0, 0.3f);
+			spriteBatch.draw(overlayRegion, camera.position.x - Consts.WIDTH/2, -Consts.HEIGHT/2, Consts.WIDTH, Consts.HEIGHT);
 			spriteBatch.setColor(Color.RED);
 			Font.FONT1.drawBordered(spriteBatch, "YOU DIED", camera.position.x - 15, 5, 0.5f);
 			spriteBatch.setColor(Color.WHITE);
