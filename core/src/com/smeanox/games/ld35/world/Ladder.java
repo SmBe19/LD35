@@ -21,16 +21,18 @@ public class Ladder implements PhysObject, Renderable {
 	private int id;
 	private float x, width, startY, endY;
 	private boolean inAir;
+	private boolean topMount;
 	private List<TextureRegion> textures;
 
-	public Ladder(int id, float x, float width, float startY, float endY, boolean inAir) {
+	public Ladder(int id, float x, float width, float startY, float endY, boolean inAir, boolean topMount) {
 		this.id = id;
 		this.x = x;
 		this.width = width;
 		this.startY = startY;
 		this.endY = endY;
 		this.inAir = inAir;
-		initTextures(0, 4, 8, 9);
+		this.topMount = topMount;
+		initTextures(0, 5, 8, 9);
 	}
 
 	private void initTextures(int startX, int endX, int startY, int endY) {
@@ -96,9 +98,9 @@ public class Ladder implements PhysObject, Renderable {
 	public void render(SpriteBatch spriteBatch, float delta) {
 		float step = width * Consts.TEX_HEIGHT_LADDER / ((float) Consts.TEX_WIDTH_LADDER);
 		spriteBatch.draw(textures.get(inAir ? 3 : 2), x - width / 2, startY, width, step);
-		for (float y = startY + step; y < endY; y += step) {
+		for (float y = startY + step; y < endY - (topMount ? step : 0); y += step) {
 			spriteBatch.draw(textures.get(1), x - width / 2, y, width, step);
 		}
-		spriteBatch.draw(textures.get(0), x - width / 2, endY, width, step);
+		spriteBatch.draw(textures.get(topMount ? 4 : 0), x - width / 2, endY - (topMount ? step : 0), width, step);
 	}
 }

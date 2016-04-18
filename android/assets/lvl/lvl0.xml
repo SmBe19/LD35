@@ -7,8 +7,8 @@
     <hero start_x="0" start_y="5" dest_x="20" dest_y="2" start_form="human"/>
     <platforms>
         <platform id="1" x="-4" y="0" width="2" height="1" end_y="0" moving_velo="20" type="destr"/>
-        <platform id="1" x="0" y="-2" width="10.5" height="0.5" end_y="0" moving_velo="20"/>
-        <platform id="2" x="-12" y="-2" width="10.5" height="0.5" start_x="-20" moving_velo="2" moving_enabled="true"/>
+        <platform id="1" x="0" y="-2" width="10.5" height="0.5" end_y="0" moving_velo="20" ladder_passable="false"/>
+        <platform id="2" x="-11" y="-2" width="2.5" height="4.5" start_x="-21" moving_velo="2" moving_enabled="true"/>
         <platform id="3" x="12" y="-2" width="10.5" height="0.5" end_x="18" end_y="2"/>
         <platform id="6" x="19.5" y="-2.25" width="6" height="0.5" type="bridge"/>
         <platform id="4" x="-16" y="-4" width="16" height="16">
@@ -31,8 +31,8 @@
         <platform id="5" x="-20" y="-8" width="1000" height="0.5" type="oldschool"/>
     </platforms>
     <ladders>
-        <ladder id="1" x="0" width="1" start_y="-8" end_y="-1.5"/>
-        <ladder id="1" x="2" width="1" start_y="-6" end_y="-1.5" in_air="true"/>
+        <ladder id="1" x="0" width="1" start_y="-8" end_y="-2.25" top_mount="true"/>
+        <ladder id="1" x="2" width="1" start_y="-6" end_y="-1.75" in_air="true"/>
     </ladders>
     <buttons>
         <button id="1" x="-4" y="5" width="1" height="1">

@@ -88,7 +88,8 @@ public class LevelReader {
 						xladder.getFloat("width"),
 						xladder.getFloat("start_y"),
 						xladder.getFloat("end_y"),
-						xladder.getBoolean("in_air", false)));
+						xladder.getBoolean("in_air", false),
+						xladder.getBoolean("top_mount", false)));
 			}
 		}
 		XmlReader.Element xwaters = xlevel.getChildByName("waters");
