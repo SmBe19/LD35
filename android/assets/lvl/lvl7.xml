@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
     <description>Level 6</description>
     <camera min_x="-88" max_x="-6" start_x="-88"/>
-    <hero start_x="-105" start_y="-12.75" dest_x="10" dest_y="7" start_form="human"/>
+    <hero start_x="-105" start_y="-2.75" dest_x="10" dest_y="7" start_form="human"/>
     <platforms>
         <platform id="99" x="-109" y="0" width="2.5" height="30"/>
         <platform id="100" x="14" y="0" width="2.5" height="30"/>
@@ -81,26 +81,15 @@
     <actors>
         <actor id="1" x="10" y="7.75" width="3" height="3" texture="signright" collision="false"/>
         <ball id="2" x="-95" y="10" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-96" y="10" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-97" y="10" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-98" y="10" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-99" y="10" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-100" y="10" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-101" y="10" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-102" y="10" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-103" y="10" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-104" y="10" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-105" y="10" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-95" y="11" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-96" y="11" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-97" y="11" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-98" y="11" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-99" y="11" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-100" y="11" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-101" y="11" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-102" y="11" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-103" y="11" vx="0" vy="0" radius="0.5"/>
         <ball id="2" x="-104" y="11" vx="0" vy="0" radius="0.5"/>
-        <ball id="2" x="-105" y="11" vx="0" vy="0" radius="0.5"/>
     </actors>
 </level>

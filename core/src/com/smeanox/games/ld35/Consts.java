@@ -60,7 +60,7 @@ public class Consts {
 	public static final float HERO_JUMP_FREEZE_TIME = 0.5f;
 	public static final float HERO_IMPULSE_AIR_MODIFIER = 0.2f;
 	public static final float HERO_WATER_GRAVITY_SCALE = 0.1f;
-	public static final float HERO_WATER_MAX_VELO_X = 2f;
+	public static final float HERO_WATER_MAX_VELO_X = 5f;
 	public static final float HERO_WATER_MAX_VELO_Y = 2f;
 	public static final float HERO_WATER_IMPULSE_X = 2;
 	public static final float HERO_WATER_IMPULSE_Y = 2;
