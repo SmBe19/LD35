@@ -42,12 +42,14 @@ public class Platform implements PhysObject, Renderable {
 	private float destroyTimer;
 	private Vector2 direction;
 
+	private boolean ladderPassable;
+
 	private List<TextureRegion> textures;
 
 	private TextureRegion[][] regions;
 
 	public Platform(int id, float x, float y, float width, float height, List<Vector2> points, PlatformType platformType,
-					float startX, float startY, float endX, float endY, boolean movingEnabled, float movingVelo, float holdTime) {
+					float startX, float startY, float endX, float endY, boolean movingEnabled, float movingVelo, float holdTime, boolean ladderPassable) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -63,6 +65,7 @@ public class Platform implements PhysObject, Renderable {
 		this.movingVelo = movingVelo;
 		this.holdTime = holdTime;
 		this.regions = null;
+		this.ladderPassable = ladderPassable;
 		aHoldTime = 0;
 		direction = new Vector2(endX - startX, endY - startY).nor();
 		switch (platformType){
@@ -156,6 +159,10 @@ public class Platform implements PhysObject, Renderable {
 
 	public boolean isMovingEnabled() {
 		return movingEnabled;
+	}
+	
+	public boolean isLadderPassable() {
+		return ladderPassable;
 	}
 
 	public void setMovingEnabled(boolean movingEnabled) {

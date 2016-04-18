@@ -54,7 +54,8 @@ public class LevelReader {
 						xplatform.getFloat("end_y", y),
 						xplatform.getBoolean("moving_enabled", false),
 						xplatform.getFloat("moving_velo", 1),
-						xplatform.getFloat("hold_time", 1)));
+						xplatform.getFloat("hold_time", 1),
+						xplatform.getBoolean("ladder_passable", true)));
 			}
 		}
 		XmlReader.Element xbuttons = xlevel.getChildByName("buttons");

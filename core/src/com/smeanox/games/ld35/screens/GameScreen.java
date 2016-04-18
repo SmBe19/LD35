@@ -307,7 +307,7 @@ public class GameScreen implements Screen {
 		}
 
 		narrator.setCameraX(cameraX);
-		narrator.drawSubtitles(spriteBatch, "Test subtitle");
+		narrator.drawCurrentSubtitles(spriteBatch);
 		spriteBatch.end();
 
 		if (Consts.USE_DEBUG_RENDERER) {

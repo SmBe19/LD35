@@ -112,7 +112,7 @@ public class ContactListnr implements ContactListener {
 
 		if(hero.getBody().getUserData() == gameWorld.getHero()){
 			if(!gameWorld.getHero().isOnGround() && gameWorld.getHero().isOnLadder()
-					&& gameWorld.getHero().getCurrentForm() == HeroForm.human && other.getBody().getUserData() instanceof Platform) {
+					&& gameWorld.getHero().getCurrentForm() == HeroForm.human && other.getBody().getUserData() instanceof Platform && ((Platform)other.getBody().getUserData()).isLadderPassable()) {
 				contact.setEnabled(false);
 			}
 		}
