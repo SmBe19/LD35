@@ -10,6 +10,8 @@ public class Consts {
 	public static final boolean USE_DEBUG_RENDERER = true;
 
 	public static boolean SUBTITLES_ENABLED = false;
+	public static boolean MUSIC_ENABLED = true;
+	public static boolean NARRATION_ENABLED = true;
 
 	public static final float SUBTITLE_TEXT_SCALE = 1f/8f;
 	public static final float FONT_BORDER_WIDTH = 0.7f;

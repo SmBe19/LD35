@@ -30,6 +30,10 @@ public class MenuScreen implements Screen {
 
 	private TextureRegion orb;
 	private TextureRegion shit;
+
+	private TextureRegion nar;
+	private TextureRegion mus;
+	private TextureRegion sub;
 	
 	public MenuScreen(LD35 game) {
 		this.game = game;
@@ -40,6 +44,10 @@ public class MenuScreen implements Screen {
 		
 		orb = new TextureRegion(Textures.spritesheet.get(), 2*32, 7*32, 32, 32);
 		shit = new TextureRegion(Textures.spritesheet.get(), 3*32, 7*32, 32, 32);
+
+		mus = new TextureRegion(Textures.spritesheet.get(), 0*32, 13*32, 32, 32);
+		nar = new TextureRegion(Textures.spritesheet.get(), 1*32, 13*32, 32, 32);
+		sub = new TextureRegion(Textures.spritesheet.get(), 2*32, 13*32, 32, 32);
 	}
 
 	@Override
@@ -55,8 +63,15 @@ public class MenuScreen implements Screen {
 				orbTouched = true;
 			}
 			
-			if (x < -Consts.WIDTH/2 + "SUBTITLES".length() + 1.f && y > Consts.HEIGHT/2 - 2.f) {
-				Consts.SUBTITLES_ENABLED = ! Consts.SUBTITLES_ENABLED;
+			if (y > Consts.HEIGHT/2 - 4.f) {
+				float x2 = x + Consts.WIDTH/2;
+				if ( x2 < 3.5 )
+					Consts.SUBTITLES_ENABLED = ! Consts.SUBTITLES_ENABLED;
+				else if (x2 < 6.5)
+					Consts.MUSIC_ENABLED = ! Consts.MUSIC_ENABLED;
+				else if (x2 < 9.5)
+					Consts.NARRATION_ENABLED = ! Consts.NARRATION_ENABLED;
+
 			}
 		}
 		if (orbTouched) {
@@ -82,7 +97,21 @@ public class MenuScreen implements Screen {
 			else 
 				spriteBatch.setColor(0.3f, 0.3f, 0.3f, 1);
 
-			Font.FONT1.draw(spriteBatch, "SUBTITLES", -Consts.WIDTH/2 + 1.f/8, -Consts.HEIGHT/2 + 1.f/8, 1.0f/8);
+			spriteBatch.draw(sub, -Consts.WIDTH/2 + 1, -Consts.HEIGHT/2 + 0.5f, 2, 2);
+
+			if (Consts.MUSIC_ENABLED)
+				spriteBatch.setColor(1, 1, 1, 1);
+			else 
+				spriteBatch.setColor(0.3f, 0.3f, 0.3f, 1);
+
+			spriteBatch.draw(mus, -Consts.WIDTH/2 + 4, -Consts.HEIGHT/2 + 0.5f, 2, 2);
+
+			if (Consts.NARRATION_ENABLED)
+				spriteBatch.setColor(1, 1, 1, 1);
+			else 
+				spriteBatch.setColor(0.3f, 0.3f, 0.3f, 1);
+
+			spriteBatch.draw(nar, -Consts.WIDTH/2 + 7, -Consts.HEIGHT/2 + 0.5f, 2, 2);
 		}
 		spriteBatch.setColor(1, 1, 1, transitionTime);
 		spriteBatch.draw(shit, -Consts.WIDTH/2, -Consts.HEIGHT/2, Consts.WIDTH, Consts.HEIGHT);
