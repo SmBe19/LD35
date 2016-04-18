@@ -30,11 +30,15 @@
         <button id="1" x="-14.5" y="-3.5" width="1" height="1">
             <toggle_interact dest_id="9" />
         </button>
-        <button id="1" x="6.5" y="2.5" width="1" height="1">
+        <button id="1" x="7.5" y="2.5" width="1" height="1">
             <toggle_interact dest_id="10" />
         </button>
     </buttons>
     <actors>
         <actor id="1" x="28.5" y="8.5" width="1" height="1" texture="signright" collision="false" dynamic="false"/>
+        <actor id="2" x="6" y="3" width="2" height="2" texture="sign" collision="false" dynamic="false"/>
     </actors>
+    <texts>
+        <text x="5.75" y="2.75" scale="0.08" text="e"/>
+    </texts>
 </level>
