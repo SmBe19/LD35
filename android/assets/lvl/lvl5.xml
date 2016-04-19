@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
     <description>Level 5</description>
     <camera min_x="-6" max_x="11" start_x="0" />
-    <hero start_x="-23" start_y="-11" dest_x="28.5" dest_y="8.5"/>
+    <hero start_x="-23" start_y="-11" dest_x="28.5" dest_y="9"/>
     <!--<hero start_x="28.5" start_y="-9" dest_x="28.5" dest_y="8.5"/>-->
     <platforms>
         <platform id="100" x="2" y="-15.4" width="50" height="1"/>
@@ -32,7 +32,7 @@
 
 	  <platform id="7" x="31.3" y="-4" width="2" height="22"/>-->
 
-	<platform id="50" x="28" y="1" width="12" height="32">
+	<platform id="50" x="28" y="1" width="12" height="32" ladder_passable="false">
 		<rect x="22" y="5" width="0.5" height="4.5"/>
 		<rect x="25" y="2.9" width="6.5" height="0.5"/>
 		<rect x="27" y="7" width="10.5" height="0.5"/>

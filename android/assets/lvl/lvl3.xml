@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
     <description>Level 3</description>
     <camera min_x="-6" max_x="9" start_x="0" />
-    <hero start_x="-23" start_y="-11" dest_x="28.5" dest_y="8.5"/>
+    <hero start_x="-23" start_y="-11" dest_x="28" dest_y="9"/>
     <platforms>
 
         <platform id="50" x="1" y="1" width="60" height="34">
