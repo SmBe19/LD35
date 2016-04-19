@@ -58,6 +58,8 @@ public class MenuScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		game.getMusicManager().update(delta);
+
 		if (Gdx.input.justTouched()) {
 			float x = Consts.WIDTH/w * (Gdx.input.getX()-w/2);
 			float y = Consts.HEIGHT/h * (Gdx.input.getY()-h/2);
@@ -67,12 +69,16 @@ public class MenuScreen implements Screen {
 			
 			if (y > Consts.HEIGHT/2 - 4.f) {
 				float x2 = x + Consts.WIDTH/2;
-				if ( x2 < 3.5 )
-					Consts.SUBTITLES_ENABLED = ! Consts.SUBTITLES_ENABLED;
-				else if (x2 < 6.5)
-					Consts.MUSIC_ENABLED = ! Consts.MUSIC_ENABLED;
-				else if (x2 < 9.5)
-					Consts.NARRATION_ENABLED = ! Consts.NARRATION_ENABLED;
+				if ( x2 < 3.5 ) {
+					Consts.SUBTITLES_ENABLED = !Consts.SUBTITLES_ENABLED;
+				} else if (x2 < 6.5) {
+					Consts.MUSIC_ENABLED = !Consts.MUSIC_ENABLED;
+					if(!Consts.MUSIC_ENABLED){
+						game.getMusicManager().stop();
+					}
+				} else if (x2 < 9.5) {
+					Consts.NARRATION_ENABLED = !Consts.NARRATION_ENABLED;
+				}
 
 			}
 		}

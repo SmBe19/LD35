@@ -122,9 +122,9 @@ public class GameScreen implements Screen {
 	private void addGameWorldObjectsToRenderables() {
 		renderables = new ArrayList<Renderable>();
 		addGameWorldObjectsToRenderables(gameWorld.getWaters());
+		addGameWorldObjectsToRenderables(gameWorld.getButtons());
 		addGameWorldObjectsToRenderables(gameWorld.getPlatforms());
 		addGameWorldObjectsToRenderables(gameWorld.getLadders());
-		addGameWorldObjectsToRenderables(gameWorld.getButtons());
 		addGameWorldObjectsToRenderables(gameWorld.getActors());
 		addGameWorldObjectsToRenderables(gameWorld.getTexts());
 		addGameWorldObjectsToRenderables(gameWorld.getDecos());
@@ -143,6 +143,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		game.getMusicManager().update(delta);
 		updateInput(delta);
 		update(delta);
 		renderWorld(delta);

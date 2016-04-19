@@ -7,6 +7,7 @@ public class NarratorState_Lvl8_3 extends NarratorState {
 	private float passedTimeSinceDead;
 	private float totalPassedTime;
 	private boolean fellInWater;
+	private float waitTime;
 
 	public NarratorState_Lvl8_3() {
 		super(NarratorSounds.lvl8_3);
@@ -19,7 +20,10 @@ public class NarratorState_Lvl8_3 extends NarratorState {
 			playSound(narrator);
 		} else {
 			if (!narratorSounds.get().isPlaying()){
-				narrator.setRollCredits(true);
+				waitTime += delta;
+				if(waitTime > 0.5f) {
+					narrator.setRollCredits(true);
+				}
 			}
 		}
 	}

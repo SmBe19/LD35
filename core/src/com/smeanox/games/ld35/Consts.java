@@ -3,7 +3,7 @@ package com.smeanox.games.ld35;
 import com.badlogic.gdx.Input;
 
 public class Consts {
-	public static final String GAME_NAME = "Mike's golden sphere";
+	public static final String GAME_NAME = "the golden sphere";
 	public static float WIDTH = 40;
 	public static final float HEIGHT = 30;
 	public static final float CAMERA_BORDER = 15;
@@ -86,4 +86,8 @@ public class Consts {
 	public static final float NARRATOR_DEAD_PAUSE = 1f;
 	public static final float WATER_ENTRY_DAMPING_X = 0.8f;
 	public static final float WATER_ENTRY_DAMPING_Y = 0.1f;
+	public static final float MUSIC_PAUSE = 10;
+	public static final float BLA_BLA_VOLUME = 1f;
+	public static final float SOUND_VOLUME = 0.3f;
+	public static final float MUSIC_VOLUME = 0.25f;
 }

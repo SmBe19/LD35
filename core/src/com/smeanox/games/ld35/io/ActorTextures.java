@@ -9,6 +9,7 @@ public enum ActorTextures {
 	signright(Textures.spritesheet.get(), 1*Consts.TEX_WIDTH_HERO, 10*Consts.TEX_HEIGHT_HERO, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO),
 	sign(Textures.spritesheet.get(), 2*Consts.TEX_WIDTH_HERO, 10*Consts.TEX_HEIGHT_HERO, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO),
 	goldenball(Textures.spritesheet.get(), 2*Consts.TEX_WIDTH_HERO, 7*Consts.TEX_HEIGHT_HERO, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO),
+	bear(Textures.spritesheet.get(), 5*Consts.TEX_WIDTH_HERO, 10*Consts.TEX_HEIGHT_HERO, Consts.TEX_WIDTH_HERO, Consts.TEX_HEIGHT_HERO),
 	;
 
 	private TextureRegion textureRegion;

@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://games.smeanox.com lvlschema.xsd">
     <description>Level 5</description>
     <camera min_x="-6" max_x="11" start_x="0" />
-    <hero start_x="-23" start_y="-11" dest_x="4.75" dest_y="13.25"/>
+    <hero start_x="-23" start_y="-11" dest_x="5.25" dest_y="13.25"/>
     <!--<hero start_x="14.75" start_y="-10" dest_x="28.5" dest_y="8.5"/>-->
     <platforms>
         <platform id="98" x="-27.3" y="0" width="2" height="30"/>
@@ -33,8 +33,8 @@
 
         <platform id="16" x="0.25" y="2" width="4.5" height="0.5"/>
 
-        <platform id="50" x="3.25" y="11.25" width="4.5" height="2.5"/>
-        <platform id="51" x="3.25" y="8.75" width="8.5" height="2.5"/>
+        <platform id="50" x="3.25" y="10.25" width="4.5" height="2.5"/>
+        <platform id="51" x="3.25" y="7.75" width="8.5" height="2.5"/>
     </platforms>
     <buttons>
         <button id="1" x="-0.5" y="2.75" width="1" height="1">
@@ -54,6 +54,7 @@
         <water id="1" x="2" y="-15.1" width="16" height="2"/>
     </waters>
     <actors>
-        <actor id="1" x="3.25" y="13.5" width="2" height="2" texture="sign" collision="true" dynamic="false"/>
+        <actor id="1" x="3.25" y="13" width="3" height="3" texture="goldenball" collision="true" dynamic="false"/>
+        <actor id="1" x="23" y="20" width="3" height="3" texture="bear" collision="true" frozen="true"/>
     </actors>
 </level>

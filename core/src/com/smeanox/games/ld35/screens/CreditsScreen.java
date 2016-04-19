@@ -41,9 +41,11 @@ public class CreditsScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		game.getMusicManager().update(delta);
+
 		animationTime += delta;
 
-		if(animationTime > 5){
+		if(animationTime > 9){
 			game.resetGameScreen();
 			game.showMenuScreen();
 		}
@@ -56,15 +58,15 @@ public class CreditsScreen implements Screen {
 		spriteBatch.begin();
 		spriteBatch.setColor(1, 1, 1, 1);
 		float orbScale;
-		if(animationTime <= 1) {
-			orbScale = 1.0f + (1 - animationTime) * (1 - animationTime);
+		if(animationTime <= 2) {
+			orbScale = 1.0f + (2 - animationTime) * (2 - animationTime) / 4;
 		} else {
 			orbScale = 1.0f;
 		}
 
 		spriteBatch.draw(orb, -5*orbScale, -5*orbScale, 10*orbScale, 10*orbScale);
-		if(animationTime <= 1){
-			spriteBatch.setColor(1, 1, 1, 1-animationTime);
+		if(animationTime <= 2){
+			spriteBatch.setColor(1, 1, 1, (2-animationTime)/2);
 		} else{
 			spriteBatch.setColor(1, 1, 1, 0);
 		}

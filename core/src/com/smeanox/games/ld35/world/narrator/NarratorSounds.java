@@ -2,6 +2,7 @@ package com.smeanox.games.ld35.world.narrator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.smeanox.games.ld35.Consts;
 
 public enum NarratorSounds {
 	lvl1_1("nar/Lvl1_1.mp3", 15.05f, new String[]{"Ah, I see you have touched my golden orb of infinity.", "For that reason, I will reward you with a nice little gift:", "From now on, you will be able to transform yourself into", "a wolf or a turtle at your will. However, there is a catch to this."}),
@@ -68,6 +69,7 @@ public enum NarratorSounds {
 	public Music get(){
 		if(music == null){
 			music = Gdx.audio.newMusic(Gdx.files.internal(musicFile));
+			music.setVolume(Consts.BLA_BLA_VOLUME);
 		}
 		return music;
 	}

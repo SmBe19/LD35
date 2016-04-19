@@ -39,7 +39,7 @@
         <platform id="5" x="-13" y="0.5" width="4" height="1" type="oldschool" moving_enabled="false" start_x="-13" start_y="0.5" end_x="-7" end_y="0.5" hold_time="0.2" moving_velo="3"/>
         <platform id="6" x="-9" y="-9.25" width="12" height="1" type="bridge"/>
         <platform id="9" x="-4" y="-14.5" width="2" height="1" type="oldschool" moving_enabled="false" start_x="-4" start_y="-14.5" end_x="-4" end_y="-9.5" hold_time="0.2" moving_velo="3"/>
-        <platform id="14" x="-7" y="3.5" width="5" height="1" type="oldschool" moving_enabled="false" start_x="-7" start_y="3.5" end_x="-1" end_y="3.5" hold_time="0.2" moving_velo="3"/>
+        <platform id="14" x="-7" y="3.5" width="5" height="1" type="oldschool" moving_enabled="false" start_x="-3" start_y="3.5" end_x="-1" end_y="3.5" hold_time="1" moving_velo="1"/>
         <platform id="15" x="7" y="7.5" width="4" height="1" type="oldschool" moving_enabled="false" start_x="7" start_y="7.5" end_x="0" end_y="7.5" hold_time="0.2" moving_velo="3"/>
         <platform id="16" x="11" y="7.5" width="4" height="1" type="oldschool"/>
         <platform id="17" x="3" y="12.75" width="2.5" height="6.5"/>
