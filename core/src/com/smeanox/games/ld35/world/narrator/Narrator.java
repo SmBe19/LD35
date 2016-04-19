@@ -102,9 +102,6 @@ public class Narrator {
 	}
 
 	public void play(NarratorSounds narratorSound){
-		if(!Consts.NARRATION_ENABLED){
-			return;
-		}
 		if(narratorSound == lastSound){
 			return;
 		}

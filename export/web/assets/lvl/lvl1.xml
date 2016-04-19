@@ -35,7 +35,7 @@
         <ball id="6" x="-18" y="35" vx="3" vy="0" radius="1"/>
         <ball id="7" x="-15" y="32" vx="1" vy="-2" radius="1"/>
         <ball id="8" x="-18" y="33" vx="2" vy="0" radius="1"/>
-        <ball id="9" x="-14" y="33" vx="3" vy="0" radius="1"/>
+        <ball id="9" x="-14" y="42" vx="3" vy="0" radius="1"/>
     </actors>
     <texts>
         <text x="-8.25" y="-2" scale="0.08" text="w"/>

@@ -69,7 +69,7 @@ public enum NarratorSounds {
 	public Music get(){
 		if(music == null){
 			music = Gdx.audio.newMusic(Gdx.files.internal(musicFile));
-			music.setVolume(Consts.BLA_BLA_VOLUME);
+			music.setVolume(Consts.NARRATION_ENABLED ? Consts.BLA_BLA_VOLUME : 0);
 		}
 		return music;
 	}
